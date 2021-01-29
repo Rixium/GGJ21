@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using LostAndFound.Core.Content;
 using LostAndFound.Core.Graphics;
 using LostAndFound.Core.Screens;
 using Microsoft.Xna.Framework;
@@ -16,6 +17,8 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<ScreenManager>().As<IScreenManager>().SingleInstance();
 
             builder.RegisterType<SplashScreen>().As<IScreen>();
+            
+            builder.RegisterType<ContentChest>().As<IContentChest>().SingleInstance();
 
             base.Load(builder);
         }

@@ -1,4 +1,5 @@
-﻿using LostAndFound.Core.Graphics;
+﻿using LostAndFound.Core.Content;
+using LostAndFound.Core.Graphics;
 using LostAndFound.Core.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,14 +11,16 @@ namespace LostAndFound.Core
     {
         private readonly IRenderManager _renderManager;
         private readonly IScreenManager _screenManager;
+        private readonly IContentChest _contentChest;
         private GraphicsDeviceManager _graphics;
 
-        public Game1(IRenderManager renderManager, IScreenManager screenManager)
+        public Game1(IRenderManager renderManager, IScreenManager screenManager, IContentChest contentChest)
         {
             _renderManager = renderManager;
             _screenManager = screenManager;
+            _contentChest = contentChest;
             _graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = "Assets";
             IsMouseVisible = true;
         }
 
@@ -28,6 +31,11 @@ namespace LostAndFound.Core
             // We're going to store the spritebatch we make inside this,
             // so we can make use of it elsewhere, rather than pass it in.
             _renderManager.SpriteBatch = spriteBatch;
+
+            _contentChest.ContentManager = Content;
+            
+            _screenManager.LoadScreens();
+            _screenManager.SetActiveScreen<SplashScreen>();
         }
 
         protected override void Update(GameTime gameTime)
@@ -41,6 +49,8 @@ namespace LostAndFound.Core
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            
+            _screenManager.GetActiveScreen().Draw();
 
             base.Draw(gameTime);
         }
