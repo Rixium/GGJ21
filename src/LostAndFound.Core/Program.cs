@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LostAndFound.Game
+namespace LostAndFound.Core
 {
     public static class Program
     {

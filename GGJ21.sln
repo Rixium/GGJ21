@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LostAndFound.Game", "src\LostAndFound.Game\LostAndFound.Game.csproj", "{A01A5F81-A155-4F91-AF10-656476F8B334}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LostAndFound.Core", "src\LostAndFound.Core\LostAndFound.Core.csproj", "{A01A5F81-A155-4F91-AF10-656476F8B334}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
