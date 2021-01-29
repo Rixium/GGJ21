@@ -10,6 +10,11 @@ namespace LostAndFound.Core.Screens
         public ScreenManager(IReadOnlyCollection<IScreen> screens)
         {
             _screens = screens;
+
+            foreach (var screen in _screens)
+            {
+                screen.RequestScreenChange = SetActiveScreen;
+            }
         }
 
         public void LoadScreens()
@@ -20,11 +25,11 @@ namespace LostAndFound.Core.Screens
             }
         }
         
-        public void SetActiveScreen<T>() where T : IScreen
+        public void SetActiveScreen(ScreenType screenType)
         {
             foreach (var screen in _screens)
             {
-                if (screen.GetType() != typeof(T)) continue;
+                if (screen.ScreenType != screenType) continue;
                 _activeScreen = screen;
                 break;
             }

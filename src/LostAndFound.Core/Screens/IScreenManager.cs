@@ -2,8 +2,8 @@
 {
     public interface IScreenManager
     {
+        void SetActiveScreen(ScreenType screenType);
         void LoadScreens();
-        void SetActiveScreen<T>() where T : IScreen;
         IScreen GetActiveScreen();
     }
 }

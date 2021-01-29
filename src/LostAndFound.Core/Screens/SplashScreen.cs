@@ -1,4 +1,5 @@
-﻿using LostAndFound.Core.Config;
+﻿using System;
+using LostAndFound.Core.Config;
 using LostAndFound.Core.Content;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -21,6 +22,9 @@ namespace LostAndFound.Core.Screens
             _windowConfiguration = windowConfiguration;
         }
 
+        public Action<ScreenType> RequestScreenChange { get; set; }
+        public ScreenType ScreenType => ScreenType.Splash;
+
         public void Load()
         {
             _image = _contentChest.Get<Texture2D>("images/splash");
@@ -28,6 +32,7 @@ namespace LostAndFound.Core.Screens
 
         public void Update()
         {
+            
         }
 
         public void Draw()
