@@ -10,7 +10,7 @@ namespace LostAndFound.Core.Modules
         {
             builder.RegisterType<Game1>().As<Game>();
 
-            builder.RegisterType<RenderManager>().As<IRenderManager>();
+            builder.RegisterType<RenderManager>().As<IRenderManager>().SingleInstance();
 
             base.Load(builder);
         }
