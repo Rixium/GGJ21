@@ -2,8 +2,8 @@
 
 namespace LostAndFound.Core.Graphics
 {
-    internal interface IRenderManager
+    public interface IRenderManager
     {
-        void SetSpriteBatch(SpriteBatch spriteBatch);
+        SpriteBatch SpriteBatch { get; set; }
     }
 }
