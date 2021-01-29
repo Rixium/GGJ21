@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LostAndFound.Core
 {
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
