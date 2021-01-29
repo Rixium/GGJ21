@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using LostAndFound.Core.Config;
 using LostAndFound.Core.Content;
+using LostAndFound.Core.Games;
 using LostAndFound.Core.Graphics;
 using LostAndFound.Core.Screens;
 using LostAndFound.Core.System;
@@ -28,6 +29,8 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<ContentChest>().As<IContentChest>().SingleInstance();
 
             builder.RegisterType<WindowConfiguration>().As<IWindowConfiguration>().SingleInstance();
+            
+            builder.RegisterType<GameInstance>().As<IGameInstance>().SingleInstance();
 
             base.Load(builder);
         }
