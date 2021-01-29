@@ -41,7 +41,7 @@ namespace LostAndFound.Core
             _contentChest.ContentManager = Content;
             
             _screenManager.LoadScreens();
-            _screenManager.SetActiveScreen(ScreenType.Splash);
+            _screenManager.SetActiveScreen(ScreenType.GameScreen);
         }
 
         protected override void Update(GameTime gameTime)

@@ -25,6 +25,7 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<SplashScreen>().As<IScreen>();
             builder.RegisterType<EmptyScreen>().As<IScreen>();
             builder.RegisterType<MainMenuScreen>().As<IScreen>();
+            builder.RegisterType<GameScreen>().As<IScreen>();
 
             builder.RegisterType<ContentChest>().As<IContentChest>().SingleInstance();
 

@@ -23,12 +23,12 @@ namespace LostAndFound.Core.Screens
 
         public void Update(GameTime gameTime)
         {
-            
+            _gameInstance.Update(gameTime);
         }
 
         public void Draw()
         {
-            
+            _gameInstance.Draw();
         }
     }
 }
