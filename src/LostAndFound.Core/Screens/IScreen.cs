@@ -6,7 +6,9 @@ namespace LostAndFound.Core.Screens
     public enum ScreenType
     {
         Empty,
-        Splash
+        Splash,
+        MainMenu,
+        GameScreen
     }
     
     public interface IScreen

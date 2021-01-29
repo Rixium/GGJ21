@@ -37,7 +37,7 @@ namespace LostAndFound.Core.Screens
             _splashTime -= gameTime.ElapsedGameTime.TotalSeconds;
             if (_splashTime <= 0)
             {
-                RequestScreenChange(ScreenType.Empty);
+                RequestScreenChange(ScreenType.MainMenu);
             }
         }
 
