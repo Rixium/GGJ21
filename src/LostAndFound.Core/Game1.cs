@@ -1,16 +1,19 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LostAndFound.Core.Graphics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace LostAndFound.Core
 {
-    public class Game1 : Game
+    internal class Game1 : Game
     {
+        private readonly IRenderManager _renderManager;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        public Game1()
+        public Game1(IRenderManager renderManager)
         {
+            _renderManager = renderManager;
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -19,6 +22,10 @@ namespace LostAndFound.Core
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            
+            // We're going to store the spritebatch we make inside this,
+            // so we can make use of it elsewhere, rather than pass it in.
+            _renderManager.SetSpriteBatch(_spriteBatch);
         }
 
         protected override void Update(GameTime gameTime)
