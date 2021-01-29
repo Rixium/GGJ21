@@ -9,7 +9,6 @@ namespace LostAndFound.Core
     {
         private readonly IRenderManager _renderManager;
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
 
         public Game1(IRenderManager renderManager)
         {
@@ -21,11 +20,11 @@ namespace LostAndFound.Core
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            var spriteBatch = new SpriteBatch(GraphicsDevice);
             
             // We're going to store the spritebatch we make inside this,
             // so we can make use of it elsewhere, rather than pass it in.
-            _renderManager.SetSpriteBatch(_spriteBatch);
+            _renderManager.SetSpriteBatch(spriteBatch);
         }
 
         protected override void Update(GameTime gameTime)
