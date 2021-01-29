@@ -1,4 +1,5 @@
-﻿using LostAndFound.Core.Content;
+﻿using LostAndFound.Core.Config;
+using LostAndFound.Core.Content;
 using LostAndFound.Core.Graphics;
 using LostAndFound.Core.Screens;
 using Microsoft.Xna.Framework;
@@ -12,13 +13,15 @@ namespace LostAndFound.Core
         private readonly IRenderManager _renderManager;
         private readonly IScreenManager _screenManager;
         private readonly IContentChest _contentChest;
+        private readonly IWindowConfiguration _windowConfiguration;
         private GraphicsDeviceManager _graphics;
 
-        public Game1(IRenderManager renderManager, IScreenManager screenManager, IContentChest contentChest)
+        public Game1(IRenderManager renderManager, IScreenManager screenManager, IContentChest contentChest, IWindowConfiguration windowConfiguration)
         {
             _renderManager = renderManager;
             _screenManager = screenManager;
             _contentChest = contentChest;
+            _windowConfiguration = windowConfiguration;
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Assets";
             IsMouseVisible = true;
@@ -26,6 +29,9 @@ namespace LostAndFound.Core
 
         protected override void LoadContent()
         {
+            _windowConfiguration.WindowHeight = _graphics.PreferredBackBufferHeight;
+            _windowConfiguration.WindowWidth = _graphics.PreferredBackBufferWidth;
+            
             var spriteBatch = new SpriteBatch(GraphicsDevice);
             
             // We're going to store the spritebatch we make inside this,

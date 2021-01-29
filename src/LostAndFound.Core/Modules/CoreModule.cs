@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using LostAndFound.Core.Config;
 using LostAndFound.Core.Content;
 using LostAndFound.Core.Graphics;
 using LostAndFound.Core.Screens;
@@ -19,6 +20,8 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<SplashScreen>().As<IScreen>();
             
             builder.RegisterType<ContentChest>().As<IContentChest>().SingleInstance();
+
+            builder.RegisterType<WindowConfiguration>().As<IWindowConfiguration>().SingleInstance();
 
             base.Load(builder);
         }
