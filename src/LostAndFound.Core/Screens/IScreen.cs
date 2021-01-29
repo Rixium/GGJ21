@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace LostAndFound.Core.Screens
 {
@@ -14,7 +15,7 @@ namespace LostAndFound.Core.Screens
 
         ScreenType ScreenType { get; }
         void Load();
-        void Update();
+        void Update(GameTime gameTime);
         void Draw();
     }
 }

@@ -14,6 +14,8 @@ namespace LostAndFound.Core.Screens
         private readonly IWindowConfiguration _windowConfiguration;
         private Texture2D _image;
 
+        private double _splashTime = 5;
+
         public SplashScreen(IRenderManager renderManager, IContentChest contentChest,
             IWindowConfiguration windowConfiguration)
         {
@@ -30,9 +32,13 @@ namespace LostAndFound.Core.Screens
             _image = _contentChest.Get<Texture2D>("images/splash");
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
-            
+            _splashTime -= gameTime.ElapsedGameTime.TotalSeconds;
+            if (_splashTime <= 0)
+            {
+                RequestScreenChange(ScreenType.Empty);
+            }
         }
 
         public void Draw()

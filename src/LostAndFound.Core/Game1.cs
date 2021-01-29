@@ -48,6 +48,8 @@ namespace LostAndFound.Core
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            
+            _screenManager.GetActiveScreen().Update(gameTime);
 
             base.Update(gameTime);
         }
