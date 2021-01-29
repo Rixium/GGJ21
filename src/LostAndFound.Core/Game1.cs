@@ -1,4 +1,5 @@
 ﻿using LostAndFound.Core.Graphics;
+using LostAndFound.Core.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -8,11 +9,13 @@ namespace LostAndFound.Core
     internal class Game1 : Game
     {
         private readonly IRenderManager _renderManager;
+        private readonly IScreenManager _screenManager;
         private GraphicsDeviceManager _graphics;
 
-        public Game1(IRenderManager renderManager)
+        public Game1(IRenderManager renderManager, IScreenManager screenManager)
         {
             _renderManager = renderManager;
+            _screenManager = screenManager;
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
