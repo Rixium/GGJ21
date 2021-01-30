@@ -16,10 +16,14 @@
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
     <EmbeddedResource Include="Icon.bmp" />
-    <Content Include="Assets\Data\**"/>
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Assets\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Data\**\*.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />

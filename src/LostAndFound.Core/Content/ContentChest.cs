@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using System.IO;
+using Microsoft.Xna.Framework.Content;
 
 namespace LostAndFound.Core.Content
 {
@@ -7,7 +8,8 @@ namespace LostAndFound.Core.Content
         public ContentManager ContentManager { get; set; }
         public T Get<T>(string assetName)
         {
-            return ContentManager.Load<T>(assetName);
+            var fixedPath = assetName.Replace($"Assets{Path.DirectorySeparatorChar}", "");
+            return ContentManager.Load<T>(fixedPath);
         }
     }
 }

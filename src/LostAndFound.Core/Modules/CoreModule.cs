@@ -1,7 +1,10 @@
 ﻿using Autofac;
 using LostAndFound.Core.Config;
 using LostAndFound.Core.Content;
+using LostAndFound.Core.Content.Aseprite;
+using LostAndFound.Core.Content.ContentLoader;
 using LostAndFound.Core.Games;
+using LostAndFound.Core.Games.Zones;
 using LostAndFound.Core.Graphics;
 using LostAndFound.Core.Screens;
 using LostAndFound.Core.System;
@@ -31,12 +34,15 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<ContentChest>().As<IContentChest>().SingleInstance();
             builder.RegisterType<FileSystem>().As<IFileSystem>().SingleInstance();
             builder.RegisterType<ApplicationFolder>().As<IApplicationFolder>().SingleInstance();
-            
+
             builder.RegisterType<ContentChest>().As<IContentChest>().SingleInstance();
 
             builder.RegisterType<WindowConfiguration>().As<IWindowConfiguration>().SingleInstance();
 
             builder.RegisterType<GameInstance>().As<IGameInstance>().SingleInstance();
+            builder.RegisterType<ZoneLoader>().As<IZoneLoader>().SingleInstance();
+
+            builder.RegisterType<AsepriteSpriteMapLoader>().As<IContentLoader<AsepriteSpriteMap>>().SingleInstance();
 
             base.Load(builder);
         }

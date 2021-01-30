@@ -12,13 +12,13 @@ namespace LostAndFound.Core.Screens
         {
             _gameInstance = gameInstance;
         }
-        
+
         public Action<ScreenType> RequestScreenChange { get; set; }
         public ScreenType ScreenType => ScreenType.GameScreen;
-        
+
         public void Load()
         {
-            
+            _gameInstance.Load();
         }
 
         public void Update(GameTime gameTime)

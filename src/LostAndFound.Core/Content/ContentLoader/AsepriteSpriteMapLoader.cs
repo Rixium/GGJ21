@@ -19,8 +19,10 @@ namespace LostAndFound.Core.Content.ContentLoader
         {
             var asepriteData = _contentDeserializer.Get<AsepriteData>(path);
             var name = Path.GetFileNameWithoutExtension(asepriteData.Meta.Image);
-            var image = _contentChest.Get<Texture2D>(Path.Combine(Path.GetDirectoryName(path) ?? "",
-                Path.GetFileNameWithoutExtension(path)));
+            var fullPath = Path.Combine(Path.GetDirectoryName(path) ?? "",
+                Path.GetFileNameWithoutExtension(path));
+
+            var image = _contentChest.Get<Texture2D>(fullPath);
 
             return new AsepriteSpriteMap(name, image, asepriteData.Meta.Slices);
         }
