@@ -36,8 +36,8 @@ namespace LostAndFound.Core.Games
         {
             maxX -= _windowConfiguration.WindowWidth / 2 / _zoom + 3;
             maxY -= _windowConfiguration.WindowHeight / 2 / _zoom + 3;
-            _minX = 0;
-            _minY = 0;
+            _minX = _windowConfiguration.WindowWidth / 2 / _zoom + 1;
+            _minY = _windowConfiguration.WindowHeight / 2 / _zoom;
             
             if (_following != null)
                 Goto(new Vector2(_following.Position.X,

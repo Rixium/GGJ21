@@ -8,6 +8,7 @@ using LostAndFound.Core.Games.Animals;
 using LostAndFound.Core.Games.Interfaces;
 using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Games.Person;
+using LostAndFound.Core.Games.Services;
 using LostAndFound.Core.Games.Zones;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -17,10 +18,11 @@ namespace LostAndFound.Core.Games
 {
     public class GameInstance : IGameInstance
     {
-        private const ZoneType StartingZone = ZoneType.Forest;
+        private const ZoneType StartingZone = ZoneType.Street;
 
         private readonly Random _random = new Random();
         private readonly GameInterface _gameInterface;
+        private readonly IReadOnlyCollection<IService> _services;
         private readonly IRenderManager _renderManager;
         private readonly IZoneLoader _zoneLoader;
         private readonly IContentChest _contentChest;
@@ -28,15 +30,15 @@ namespace LostAndFound.Core.Games
         private readonly IAnimalFactory _animalFactory;
         private readonly Camera _camera;
 
-        private GameData _gameData = new GameData();
+        public GameData GameData { get; private set; } = new GameData();
         private IList<ZoneData> _zoneData;
 
-        private ZoneData ActiveZone => _zoneData.First(x => x.ZoneType == _gameData.ActiveZone);
+        private ZoneData ActiveZone => _zoneData.First(x => x.ZoneType == GameData.ActiveZone);
         private Player _player;
 
         public GameInstance(IRenderManager renderManager, IZoneLoader zoneLoader,
             IWindowConfiguration windowConfiguration, IContentChest contentChest, IPersonFactory personFactory,
-            IAnimalFactory animalFactory, GameInterface gameInterface)
+            IAnimalFactory animalFactory, GameInterface gameInterface, IReadOnlyCollection<IService> services)
         {
             _renderManager = renderManager;
             _zoneLoader = zoneLoader;
@@ -44,6 +46,8 @@ namespace LostAndFound.Core.Games
             _personFactory = personFactory;
             _animalFactory = animalFactory;
             _gameInterface = gameInterface;
+            _services = services;
+
             _camera = new Camera(windowConfiguration);
         }
 
@@ -51,10 +55,12 @@ namespace LostAndFound.Core.Games
         {
             _zoneData = _zoneLoader.LoadZones();
 
-            _gameData.ActiveZone = ZoneType.Forest;
-            _camera.Position = new Vector2(500, 500);
+            GameData.ActiveZone = ZoneType.Forest;
 
             _personFactory.Load();
+
+            foreach (var service in _services)
+                service.GameInstance = this;
         }
 
         public void Start()
@@ -63,15 +69,21 @@ namespace LostAndFound.Core.Games
 
             var zoneColliders = ActiveZone.Colliders.ToList();
             var playerStartCollider = zoneColliders.First(x => x.Name.Equals("PlayerStart"));
-            _gameData.PlayerData.Position = playerStartCollider.Bounds.ToVector2();
+            GameData.PlayerData.Position = playerStartCollider.Bounds.ToVector2();
 
-            _player = new Player(_contentChest.Get<Texture2D>("Images/Player/Idle_1"), _gameData);
-            _camera.SetEntity(_gameData.PlayerData, true);
+            _player = new Player(_contentChest.Get<Texture2D>("Images/Player/Idle_1"), GameData);
+            _camera.SetEntity(GameData.PlayerData, false);
 
             _player.PlayerMove += CanPlayerMove;
             SpawnPerson();
 
-            _gameInterface.SetUp(_gameData);
+            _gameInterface.SetUp(GameData);
+            
+            foreach (var service in _services)
+            {
+                service.GameInstance = this;
+                service.Start();
+            }
         }
 
         public void SpawnPerson()
@@ -91,9 +103,9 @@ namespace LostAndFound.Core.Games
                 ConversationData = new[] {"Hello Son!", "Lost me dog!"}
             };
 
-            _gameData.QuestData.Add(questData);
-            _gameData.AnimalData.Add(animal);
-            _gameData.PersonData.Add(person);
+            GameData.QuestData.Add(questData);
+            GameData.AnimalData.Add(animal);
+            GameData.PersonData.Add(person);
         }
 
         private AnimalData GetAnimalData() => _animalFactory.Create();
@@ -106,7 +118,7 @@ namespace LostAndFound.Core.Games
 
         private void SetupGameData()
         {
-            _gameData = new GameData
+            GameData = new GameData
             {
                 ActiveZone = StartingZone,
                 PersonData = new List<PersonData>(),
@@ -116,7 +128,7 @@ namespace LostAndFound.Core.Games
             };
         }
 
-        public void AddMoney(int money) => _gameData.PlayerData.Cash += money;
+        public void AddMoney(int money) => GameData.PlayerData.Cash += money;
 
         public void Draw()
         {
@@ -124,9 +136,9 @@ namespace LostAndFound.Core.Games
                 _camera.GetMatrix());
 
             _renderManager.SpriteBatch.Draw(ActiveZone.BackgroundImage, new Vector2(0, 0), Color.White);
-            _renderManager.SpriteBatch.Draw(_player.Image, _gameData.PlayerData.Position, Color.White);
+            _renderManager.SpriteBatch.Draw(_player.Image, GameData.PlayerData.Position, Color.White);
 
-            foreach (var person in _gameData.PersonData)
+            foreach (var person in GameData.PersonData)
             {
                 var personImage = _contentChest.Get<Texture2D>(person.ImageName);
                 _renderManager.SpriteBatch.Draw(personImage, person.Position, Color.White);
@@ -141,10 +153,13 @@ namespace LostAndFound.Core.Games
 
         public void Update(GameTime gameTime)
         {
-            _camera.Update(20000, 20000);
-            _player.Update(_gameData.PlayerData, gameTime);
-            _camera.ToGo = _gameData.PlayerData.Position;
+            _camera.Update(500, 281);
+            _player.Update(GameData.PlayerData, gameTime);
+            _camera.ToGo = GameData.PlayerData.Position;
             _gameInterface.Update(gameTime);
+            
+            foreach(var service in _services)
+                service.Update(gameTime);
         }
     }
 }

@@ -7,6 +7,7 @@ using LostAndFound.Core.Games;
 using LostAndFound.Core.Games.Animals;
 using LostAndFound.Core.Games.Interfaces;
 using LostAndFound.Core.Games.Person;
+using LostAndFound.Core.Games.Services;
 using LostAndFound.Core.Games.Zones;
 using LostAndFound.Core.Graphics;
 using LostAndFound.Core.Input;
@@ -57,6 +58,7 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<PersonFactory>().As<IPersonFactory>().SingleInstance();
             builder.RegisterType<AnimalFactory>().As<IAnimalFactory>().SingleInstance();
 
+            builder.RegisterType<PersonInteractionService>().As<IService>();
             base.Load(builder);
         }
     }
