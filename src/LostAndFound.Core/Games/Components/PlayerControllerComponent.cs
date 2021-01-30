@@ -78,7 +78,7 @@ namespace LostAndFound.Core.Games.Components
         public void Move(IEntity entity, int xMove, int yMove)
         {
             var newPosition = entity.Position + new Vector2(xMove, yMove);
-            
+
             var boundingBox = Entity.GetComponent<BoxColliderComponent>();
             var bounds = boundingBox.Bounds.Add(new Rectangle(xMove, 0, 0, 0));
 
@@ -107,6 +107,13 @@ namespace LostAndFound.Core.Games.Components
                 }
             }
 
+            var mapBottom = new Rectangle(0, _gameInstance.ActiveZone.Image.Height, _gameInstance.ActiveZone.Image.Width, 100);
+            if (bounds.Intersects(mapBottom))
+            {
+                var depth = bounds.GetIntersectionDepth(mapBottom);
+                newPosition.Y += depth.Y;
+            }
+            
             entity.Position = newPosition;
         }
     }
