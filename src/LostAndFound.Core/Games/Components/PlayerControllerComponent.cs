@@ -16,6 +16,7 @@ namespace LostAndFound.Core.Games.Components
         private readonly IGameInstance _gameInstance;
         private readonly IInputManager _inputManager;
         private int _speed = 2;
+        private bool _canMove = true;
 
         public PlayerControllerComponent(IGameInstance gameInstance, IInputManager inputManager)
         {
@@ -30,6 +31,23 @@ namespace LostAndFound.Core.Games.Components
         }
 
         public void Update(GameTime gameTime)
+        {
+            if (_canMove)
+            {
+                PlayerMovement();
+            }
+            
+            if (_inputManager.KeyPressed(Keys.J))
+            {
+                _canMove = !_canMove;
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+        }
+        
+        void PlayerMovement()
         {
             var xChange = 0;
             var yChange = 0;
@@ -53,10 +71,6 @@ namespace LostAndFound.Core.Games.Components
             }
 
             Entity.Position += new Vector2(xChange, yChange);
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
         }
 
         // public bool CanPlayerMove(Movement movement, Rectangle bounds)
