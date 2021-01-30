@@ -1,4 +1,5 @@
 ﻿using System;
+using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Games.Zones;
 using Microsoft.Xna.Framework;

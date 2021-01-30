@@ -1,4 +1,5 @@
 ﻿using LostAndFound.Core.Config;
+using LostAndFound.Core.Games.Entities;
 using Microsoft.Xna.Framework;
 
 namespace LostAndFound.Core.Games
