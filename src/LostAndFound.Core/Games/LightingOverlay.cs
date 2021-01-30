@@ -1,5 +1,4 @@
-﻿using System;
-using LostAndFound.Core.Content;
+﻿using LostAndFound.Core.Content;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

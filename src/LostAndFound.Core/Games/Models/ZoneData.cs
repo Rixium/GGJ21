@@ -1,6 +1,7 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using LostAndFound.Core.Games.Zones;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace LostAndFound.Core.Games.Zones
+namespace LostAndFound.Core.Games.Models
 {
     public enum ZoneType
     {

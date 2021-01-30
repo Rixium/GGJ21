@@ -7,15 +7,22 @@ namespace LostAndFound.Core
 {
     public static class Program
     {
+        public static IContainer Container;
+
         [STAThread]
         private static void Main()
         {
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule<CoreModule>();
-            var container = containerBuilder.Build();
+            Container = containerBuilder.Build();
 
-            using var game = container.Resolve<Game>();
+            using var game = Container.Resolve<Game>();
             game.Run();
+        }
+
+        public static T Resolve<T>()
+        {
+            return Container.Resolve<T>();
         }
     }
 }

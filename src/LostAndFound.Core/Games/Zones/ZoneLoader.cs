@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using LostAndFound.Core.Content.Aseprite;
 using LostAndFound.Core.Content.ContentLoader;
+using LostAndFound.Core.Games.Models;
 using Microsoft.Xna.Framework;
 
 namespace LostAndFound.Core.Games.Zones

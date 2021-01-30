@@ -1,11 +1,11 @@
-﻿using LostAndFound.Core.Games.Models;
+﻿using LostAndFound.Core.Games.Zones;
 using Microsoft.Xna.Framework;
 
 namespace LostAndFound.Core.Games
 {
     public interface IGameInstance
     {
-        public GameData GameData { get; }
+        public IZone ActiveZone { get; }
         void Load();
         void Start();
         void Draw();

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using LostAndFound.Core.Games.Zones;
 
 namespace LostAndFound.Core.Games.Models
 {

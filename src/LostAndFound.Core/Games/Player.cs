@@ -1,18 +1,61 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using LostAndFound.Core.Games.Components;
 using LostAndFound.Core.Games.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace LostAndFound.Core.Games
 {
+    public interface IEntity
+    {
+        public Vector2 Position { get; set; }
+        GameInstance GameInstance { get; set; }
+        public void AddComponent(IComponent component);
+        public void Update(GameTime gameTime);
+        public void Draw(SpriteBatch spriteBatch);
+    }
+
+    public class Entity : IEntity
+    {
+        private readonly IList<IComponent> _components = new List<IComponent>();
+
+        public Vector2 Position { get; set; }
+        public GameInstance GameInstance { get; set; }
+
+        public Entity(Vector2 position)
+        {
+            Position = position;
+        }
+
+        public void AddComponent(IComponent component)
+        {
+            _components.Add(component);
+            component.Entity = this;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            foreach (var component in _components)
+            {
+                component.Update(gameTime);
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (var component in _components)
+            {
+                component.Draw(spriteBatch);
+            }
+        }
+    }
+
     public class Player
     {
         private readonly GameData _gameData;
         private PlayerData PlayerData => _gameData.PlayerData;
 
         public Texture2D Image;
-        public Func<Movement, Rectangle, bool> PlayerMove;
 
         public Rectangle Bounds =>
             new Rectangle((int) PlayerData.Position.X, (int) PlayerData.Position.Y, Image.Width, Image.Height);
@@ -25,37 +68,6 @@ namespace LostAndFound.Core.Games
 
         public void Update(PlayerData playerData, GameTime gameTime)
         {
-            var movement = new Movement();
-
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                movement.X = -1;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                movement.X = 1;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                movement.Y = -1;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                movement.Y = 1;
-            }
-
-            if (PlayerMove(movement, Bounds))
-            {
-                playerData.Position += movement.ToVector2;
-            }
         }
-    }
-
-    public class Movement
-    {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public Vector2 ToVector2 => new Vector2(X, Y);
     }
 }

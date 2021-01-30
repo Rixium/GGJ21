@@ -26,5 +26,7 @@ namespace LostAndFound.Core.Input
             _lastKeyState = _currentState;
             _currentState = Keyboard.GetState();
         }
+
+        public bool KeyDown(Keys key) => _currentState.IsKeyDown(key);
     }
 }

@@ -9,5 +9,6 @@ namespace LostAndFound.Core.Input
         bool KeyReleased(Keys key);
         bool KeyHeld(Keys key);
         void Update(GameTime gameTime);
+        bool KeyDown(Keys p0);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using LostAndFound.Core.Games.Models;
-using LostAndFound.Core.Games.Zones;
 using Microsoft.Xna.Framework;
 
 namespace LostAndFound.Core.Games.Animals

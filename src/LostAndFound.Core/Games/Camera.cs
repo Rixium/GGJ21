@@ -1,5 +1,4 @@
 ﻿using LostAndFound.Core.Config;
-using LostAndFound.Core.Games.Models;
 using Microsoft.Xna.Framework;
 
 namespace LostAndFound.Core.Games
@@ -16,7 +15,7 @@ namespace LostAndFound.Core.Games
 
         private int _zoom = 3;
 
-        private PlayerData _following;
+        private IEntity _following;
 
         public Camera(IWindowConfiguration windowConfiguration)
         {
@@ -57,12 +56,12 @@ namespace LostAndFound.Core.Games
             _position.Y = MathHelper.Clamp(_position.Y, _minY, maxY);
         }
         
-        public void SetEntity(PlayerData player, bool immediate)
+        public void SetEntity(IEntity entity, bool immediate)
         {
-            _following = player;
+            _following = entity;
 
             if (immediate)
-                Position = player.Position;
+                Position = entity.Position;
         }
         
         public Vector2 Position
