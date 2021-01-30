@@ -1,4 +1,5 @@
 ﻿using System;
+using LostAndFound.Core.Extensions;
 using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Games.Zones;
 using Microsoft.Xna.Framework;
@@ -22,10 +23,11 @@ namespace LostAndFound.Core.Games.Components
 
         public void Update(GameTime gameTime)
         {
+            var entityCollider = Entity.GetComponent<BoxColliderComponent>();
             var entityZone = _gameInstance.ActiveZone;
             foreach (var collider in entityZone.Colliders)
             {
-                if (!collider.Bounds.Contains(Entity.Position))
+                if (!collider.Bounds.Intersects(entityCollider.Bounds))
                 {
                     continue;
                 }
@@ -51,7 +53,7 @@ namespace LostAndFound.Core.Games.Components
             _gameInstance.MoveEntityToZone(oldZone, zoneToGoTo, Entity);
             _gameInstance.SetActiveZone(zoneToGoTo.ZoneType);
 
-            Entity.Position = zoneToGoTo.GetTeleportPoint(direction);
+            Entity.Position =  new Vector2(zoneToGoTo.GetTeleportPoint(direction).X, Entity.Position.Y);
         }
 
         public void Draw(SpriteBatch spriteBatch)
