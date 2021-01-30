@@ -25,8 +25,8 @@ namespace LostAndFound.Core.Transitions
         public Action FadeOutEnded { get; set; }
         public Action FadeInEnded { get; set; }
 
-        private float _currentFade;
-        private FadeState _fadeState = FadeState.None;
+        private float _currentFade = 1;
+        private FadeState _fadeState = FadeState.FadingIn;
 
         public TransitionManager(IRenderManager renderManager, IWindowConfiguration windowConfiguration,
             IContentChest contentChest)
@@ -64,7 +64,8 @@ namespace LostAndFound.Core.Transitions
 
             _currentFade = 1;
             _fadeState = FadeState.None;
-            FadeOutEnded();
+            
+            FadeOutEnded?.Invoke();
         }
 
         private void FadeIn(GameTime gameTime)
@@ -78,7 +79,8 @@ namespace LostAndFound.Core.Transitions
 
             _currentFade = 0;
             _fadeState = FadeState.None;
-            FadeInEnded();
+            
+            FadeInEnded?.Invoke();
         }
 
         public void Draw()
