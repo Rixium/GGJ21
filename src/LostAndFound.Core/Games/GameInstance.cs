@@ -24,18 +24,23 @@ namespace LostAndFound.Core.Games
         private readonly IZoneLoader _zoneLoader;
 
         private readonly GameInterface _gameInterface;
+        private readonly TimeManager _timeManager;
+        private readonly LightingOverlay _lightingOverlay;
         private readonly IRenderManager _renderManager;
         private readonly IContentChest _contentChest;
 
         private readonly Camera _camera;
 
         public GameInstance(IRenderManager renderManager, IZoneLoader zoneLoader,
-            IWindowConfiguration windowConfiguration, IContentChest contentChest, GameInterface gameInterface)
+            IWindowConfiguration windowConfiguration, IContentChest contentChest, GameInterface gameInterface,
+            TimeManager timeManager, LightingOverlay lightingOverlay)
         {
             _renderManager = renderManager;
             _zoneLoader = zoneLoader;
             _contentChest = contentChest;
             _gameInterface = gameInterface;
+            _timeManager = timeManager;
+            _lightingOverlay = lightingOverlay;
 
             _camera = new Camera(windowConfiguration);
         }
@@ -43,6 +48,7 @@ namespace LostAndFound.Core.Games
         public void Load()
         {
             _gameInterface.Load();
+            _lightingOverlay.Load();
 
             var zoneData = _zoneLoader.LoadZones();
 
@@ -90,6 +96,10 @@ namespace LostAndFound.Core.Games
                 _camera.GetMatrix());
             ActiveZone.Draw(_renderManager.SpriteBatch);
             _renderManager.SpriteBatch.End();
+            
+            _renderManager.SpriteBatch.Begin();
+            _lightingOverlay.Draw();
+            _renderManager.SpriteBatch.End();
 
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             _gameInterface.Draw();
@@ -101,6 +111,7 @@ namespace LostAndFound.Core.Games
             _camera.Update(500, 281);
             _gameInterface.Update(gameTime);
             ActiveZone.Update(gameTime);
+            _timeManager.UpdateTime(gameTime);
         }
 
         public IZone GetZone(ZoneType zoneType) => _zones.FirstOrDefault(x => x.ZoneType == zoneType);
