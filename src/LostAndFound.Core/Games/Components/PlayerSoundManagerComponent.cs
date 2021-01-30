@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using LostAndFound.Core.Games.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -28,8 +29,23 @@ namespace LostAndFound.Core.Games.Components
             if ((lastFootstepPos - Entity.Position).Length() > footStepLenght)
             {
                 lastFootstepPos = Entity.Position;
-                _soundComponent.PlaySoundByName("Audio/SoundEffects/Footstep");
+                PlayRandomFootstep();
             }
+        }
+
+        private void PlayRandomFootstep()
+        {
+            List<string> soundPaths = new List<string>();
+            soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_1");
+            soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_2");
+            soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_3");
+            soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_4");
+            soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_5");
+            soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_6");
+            soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_7");
+            soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_8");
+            
+            _soundComponent.PlaySoundByName("Audio/SoundEffects/Footstep");
         }
 
         public void Draw(SpriteBatch spriteBatch)
