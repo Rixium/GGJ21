@@ -1,5 +1,4 @@
-﻿using LostAndFound.Core.Extensions;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.UI
@@ -33,8 +32,14 @@ namespace LostAndFound.Core.UI
             spriteBatch.DrawString(
                 _font,
                 _text,
-                Bounds.ToVector2(),
-                _color);
+                Position,
+                _color,
+                0f,
+                GetOriginOffset(),
+                Scale,
+                SpriteEffects.None,
+                0f
+            );
         }
     }
 }

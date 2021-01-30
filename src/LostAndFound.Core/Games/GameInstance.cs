@@ -10,6 +10,7 @@ using LostAndFound.Core.Games.Zones;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace LostAndFound.Core.Games
 {
@@ -78,6 +79,12 @@ namespace LostAndFound.Core.Games
             };
         }
 
+        public void AddMoney(int money)
+        {
+            _gameData.PlayerData.Cash += money;
+            _gameInterface.OnMoneyChanged?.Invoke(_gameData.PlayerData.Cash);
+        }
+
         public void Draw()
         {
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null,
@@ -88,13 +95,18 @@ namespace LostAndFound.Core.Games
 
             _renderManager.SpriteBatch.End();
             
-            _renderManager.SpriteBatch.Begin();
+            _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             _gameInterface.Draw();
             _renderManager.SpriteBatch.End();
         }
 
         public void Update(GameTime gameTime)
         {
+            if (Keyboard.GetState().IsKeyDown(Keys.P))
+            {
+                AddMoney(10);
+            }
+            
             _camera.Update(20000, 20000);
             _player.Update(_gameData.PlayerData, gameTime);
             _camera.ToGo = _gameData.PlayerData.Position;
