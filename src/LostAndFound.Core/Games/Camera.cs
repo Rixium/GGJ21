@@ -13,7 +13,7 @@ namespace LostAndFound.Core.Games
         private int _minY;
         private readonly int _maxY;
 
-        private int _zoom = 1;
+        private int _zoom = 3;
 
         public Camera(IWindowConfiguration windowConfiguration)
         {
@@ -32,7 +32,7 @@ namespace LostAndFound.Core.Games
             _minX = 0;
             _minY = 0;
 
-            var (x, y) = Vector2.Lerp(Position, ToGo, 0.001f);
+            var (x, y) = Vector2.Lerp(Position, ToGo, 0.1f);
             
             if (Vector2.Distance(Position, ToGo) < 10)
             {

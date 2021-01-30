@@ -5,6 +5,7 @@ namespace LostAndFound.Core.Games
     public interface IGameInstance
     {
         void Load();
+        void Start();
         void Draw();
         void Update(GameTime gameTime);
     }

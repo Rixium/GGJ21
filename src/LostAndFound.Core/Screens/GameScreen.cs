@@ -29,6 +29,8 @@ namespace LostAndFound.Core.Screens
         {
             _gameInstance.Load();
             _transitionManager.Load();
+            
+            _gameInstance.Start();
         }
 
         public void Update(GameTime gameTime)
