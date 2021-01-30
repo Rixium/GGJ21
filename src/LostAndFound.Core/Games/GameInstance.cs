@@ -12,17 +12,15 @@ using LostAndFound.Core.Games.Zones;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace LostAndFound.Core.Games
 {
-    class GameInstance : IGameInstance
+    public class GameInstance : IGameInstance
     {
         private const ZoneType StartingZone = ZoneType.Forest;
 
-        private Random _random = new Random();
-        private GameInterface _gameInterface;
-
+        private readonly Random _random = new Random();
+        private readonly GameInterface _gameInterface;
         private readonly IRenderManager _renderManager;
         private readonly IZoneLoader _zoneLoader;
         private readonly IContentChest _contentChest;
@@ -143,16 +141,6 @@ namespace LostAndFound.Core.Games
 
         public void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.P))
-            {
-                AddMoney(10);
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                SpawnPerson();
-            }
-
             _camera.Update(20000, 20000);
             _player.Update(_gameData.PlayerData, gameTime);
             _camera.ToGo = _gameData.PlayerData.Position;
