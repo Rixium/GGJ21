@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using LostAndFound.Core.Config;
 using LostAndFound.Core.Content.Aseprite;
 using LostAndFound.Core.Content.ContentLoader;
@@ -22,6 +23,9 @@ namespace LostAndFound.Core.Screens
 
         private readonly IList<IPanel> _mainMenuPanels = new List<IPanel>();
         private readonly float _uiScale = 3f;
+        private IPanel ActivePanel => _mainMenuPanels.FirstOrDefault(x => x.Name.Equals(_activePanelName));
+        private string _activePanelName = "Main";
+
 
         public MainMenuScreen(IRenderManager renderManager, IWindowConfiguration windowConfiguration,
             ITransitionManager transitionManager, IContentLoader<AsepriteSpriteMap> spriteMapLoader)
@@ -48,7 +52,8 @@ namespace LostAndFound.Core.Screens
             var petItUp = spriteMap.CreateSpriteFromRegion("pet it up");
             var petItDown = spriteMap.CreateSpriteFromRegion("pet it down");
 
-            var mainPanel = new Panel(_renderManager);
+            var mainPanel = new Panel(_renderManager, "Main");
+            var optionsPanel = new Panel(_renderManager, "Options");
 
             var titleImage = new Image(titleSprite, _windowConfiguration.Center - new Vector2(0, 100), _uiScale,
                 Origin.Center);
@@ -66,35 +71,33 @@ namespace LostAndFound.Core.Screens
                 _transitionManager.FadeOutEnded = () => { RequestScreenChange?.Invoke(ScreenType.GameScreen); };
             };
 
+            optionsButton.Click = () => { _activePanelName = "Options"; };
+
             quitButton.Click = Game1.Quit;
 
             mainPanel.AddElement(titleImage);
             mainPanel.AddElement(playButton);
             mainPanel.AddElement(optionsButton);
             mainPanel.AddElement(quitButton);
+            
+            optionsPanel.AddElement(titleImage);
 
             _mainMenuPanels.Add(mainPanel);
+            _mainMenuPanels.Add(optionsPanel);
         }
 
         public void Update(GameTime gameTime)
         {
             _transitionManager.Update(gameTime);
 
-            foreach (var panel in _mainMenuPanels)
-            {
-                panel.Update(gameTime);
-            }
+            ActivePanel?.Update(gameTime);
         }
 
         public void Draw()
         {
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
 
-
-            foreach (var panel in _mainMenuPanels)
-            {
-                panel.Draw();
-            }
+            ActivePanel?.Draw();
 
             _transitionManager.Draw();
             _renderManager.SpriteBatch.End();

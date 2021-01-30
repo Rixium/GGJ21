@@ -9,10 +9,13 @@ namespace LostAndFound.Core.UI
         private readonly IRenderManager _renderManager;
         private readonly IList<IElement> _elements = new List<IElement>();
 
-        public Panel(IRenderManager renderManager)
+        public Panel(IRenderManager renderManager, string name)
         {
             _renderManager = renderManager;
+            Name = name;
         }
+
+        public string Name { get; }
 
         public void AddElement<T>(T element) where T : IElement
         {
