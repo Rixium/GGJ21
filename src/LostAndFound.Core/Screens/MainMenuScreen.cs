@@ -21,7 +21,7 @@ namespace LostAndFound.Core.Screens
         public ScreenType ScreenType => ScreenType.MainMenu;
 
         private readonly IList<IPanel> _mainMenuPanels = new List<IPanel>();
-        private readonly float _uiScale = 4f;
+        private readonly float _uiScale = 3f;
 
         public MainMenuScreen(IRenderManager renderManager, IWindowConfiguration windowConfiguration,
             ITransitionManager transitionManager, IContentLoader<AsepriteSpriteMap> spriteMapLoader)
