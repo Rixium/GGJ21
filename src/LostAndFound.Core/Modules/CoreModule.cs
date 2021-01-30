@@ -51,7 +51,8 @@ namespace LostAndFound.Core.Modules
 
             builder.RegisterType<AsepriteSpriteMapLoader>().As<IContentLoader<AsepriteSpriteMap>>().SingleInstance();
 
-            builder.RegisterType<TimeManager>();
+            builder.RegisterType<TimeManager>().SingleInstance();
+            builder.RegisterType<LightingOverlay>();
 
             builder.RegisterType<PersonFactory>().As<IPersonFactory>().SingleInstance();
             builder.RegisterType<AnimalFactory>().As<IAnimalFactory>().SingleInstance();
