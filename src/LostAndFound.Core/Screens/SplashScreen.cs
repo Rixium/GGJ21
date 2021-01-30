@@ -6,7 +6,9 @@ using LostAndFound.Core.Transitions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+#if !DEBUG
 using Microsoft.Xna.Framework.Media;
+#endif
 
 namespace LostAndFound.Core.Screens
 {
@@ -58,10 +60,12 @@ namespace LostAndFound.Core.Screens
             if (_splashTime <= 0)
             {
                 _transitionManager.SetState(FadeState.FadingOut);
+#if !DEBUG
                 var song = _contentChest.Get<Song>("Audio/Music/Floating");
                 MediaPlayer.IsRepeating = true;
                 MediaPlayer.Volume = 0.5f;
                 MediaPlayer.Play(song);
+#endif
             }
         }
 
