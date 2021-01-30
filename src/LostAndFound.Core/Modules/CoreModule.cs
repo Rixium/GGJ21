@@ -7,7 +7,6 @@ using LostAndFound.Core.Screens;
 using LostAndFound.Core.System;
 using LostAndFound.Core.Transitions;
 using Microsoft.Xna.Framework;
-using FileSystem = Microsoft.VisualBasic.FileSystem;
 
 namespace LostAndFound.Core.Modules
 {
