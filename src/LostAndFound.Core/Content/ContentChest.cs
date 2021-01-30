@@ -9,6 +9,7 @@ namespace LostAndFound.Core.Content
         public T Get<T>(string assetName)
         {
             var fixedPath = assetName.Replace($"Assets{Path.DirectorySeparatorChar}", "");
+            fixedPath = fixedPath.Split('.')[0];
             return ContentManager.Load<T>(fixedPath);
         }
     }

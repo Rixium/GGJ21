@@ -49,6 +49,8 @@ namespace LostAndFound.Core.Games
 
             _gameInterface = new GameInterface(_renderManager, _contentChest);
             _gameInterface.SetUp();
+            
+            _personFactory.Load();
         }
 
         public void Start()
