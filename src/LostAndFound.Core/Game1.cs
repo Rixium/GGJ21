@@ -11,6 +11,7 @@ namespace LostAndFound.Core
 {
     internal class Game1 : Game
     {
+        private static Game1 _instance;
         private readonly IRenderManager _renderManager;
         private readonly IScreenManager _screenManager;
         private readonly IContentChest _contentChest;
@@ -21,6 +22,8 @@ namespace LostAndFound.Core
         public Game1(IRenderManager renderManager, IScreenManager screenManager, IContentChest contentChest,
             IWindowConfiguration windowConfiguration, IApplicationFolder applicationFolder)
         {
+            _instance = this;
+
             _renderManager = renderManager;
             _screenManager = screenManager;
             _contentChest = contentChest;
@@ -46,7 +49,7 @@ namespace LostAndFound.Core
 
             _applicationFolder.SetDirectoryName("OffTheLeash");
             _applicationFolder.Create();
-            
+
             _screenManager.LoadScreens();
             _screenManager.SetActiveScreen(ScreenType.MainMenu);
         }
@@ -70,5 +73,7 @@ namespace LostAndFound.Core
 
             base.Draw(gameTime);
         }
+
+        public static void Quit() => _instance.Exit();
     }
 }
