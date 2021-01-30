@@ -7,6 +7,17 @@ namespace LostAndFound.Core.Games.Zones
     {
         public string Name { get; set; }
         public Rectangle Bounds { get; set; }
-        public Dictionary<string, string> Properties { get; set; }
+        public Dictionary<string, string> Properties { get; set; } = new Dictionary<string, string>();
+
+        public string GetProperty(string propertyName)
+        {
+            if (Properties == null)
+            {
+                return null;
+            }
+
+            Properties.TryGetValue(propertyName, out var propertyValue);
+            return propertyValue;
+        }
     }
 }

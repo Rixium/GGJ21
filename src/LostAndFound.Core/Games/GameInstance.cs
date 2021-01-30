@@ -73,6 +73,7 @@ namespace LostAndFound.Core.Games
 
             player.AddComponent(staticDrawComponent);
             player.AddComponent(Program.Resolve<PlayerControllerComponent>());
+            player.AddComponent(Program.Resolve<ZoneInteractionComponent>());
 
             _camera.SetEntity(player, false);
             ActiveZone.Entities.Add(player);
@@ -95,6 +96,15 @@ namespace LostAndFound.Core.Games
             _camera.Update(500, 281);
             _gameInterface.Update(gameTime);
             ActiveZone.Update(gameTime);
+        }
+
+        public IZone GetZone(ZoneType zoneType) => _zones.FirstOrDefault(x => x.ZoneType == zoneType);
+        public void SetActiveZone(ZoneType zoneType) => _currentZone = zoneType;
+
+        public void MoveEntityToZone(IZone oldZone, IZone zoneToGoTo, IEntity entity)
+        {
+            oldZone.RemoveEntity(entity);
+            zoneToGoTo.AddEntity(entity);
         }
     }
 }

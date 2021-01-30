@@ -68,6 +68,7 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<PersonInteractionComponent>().InstancePerDependency();
             builder.RegisterType<StaticDrawComponent>().InstancePerDependency();
             builder.RegisterType<PlayerControllerComponent>().InstancePerDependency();
+            builder.RegisterType<ZoneInteractionComponent>().InstancePerDependency();
         }
     }
 }

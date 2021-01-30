@@ -11,6 +11,7 @@ namespace LostAndFound.Core.Games
         public Vector2 Position { get; set; }
         GameInstance GameInstance { get; set; }
         public void AddComponent(IComponent component);
+        public T GetComponent<T>();
         public void Update(GameTime gameTime);
         public void Draw(SpriteBatch spriteBatch);
     }
@@ -18,7 +19,6 @@ namespace LostAndFound.Core.Games
     public class Entity : IEntity
     {
         private readonly IList<IComponent> _components = new List<IComponent>();
-
         public Vector2 Position { get; set; }
         public GameInstance GameInstance { get; set; }
 
@@ -31,6 +31,19 @@ namespace LostAndFound.Core.Games
         {
             _components.Add(component);
             component.Entity = this;
+        }
+
+        public T GetComponent<T>()
+        {
+            foreach (var component in _components)
+            {
+                if (component.GetType() == typeof(T))
+                {
+                    return (T) component;
+                }
+            }
+
+            return default;
         }
 
         public void Update(GameTime gameTime)
