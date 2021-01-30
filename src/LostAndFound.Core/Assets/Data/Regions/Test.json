@@ -22,7 +22,7 @@
    { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
-   { "name": "ToStreetZone", "color": "#0000ffff", "data": "(Direction:Left)(to:Street,Right)", "keys": [{ "frame": 0, "bounds": {"x": 4, "y": 597, "w": 17, "h": 93 } }] },
+   { "name": "ToStreetZone", "color": "#0000ffff", "data": "(Direction:Left)(to:Street,Right)(Left:Street)", "keys": [{ "frame": 0, "bounds": {"x": 4, "y": 597, "w": 17, "h": 93 } }] },
    { "name": "SafeZone", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 241, "y": 591, "w": 811, "h": 85 } }] },
    { "name": "PlayerStart", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 614, "y": 595, "w": 23, "h": 31 } }] }
   ]

@@ -27,6 +27,7 @@ namespace LostAndFound.Core.Games.Components
 
         public void Update(GameTime gameTime)
         {
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)

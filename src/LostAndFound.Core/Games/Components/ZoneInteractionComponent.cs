@@ -25,35 +25,40 @@ namespace LostAndFound.Core.Games.Components
         {
             var entityCollider = Entity.GetComponent<BoxColliderComponent>();
             var entityZone = _gameInstance.ActiveZone;
-            foreach (var collider in entityZone.Colliders)
+
+            if (entityCollider.Bounds.X < 0)
             {
-                if (!collider.Bounds.Intersects(entityCollider.Bounds))
-                {
-                    continue;
-                }
-
-                var toProperty = collider.GetProperty("To");
-                if (toProperty == null) continue;
-
-                var toZoneValues = toProperty.Split(',');
-                Enum.TryParse<ZoneType>(toZoneValues[0], out var zoneType);
-                Enum.TryParse<Direction>(toZoneValues[1], out var entranceDirection);
-
+                var collider = entityZone.GetColliderWithProperty("Left");
+                var property = collider.GetProperty("Left");
+                Enum.TryParse<ZoneType>(property, out var zoneType);
+                
                 var zoneToGoTo = _gameInstance.GetZone(zoneType);
 
                 if (zoneToGoTo != null)
                 {
-                    TeleportToZone(entityZone, zoneToGoTo, entranceDirection);
+                    TeleportToZone(entityZone, zoneToGoTo);
+                    Entity.Position =  new Vector2(zoneToGoTo.Image.Width, Entity.Position.Y);
+                }
+            } else if (entityCollider.Bounds.X > entityZone.Image.Width)
+            {
+                var collider = entityZone.GetColliderWithProperty("Right");
+                var property = collider.GetProperty("Right");
+                Enum.TryParse<ZoneType>(property, out var zoneType);
+                
+                var zoneToGoTo = _gameInstance.GetZone(zoneType);
+
+                if (zoneToGoTo != null)
+                {
+                    TeleportToZone(entityZone, zoneToGoTo);
+                    Entity.Position =  new Vector2(0, Entity.Position.Y);
                 }
             }
         }
 
-        private void TeleportToZone(IZone oldZone, IZone zoneToGoTo, Direction direction)
-        {
+        private void TeleportToZone(IZone oldZone, IZone zoneToGoTo)
+         {
             _gameInstance.MoveEntityToZone(oldZone, zoneToGoTo, Entity);
             _gameInstance.SetActiveZone(zoneToGoTo.ZoneType);
-
-            Entity.Position =  new Vector2(zoneToGoTo.GetTeleportPoint(direction).X, Entity.Position.Y);
         }
 
         public void Draw(SpriteBatch spriteBatch)

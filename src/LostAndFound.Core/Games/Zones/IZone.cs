@@ -17,5 +17,6 @@ namespace LostAndFound.Core.Games.Zones
         Vector2 GetTeleportPoint(Direction direction);
         void RemoveEntity(IEntity entity);
         void AddEntity(IEntity entity);
+        Collider GetColliderWithProperty(string propertyName);
     }
 }

@@ -32,7 +32,7 @@
   "slices": [
    { "name": "SafeZone", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 39, "y": 240, "w": 461, "h": 35 } }] },
    { "name": "PlayerStart", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 278, "y": 241, "w": 7, "h": 4 } }] },
-   { "name": "Slice 1", "color": "#0000ffff", "data": "(To:Street,Left)(Direction:Right)", "keys": [{ "frame": 0, "bounds": {"x": 490, "y": 250, "w": 9, "h": 14 } }] }
+   { "name": "Slice 1", "color": "#0000ffff", "data": "(To:Street,Left)(Direction:Right)(Right:Street)(Left:Test)", "keys": [{ "frame": 0, "bounds": {"x": 490, "y": 250, "w": 9, "h": 14 } }] }
   ]
  }
 }
