@@ -1,4 +1,6 @@
-﻿using LostAndFound.Core.Games.Entities;
+﻿using System.Collections.Generic;
+using LostAndFound.Core.Content;
+using LostAndFound.Core.Games.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,7 +9,14 @@ namespace LostAndFound.Core.Games.Components
 {
     public class SoundComponent : IComponent
     {
+        private readonly IContentChest _contentChest;
         public IEntity Entity { get; set; }
+
+        public SoundComponent(IContentChest contentChest)
+        {
+            _contentChest = contentChest;
+        }
+        
         public void Start()
         {
         }
@@ -20,9 +29,9 @@ namespace LostAndFound.Core.Games.Components
         {
         }
 
-        public void PlaySound(SoundEffect sound, float volume = 1)
+        public void PlaySoundByName(string name, float volume = 1)
         {
-            sound.Play(volume, 1, 0);
+            _contentChest.Get<SoundEffect>(name).Play(volume, 0, 0);
         }
     }
 }
