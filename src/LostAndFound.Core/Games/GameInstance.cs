@@ -67,11 +67,16 @@ namespace LostAndFound.Core.Games
 
             var player = new Entity(playerStartCollider.Bounds.ToVector2());
             var playerImage = _contentChest.Get<Texture2D>("Images/Player/Idle_1");
+            var playerFeetBoxCollider = Program.Resolve<BoxColliderComponent>();
+            playerFeetBoxCollider.Width = 14;
+            playerFeetBoxCollider.Height = 5;
+            playerFeetBoxCollider.Offset = new Vector2(0, 49);
 
             var staticDrawComponent = Program.Resolve<StaticDrawComponent>();
             staticDrawComponent.Image = playerImage;
 
             player.AddComponent(staticDrawComponent);
+            player.AddComponent(playerFeetBoxCollider);
             player.AddComponent(Program.Resolve<PlayerControllerComponent>());
             player.AddComponent(Program.Resolve<ZoneInteractionComponent>());
 
