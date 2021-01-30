@@ -70,6 +70,7 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<PlayerControllerComponent>().InstancePerDependency();
             builder.RegisterType<ZoneInteractionComponent>().InstancePerDependency();
             builder.RegisterType<BoxColliderComponent>().InstancePerDependency();
+            builder.RegisterType<SoundComponent>().InstancePerDependency();
         }
     }
 }

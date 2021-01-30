@@ -77,6 +77,7 @@ namespace LostAndFound.Core.Games
             playerFeetBoxCollider.Width = 14;
             playerFeetBoxCollider.Height = 5;
             playerFeetBoxCollider.Offset = new Vector2(0, 49);
+            var playerSoundComponent = Program.Resolve<SoundComponent>();
 
             var staticDrawComponent = Program.Resolve<StaticDrawComponent>();
             staticDrawComponent.Image = playerImage;
@@ -85,6 +86,7 @@ namespace LostAndFound.Core.Games
             player.AddComponent(playerFeetBoxCollider);
             player.AddComponent(Program.Resolve<PlayerControllerComponent>());
             player.AddComponent(Program.Resolve<ZoneInteractionComponent>());
+            player.AddComponent(playerSoundComponent);
 
             _camera.SetEntity(player, false);
             ActiveZone.Entities.Add(player);
