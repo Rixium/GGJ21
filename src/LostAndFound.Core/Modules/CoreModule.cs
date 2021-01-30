@@ -7,6 +7,7 @@ using LostAndFound.Core.Screens;
 using LostAndFound.Core.System;
 using LostAndFound.Core.Transitions;
 using Microsoft.Xna.Framework;
+using FileSystem = Microsoft.VisualBasic.FileSystem;
 
 namespace LostAndFound.Core.Modules
 {
@@ -16,7 +17,6 @@ namespace LostAndFound.Core.Modules
         {
             builder.RegisterType<Game1>().As<Game>();
 
-            builder.RegisterType<FileSystem>().As<IFileSystem>().InstancePerDependency();
             builder.RegisterType<ContentDeserializer>().As<IContentDeserializer>().InstancePerDependency();
 
             builder.RegisterType<RenderManager>().As<IRenderManager>().SingleInstance();
@@ -29,6 +29,10 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<MainMenuScreen>().As<IScreen>();
             builder.RegisterType<GameScreen>().As<IScreen>();
 
+            builder.RegisterType<ContentChest>().As<IContentChest>().SingleInstance();
+            builder.RegisterType<FileSystem>().As<IFileSystem>().SingleInstance();
+            builder.RegisterType<ApplicationFolder>().As<IApplicationFolder>().SingleInstance();
+            
             builder.RegisterType<ContentChest>().As<IContentChest>().SingleInstance();
 
             builder.RegisterType<WindowConfiguration>().As<IWindowConfiguration>().SingleInstance();
