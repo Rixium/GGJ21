@@ -1,26 +1,41 @@
-﻿using LostAndFound.Core.Games.Models;
+﻿using System.IO;
+using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Persistence;
 using LostAndFound.Core.System;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using Shouldly;
 
 namespace LostAndFound.Core.IntegrationTests.Persistence
 {
     public class GameSaverShould
     {
         private GameSaver _gameSaver;
+        private ApplicationFolder _applicationFolder;
+        private FileSystem _fileSystem;
+        private string _testDirectory;
 
         [SetUp]
         public void SetUp()
         {
-            var applicationFolder = new ApplicationFolder();
-            _gameSaver = new GameSaver(applicationFolder);
+            _applicationFolder = new ApplicationFolder();
+            _fileSystem = new FileSystem();
+            _testDirectory = _applicationFolder.Create();
+            _gameSaver = new GameSaver(_applicationFolder);
         }
 
-        [SetUp]
+        [TearDown]
+        public void TearDown()
+        {
+            _fileSystem.Delete(_applicationFolder.Root);
+        }
+
+        [Test]
         public void SaveGameData()
         {
-            _gameSaver.Save("TestFile", new GameData
+            var saveName = "testSave.xml";
+
+            _gameSaver.Save(saveName, new GameData
             {
                 ActiveZone = ZoneType.Street,
                 PlayerData = new PlayerData
@@ -29,6 +44,8 @@ namespace LostAndFound.Core.IntegrationTests.Persistence
                     Position = new Vector2(10, 10)
                 }
             });
+
+            _fileSystem.Exists(Path.Join(_testDirectory, saveName)).ShouldBeTrue();
         }
     }
 }

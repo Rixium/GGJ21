@@ -8,6 +8,7 @@ namespace LostAndFound.Core.System
     {
         private string _companyName = "YetiFace";
         private string _gameName = "OffTheLeash";
+        public string Root { get; set; }
 
         public void SetDirectoryName(string directoryName) => _gameName = directoryName;
 
@@ -18,7 +19,7 @@ namespace LostAndFound.Core.System
             var applicationFolder = Path.Combine(companyFolder, _gameName);
 
             Directory.CreateDirectory(applicationFolder);
-
+            Root = companyFolder;
             return applicationFolder;
         }
 

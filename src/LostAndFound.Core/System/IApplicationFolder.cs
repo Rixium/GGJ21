@@ -2,9 +2,9 @@
 {
     public interface IApplicationFolder
     {
-        void SetDirectoryName(string applicationName);
+        string Root { get; set; }
+        void SetDirectoryName(string directoryName);
         string Create();
-
         string Save<T>(string path, T data, bool shouldOverwrite);
     }
 }
