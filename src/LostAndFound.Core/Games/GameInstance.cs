@@ -12,6 +12,7 @@ using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Games.Zones;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games
@@ -148,6 +149,7 @@ namespace LostAndFound.Core.Games
             player.AddComponent(Program.Resolve<PlayerControllerComponent>());
             player.AddComponent(Program.Resolve<ZoneInteractionComponent>());
             player.AddComponent(playerSoundComponent);
+            player.AddComponent(Program.Resolve<PlayerSoundManagerComponent>());
 
             player.Position = playerStartCollider.Bounds.ToVector2() - playerFeetBoxCollider.Offset;
             
