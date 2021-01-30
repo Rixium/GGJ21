@@ -6,10 +6,12 @@ namespace LostAndFound.Core.Games.Components
 {
     public class AnimationDrawComponent : IComponent
     {
+        private AnimatorComponent _animator;
         public IEntity Entity { get; set; }
 
         public void Start()
         {
+            _animator = Entity.GetComponent<AnimatorComponent>();
         }
 
         public void Update(GameTime gameTime)
@@ -18,8 +20,7 @@ namespace LostAndFound.Core.Games.Components
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            var animator = Entity.GetComponent<AnimatorComponent>();
-            var frame = animator.Current;
+            var frame = _animator.Current;
             if (frame == null)
             {
                 return;

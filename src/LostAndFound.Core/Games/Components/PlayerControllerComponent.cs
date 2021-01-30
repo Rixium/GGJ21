@@ -15,6 +15,8 @@ namespace LostAndFound.Core.Games.Components
 
     public class PlayerControllerComponent : IComponent
     {
+        private BoxColliderComponent _boxColliderComponent;
+        
         public int XVelocity { get; set; }
         public int YVelocity { get; set; }
         
@@ -33,6 +35,7 @@ namespace LostAndFound.Core.Games.Components
 
         public void Start()
         {
+            _boxColliderComponent = Entity.GetComponent<BoxColliderComponent>();
         }
 
         public void Update(GameTime gameTime)
@@ -85,8 +88,7 @@ namespace LostAndFound.Core.Games.Components
         {
             var newPosition = entity.Position + new Vector2(xMove, yMove);
 
-            var boundingBox = Entity.GetComponent<BoxColliderComponent>();
-            var bounds = boundingBox.Bounds.Add(new Rectangle(xMove, 0, 0, 0));
+            var bounds = _boxColliderComponent.Bounds.Add(new Rectangle(xMove, 0, 0, 0));
 
             foreach (var collider in _gameInstance.ActiveZone.Colliders)
             {
@@ -100,7 +102,7 @@ namespace LostAndFound.Core.Games.Components
                 }
             }
             
-            bounds = boundingBox.Bounds.Add(new Rectangle(0, yMove, 0, 0));
+            bounds = _boxColliderComponent.Bounds.Add(new Rectangle(0, yMove, 0, 0));
             foreach (var collider in _gameInstance.ActiveZone.Colliders)
             {
                 if (collider.GetProperty("Solid") != null)
@@ -113,7 +115,7 @@ namespace LostAndFound.Core.Games.Components
                 }
             }
 
-            var mapBottom = new Rectangle(0, _gameInstance.ActiveZone.Image.Height - boundingBox.Height, _gameInstance.ActiveZone.Image.Width, 100);
+            var mapBottom = new Rectangle(0, _gameInstance.ActiveZone.Image.Height - _boxColliderComponent.Height, _gameInstance.ActiveZone.Image.Width, 100);
             if (bounds.Intersects(mapBottom))
             {
                 var depth = bounds.GetIntersectionDepth(mapBottom);
