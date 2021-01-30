@@ -57,7 +57,7 @@ namespace LostAndFound.Core.Transitions
         {
             _currentFade += gameTime.AsDelta();
 
-            if (_currentFade > 1)
+            if (_currentFade < 1)
             {
                 return;
             }
@@ -88,6 +88,8 @@ namespace LostAndFound.Core.Transitions
                 Color.Black * _currentFade);
         }
 
-        public void SetState(FadeState fadeState) => _currentFade = _fadeState == FadeState.FadingOut ? 1 : 0;
+        public void SetState(FadeState fadeState) => _fadeState = fadeState;
+
+        public void SetFade(float fade) => _currentFade = fade;
     }
 }

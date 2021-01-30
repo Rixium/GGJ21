@@ -11,5 +11,6 @@ namespace LostAndFound.Core.Transitions
         void Update(GameTime gameTime);
         void Draw();
         void SetState(FadeState fadeState);
+        void SetFade(float fade);
     }
 }
