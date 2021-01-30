@@ -7,7 +7,8 @@ namespace LostAndFound.Core.UI
     public enum Origin
     {
         TopLeft,
-        Center
+        Center,
+        TopRight
     }
     
     public interface IElement

@@ -1,11 +1,11 @@
 { "frames": [
    {
     "filename": "Test.aseprite",
-    "frame": { "x": 0, "y": 0, "w": 2000, "h": 800 },
+    "frame": { "x": 0, "y": 0, "w": 1280, "h": 720 },
     "rotated": false,
     "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 2000, "h": 800 },
-    "sourceSize": { "w": 2000, "h": 800 },
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+    "sourceSize": { "w": 1280, "h": 720 },
     "duration": 100
    }
  ],
@@ -14,7 +14,7 @@
   "version": "1.2.25-x64",
   "image": "Test.png",
   "format": "RGBA8888",
-  "size": { "w": 2000, "h": 800 },
+  "size": { "w": 1280, "h": 720 },
   "scale": "1",
   "frameTags": [
   ],
@@ -22,9 +22,9 @@
    { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
-   { "name": "ToStreetZone", "color": "#0000ffff", "data": "(Direction:Left)(to:Street,Right)", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 676, "w": 17, "h": 93 } }] },
-   { "name": "SafeZone", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 631, "w": 2000, "h": 169 } }] },
-   { "name": "PlayerStart", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 974, "y": 635, "w": 23, "h": 31 } }] }
+   { "name": "ToStreetZone", "color": "#0000ffff", "data": "(Direction:Left)(to:Street,Right)", "keys": [{ "frame": 0, "bounds": {"x": 4, "y": 597, "w": 17, "h": 93 } }] },
+   { "name": "SafeZone", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 241, "y": 591, "w": 811, "h": 85 } }] },
+   { "name": "PlayerStart", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 614, "y": 595, "w": 23, "h": 31 } }] }
   ]
  }
 }

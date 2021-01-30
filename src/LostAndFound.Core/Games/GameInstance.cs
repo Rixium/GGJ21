@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using LostAndFound.Core.Config;
 using LostAndFound.Core.Content;
 using LostAndFound.Core.Extensions;
+using LostAndFound.Core.Games.Animals;
 using LostAndFound.Core.Games.Interfaces;
 using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Games.Person;
@@ -16,12 +18,14 @@ namespace LostAndFound.Core.Games
 {
     class GameInstance : IGameInstance
     {
+        private Random _random = new Random();
         private GameInterface _gameInterface;
 
         private readonly IRenderManager _renderManager;
         private readonly IZoneLoader _zoneLoader;
         private readonly IContentChest _contentChest;
         private readonly IPersonFactory _personFactory;
+        private readonly IAnimalFactory _animalFactory;
         private readonly Camera _camera;
 
         private GameData _gameData = new GameData();
@@ -31,12 +35,15 @@ namespace LostAndFound.Core.Games
         private Player _player;
 
         public GameInstance(IRenderManager renderManager, IZoneLoader zoneLoader,
-            IWindowConfiguration windowConfiguration, IContentChest contentChest, IPersonFactory personFactory)
+            IWindowConfiguration windowConfiguration, IContentChest contentChest, IPersonFactory personFactory,
+            IAnimalFactory animalFactory, GameInterface gameInterface)
         {
             _renderManager = renderManager;
             _zoneLoader = zoneLoader;
             _contentChest = contentChest;
             _personFactory = personFactory;
+            _animalFactory = animalFactory;
+            _gameInterface = gameInterface;
             _camera = new Camera(windowConfiguration);
         }
 
@@ -47,9 +54,6 @@ namespace LostAndFound.Core.Games
             _gameData.ActiveZone = ZoneType.Test;
             _camera.Position = new Vector2(500, 500);
 
-            _gameInterface = new GameInterface(_renderManager, _contentChest);
-            _gameInterface.SetUp();
-            
             _personFactory.Load();
         }
 
@@ -65,14 +69,33 @@ namespace LostAndFound.Core.Games
             _camera.SetEntity(_gameData.PlayerData, true);
 
             _player.PlayerMove += CanPlayerMove;
+            SpawnPerson();
+            
+            _gameInterface.SetUp(_gameData);
         }
 
         public void SpawnPerson()
         {
             var person = _personFactory.Create();
+            var safeZone = ActiveZone.Colliders.First(x => x.Name.Equals("SafeZone"));
+            person.Position = new Vector2(_random.Next(safeZone.Bounds.X, safeZone.Bounds.Right),
+                _random.Next(safeZone.Bounds.Y, safeZone.Bounds.Bottom));
             _gameData.PersonData.Add(person);
+
+            var questData = new QuestData
+            {
+                PersonData = person,
+                AnimalData = GetAnimalData(),
+                Reward = 1000,
+                ConversationData = new[] {"Hello Son!", "Lost me dog!"}
+            };
+            
+            _gameData.QuestData.Add(questData);
+            _gameInterface.OnQuestAdded?.Invoke(questData);
         }
-        
+
+        private AnimalData GetAnimalData() => _animalFactory.Create();
+
         public bool CanPlayerMove(Movement movement, Rectangle bounds)
         {
             var newBounds = new Rectangle(bounds.X + movement.X, bounds.Y + movement.Y, bounds.Width, bounds.Height);
@@ -85,7 +108,8 @@ namespace LostAndFound.Core.Games
             {
                 ActiveZone = ZoneType.Test,
                 PersonData = new List<PersonData>(),
-                PlayerData = new PlayerData()
+                PlayerData = new PlayerData(),
+                QuestData = new List<QuestData>()
             };
         }
 
@@ -103,8 +127,14 @@ namespace LostAndFound.Core.Games
             _renderManager.SpriteBatch.Draw(ActiveZone.BackgroundImage, new Vector2(0, 0), Color.White);
             _renderManager.SpriteBatch.Draw(_player.Image, _gameData.PlayerData.Position, Color.White);
 
+            foreach (var person in _gameData.PersonData)
+            {
+                var personImage = _contentChest.Get<Texture2D>(person.ImageName);
+                _renderManager.SpriteBatch.Draw(personImage, person.Position, Color.White);
+            }
+
             _renderManager.SpriteBatch.End();
-            
+
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             _gameInterface.Draw();
             _renderManager.SpriteBatch.End();
@@ -116,7 +146,12 @@ namespace LostAndFound.Core.Games
             {
                 AddMoney(10);
             }
-            
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                SpawnPerson();
+            }
+
             _camera.Update(20000, 20000);
             _player.Update(_gameData.PlayerData, gameTime);
             _camera.ToGo = _gameData.PlayerData.Position;

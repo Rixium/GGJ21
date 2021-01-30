@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using LostAndFound.Core.Content;
 using LostAndFound.Core.Games.Models;
@@ -8,6 +9,8 @@ namespace LostAndFound.Core.Games.Person
 {
     public class PersonFactory : IPersonFactory
     {
+        private Random _random = new Random();
+        
         private IContentChest _contentChest;
         private List<Texture2D> _personTextures;
 
@@ -29,10 +32,17 @@ namespace LostAndFound.Core.Games.Person
         
         public PersonData Create()
         {
+            var selectedPerson = _random.Next(0, _personTextures.Count);
+            var randomPerson = _personTextures[selectedPerson];
+            var randomName = GetRandomName();
+            
             return new PersonData
             {
-                Name = "Daniel"
+                Name = randomName,
+                ImageName = randomPerson.Name
             };
         }
+
+        private string GetRandomName() => "Daniel";
     }
 }

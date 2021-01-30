@@ -4,6 +4,8 @@ using LostAndFound.Core.Content;
 using LostAndFound.Core.Content.Aseprite;
 using LostAndFound.Core.Content.ContentLoader;
 using LostAndFound.Core.Games;
+using LostAndFound.Core.Games.Animals;
+using LostAndFound.Core.Games.Interfaces;
 using LostAndFound.Core.Games.Person;
 using LostAndFound.Core.Games.Zones;
 using LostAndFound.Core.Graphics;
@@ -42,12 +44,14 @@ namespace LostAndFound.Core.Modules
 
             builder.RegisterType<GameInstance>().As<IGameInstance>().SingleInstance();
             builder.RegisterType<ZoneLoader>().As<IZoneLoader>().SingleInstance();
+            builder.RegisterType<GameInterface>().InstancePerDependency();
 
             builder.RegisterType<AsepriteSpriteMapLoader>().As<IContentLoader<AsepriteSpriteMap>>().SingleInstance();
 
             builder.RegisterType<TimeManager>();
 
             builder.RegisterType<PersonFactory>().As<IPersonFactory>().SingleInstance();
+            builder.RegisterType<AnimalFactory>().As<IAnimalFactory>().SingleInstance();
 
             base.Load(builder);
         }

@@ -52,6 +52,8 @@ namespace LostAndFound.Core.UI
                     return new Vector2(0, 0);
                 case Origin.Center:
                     return new Vector2(Width / 2f * Scale, Height / 2f * Scale);
+                case Origin.TopRight:
+                    return new Vector2(Width * Scale, 0);
                 default:
                     return new Vector2(0, 0);
             }
