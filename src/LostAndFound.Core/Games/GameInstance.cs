@@ -80,12 +80,16 @@ namespace LostAndFound.Core.Games
             playerFeetBoxCollider.Offset = new Vector2(0, 49);
             var playerSoundComponent = Program.Resolve<SoundComponent>();
 
-            var staticDrawComponent = Program.Resolve<StaticDrawComponent>();
-            staticDrawComponent.Image = playerImage;
-
+            var animatorComponent = Program.Resolve<AnimatorComponent>();
+            animatorComponent.AddAnimation("Walk_Right", new Animation(new List<Sprite>
+            {
+                new Sprite(playerImage)
+            }));
+            
             player.AddComponent(Program.Resolve<PlayerAnimationComponent>());
-            player.AddComponent(staticDrawComponent);
+            player.AddComponent(Program.Resolve<AnimationDrawComponent>());
             player.AddComponent(playerFeetBoxCollider);
+            player.AddComponent(animatorComponent);
             player.AddComponent(Program.Resolve<PlayerControllerComponent>());
             player.AddComponent(Program.Resolve<ZoneInteractionComponent>());
             player.AddComponent(playerSoundComponent);

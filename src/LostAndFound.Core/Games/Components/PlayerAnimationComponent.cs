@@ -8,8 +8,6 @@ namespace LostAndFound.Core.Games.Components
     public class PlayerAnimationComponent : IComponent
     {
         private PlayerControllerComponent _moveComponent;
-        
-        // public IAnimator HeadAnimator { get; set; }
         public IEntity Entity { get; set; }
         
         public void Start()
@@ -20,21 +18,26 @@ namespace LostAndFound.Core.Games.Components
         public void Update(GameTime gameTime)
         {
             _moveComponent = Entity.GetComponent<PlayerControllerComponent>();
+            var animatorComponent = Entity.GetComponent<AnimatorComponent>();
             
             if (_moveComponent.XVelocity > 0)
             {
                 Console.WriteLine("WALKIN RIGHT");
+                animatorComponent.SetAnimation("Walk_Right");
             } else if (_moveComponent.XVelocity < 0)
             {
                 Console.WriteLine("WALKIN LEFT");
+                animatorComponent.SetAnimation("Walk_Left");
             }
             
             if (_moveComponent.YVelocity > 0)
             {
                 Console.WriteLine("WALKIN DOWN");
+                animatorComponent.SetAnimation("Walk_Down");
             } else if (_moveComponent.YVelocity < 0)
             {
                 Console.WriteLine("WALKIN UP");
+                animatorComponent.SetAnimation("Walk_Up");
             }
         }
 
