@@ -20,7 +20,7 @@ namespace LostAndFound.Core.Games.Components
         
         private readonly IGameInstance _gameInstance;
         private readonly IInputManager _inputManager;
-        private int _speed = 2;
+        private int _speed = 1;
         private bool _canMove = true;
 
         public PlayerControllerComponent(IGameInstance gameInstance, IInputManager inputManager)

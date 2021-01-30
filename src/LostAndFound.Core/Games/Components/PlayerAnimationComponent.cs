@@ -1,5 +1,4 @@
-﻿using System;
-using LostAndFound.Core.Games.Entities;
+﻿using LostAndFound.Core.Games.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -22,21 +21,17 @@ namespace LostAndFound.Core.Games.Components
             
             if (_moveComponent.XVelocity > 0)
             {
-                Console.WriteLine("WALKIN RIGHT");
                 animatorComponent.SetAnimation("Walk_Right");
             } else if (_moveComponent.XVelocity < 0)
             {
-                Console.WriteLine("WALKIN LEFT");
                 animatorComponent.SetAnimation("Walk_Left");
             }
             
             if (_moveComponent.YVelocity > 0)
             {
-                Console.WriteLine("WALKIN DOWN");
                 animatorComponent.SetAnimation("Walk_Down");
             } else if (_moveComponent.YVelocity < 0)
             {
-                Console.WriteLine("WALKIN UP");
                 animatorComponent.SetAnimation("Walk_Up");
             }
         }

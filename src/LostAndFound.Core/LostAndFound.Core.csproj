@@ -21,10 +21,7 @@
     <MonoGameContentReference Include="Assets\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\UI\**\*.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Data\**\*.json">
+    <Content Include="Assets\**\*.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Fonts\**\*.ttf">

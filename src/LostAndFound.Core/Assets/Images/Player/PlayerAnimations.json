@@ -1,0 +1,46 @@
+{ "frames": [
+   {
+    "filename": "PlayerAnimations.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 300, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 300, "h": 300 },
+    "sourceSize": { "w": 300, "h": 300 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.25-x64",
+  "image": "PlayerAnimations.png",
+  "format": "RGBA8888",
+  "size": { "w": 300, "h": 300 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "Walk_Right_1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 0, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Right_2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 64, "y": 0, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Right_3", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 0, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Right_4", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 128, "y": 0, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Right_5", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 160, "y": 0, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Left_1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 57, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Left_2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 64, "y": 57, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Left_3", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 57, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Left_4", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 128, "y": 57, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Left_5", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 160, "y": 57, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Up_1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 121, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Up_2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 64, "y": 121, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Down_1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 185, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Down_2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 64, "y": 185, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Down_3", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 185, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Down_4", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 128, "y": 185, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Down_5", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 160, "y": 185, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Down_6", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 192, "y": 185, "w": 32, "h": 55 } }] },
+   { "name": "Walk_Down_7", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 224, "y": 185, "w": 32, "h": 55 } }] }
+  ]
+ }
+}

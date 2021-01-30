@@ -24,9 +24,9 @@ namespace LostAndFound.Core.Games.Components
             {
                 return;
             }
-            
-            spriteBatch.Draw(frame.Texture, Entity.Position, Color.White);
-        }
 
+            spriteBatch.Draw(frame.Texture, Entity.Position, frame.Source, Color.White, 0f, frame.Origin, 1f,
+                SpriteEffects.None, 0f);
+        }
     }
 }

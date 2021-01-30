@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using LostAndFound.Core.Graphics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Content.Aseprite
@@ -26,7 +27,8 @@ namespace LostAndFound.Core.Content.Aseprite
             if (region == null)
                 throw new RegionNotFoundException();
 
-            return new Sprite(Image, region.Keys.First().Bounds.ToRectangle());
+            var regionBounds = region.Keys.First().Bounds.ToRectangle();
+            return new Sprite(Image, regionBounds, new Vector2(regionBounds.Width, 0) / 4f);
         }
     }
 
