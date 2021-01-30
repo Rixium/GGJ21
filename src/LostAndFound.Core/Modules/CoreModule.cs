@@ -44,6 +44,8 @@ namespace LostAndFound.Core.Modules
 
             builder.RegisterType<AsepriteSpriteMapLoader>().As<IContentLoader<AsepriteSpriteMap>>().SingleInstance();
 
+            builder.RegisterType<TimeManager>();
+
             base.Load(builder);
         }
     }
