@@ -37,6 +37,18 @@
 /processorParam:Quality=Best
 /build:Audio/SoundEffects/start.wav
 
+#begin Data/Regions/Forest.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Data/Regions/Forest.png
+
 #begin Data/Regions/Street.png
 /importer:TextureImporter
 /processor:TextureProcessor

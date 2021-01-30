@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace LostAndFound.Core.Games.Models
 {
@@ -8,5 +9,6 @@ namespace LostAndFound.Core.Games.Models
         public int Cash { get; set; }
         public int Speed { get; set; }
         public Vector2 Position { get; set; }
+        public List<string> AcceptedQuests { get; set; }
     }
 }

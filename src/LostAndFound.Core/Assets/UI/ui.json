@@ -1,6 +1,6 @@
 { "frames": [
    {
-    "filename": "ui.aseprite",
+    "filename": "ui (1).aseprite",
     "frame": { "x": 0, "y": 0, "w": 1000, "h": 1000 },
     "rotated": false,
     "trimmed": false,
@@ -31,7 +31,7 @@
    { "name": "pet it down", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 60, "y": 52, "w": 57, "h": 24 } }] },
    { "name": "options down", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 60, "y": 77, "w": 57, "h": 24 } }] },
    { "name": "tittle", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 125, "y": 4, "w": 127, "h": 24 } }] },
-   { "name": "task manager/notepad", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 129, "y": 32, "w": 107, "h": 131 } }] },
+   { "name": "notepad", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 129, "y": 32, "w": 107, "h": 131 } }] },
    { "name": "cash count UI", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 262, "y": 2, "w": 50, "h": 18 } }] },
    { "name": "volume mute", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 256, "y": 31, "w": 117, "h": 34 } }] },
    { "name": "volume low", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 255, "y": 66, "w": 118, "h": 34 } }] },
@@ -47,7 +47,9 @@
    { "name": "volume mediumhigh 2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 460, "w": 118, "h": 33 } }] },
    { "name": "volume high 1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 494, "w": 118, "h": 34 } }] },
    { "name": "volume high 2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 529, "w": 118, "h": 34 } }] },
-   { "name": "volume high 3", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 565, "w": 118, "h": 33 } }] }
+   { "name": "volume high 3", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 565, "w": 118, "h": 33 } }] },
+   { "name": "Arrow right", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 401, "y": 30, "w": 22, "h": 20 } }] },
+   { "name": "Arrow left", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 403, "y": 6, "w": 22, "h": 19 } }] }
   ]
  }
 }

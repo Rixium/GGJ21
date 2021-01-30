@@ -36,6 +36,10 @@ namespace LostAndFound.Core
 
         protected override void LoadContent()
         {
+            _graphics.PreferredBackBufferWidth = 1280;
+            _graphics.PreferredBackBufferHeight = 720;
+            _graphics.ApplyChanges();
+            
             _windowConfiguration.WindowHeight = _graphics.PreferredBackBufferHeight;
             _windowConfiguration.WindowWidth = _graphics.PreferredBackBufferWidth;
 

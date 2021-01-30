@@ -18,6 +18,8 @@ namespace LostAndFound.Core.Games
 {
     class GameInstance : IGameInstance
     {
+        private const ZoneType StartingZone = ZoneType.Forest;
+        
         private Random _random = new Random();
         private GameInterface _gameInterface;
 
@@ -51,7 +53,7 @@ namespace LostAndFound.Core.Games
         {
             _zoneData = _zoneLoader.LoadZones();
 
-            _gameData.ActiveZone = ZoneType.Test;
+            _gameData.ActiveZone = ZoneType.Forest;
             _camera.Position = new Vector2(500, 500);
 
             _personFactory.Load();
@@ -80,18 +82,20 @@ namespace LostAndFound.Core.Games
             var safeZone = ActiveZone.Colliders.First(x => x.Name.Equals("SafeZone"));
             person.Position = new Vector2(_random.Next(safeZone.Bounds.X, safeZone.Bounds.Right),
                 _random.Next(safeZone.Bounds.Y, safeZone.Bounds.Bottom));
-            _gameData.PersonData.Add(person);
-
+            
+            var animal = GetAnimalData();
+            
             var questData = new QuestData
             {
-                PersonData = person,
-                AnimalData = GetAnimalData(),
+                PersonId = person.Id,
+                AnimalId = animal.Id,
                 Reward = 1000,
                 ConversationData = new[] {"Hello Son!", "Lost me dog!"}
             };
             
             _gameData.QuestData.Add(questData);
-            _gameInterface.OnQuestAdded?.Invoke(questData);
+            _gameData.AnimalData.Add(animal);
+            _gameData.PersonData.Add(person);
         }
 
         private AnimalData GetAnimalData() => _animalFactory.Create();
@@ -106,10 +110,11 @@ namespace LostAndFound.Core.Games
         {
             _gameData = new GameData
             {
-                ActiveZone = ZoneType.Test,
+                ActiveZone = StartingZone,
                 PersonData = new List<PersonData>(),
                 PlayerData = new PlayerData(),
-                QuestData = new List<QuestData>()
+                QuestData = new List<QuestData>(),
+                AnimalData = new List<AnimalData>()
             };
         }
 
