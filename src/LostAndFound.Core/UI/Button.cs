@@ -9,7 +9,11 @@ namespace LostAndFound.Core.UI
     {
         private readonly Sprite _image;
         private readonly Sprite _hoverImage;
+        private Sprite ActiveSprite => _clicked ? _hoverImage : _image;
+        
         private bool _hovering;
+        private bool _clicked;
+        
         public override int Width => _image.Width;
         public override int Height => _image.Height;
 
@@ -30,7 +34,9 @@ namespace LostAndFound.Core.UI
                 return;
             }
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            _clicked = Mouse.GetState().LeftButton == ButtonState.Pressed;
+            
+            if (_clicked)
             {
                 Click?.Invoke();
             }
@@ -38,8 +44,8 @@ namespace LostAndFound.Core.UI
 
         protected override void InternalDraw(SpriteBatch spriteBatch)
         {
-            var activeImage = _hovering ? _hoverImage : _image;
-            spriteBatch.Draw(activeImage.Texture, Bounds, activeImage.Source, Color.White);
+            var color = _hovering ? Color.White : Color.White * 0.8f;
+            spriteBatch.Draw(ActiveSprite.Texture, Bounds, ActiveSprite.Source, color);
         }
     }
 }
