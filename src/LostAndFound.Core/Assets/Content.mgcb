@@ -31,6 +31,12 @@
 /processorParam:Quality=Best
 /build:Audio/SoundEffects/buttonHover.wav
 
+#begin Audio/SoundEffects/Footstep.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Footstep.wav
+
 #begin Audio/SoundEffects/start.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

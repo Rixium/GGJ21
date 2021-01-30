@@ -20,9 +20,9 @@ namespace LostAndFound.Core.Games.Components
         {
         }
 
-        public void PlaySound(SoundEffect sound, float volume)
+        public void PlaySound(SoundEffect sound, float volume = 1)
         {
-            sound.Play(volume, 1, 1);
+            sound.Play(volume, 1, 0);
         }
     }
 }
