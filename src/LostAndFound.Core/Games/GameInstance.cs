@@ -50,8 +50,13 @@ namespace LostAndFound.Core.Games
             var playerStartCollider = zoneColliders.First(x => x.Name.Equals("PlayerStart"));
             _gameData.PlayerData.Position = playerStartCollider.Bounds.ToVector2();
 
-            _player = new Player(_contentChest.Get<Texture2D>("Images/Player/Idle_1"));
-            _camera.SetEntity(_gameData.PlayerData, false);
+            _player = new Player(_contentChest.Get<Texture2D>("Images/Player/Idle_1"), _gameData);
+            _camera.SetEntity(_gameData.PlayerData, true);
+
+            _player.PlayerMove += ((movement, rectangle) =>
+            {
+                return true;
+            });
         }
 
         private void SetupGameData()
