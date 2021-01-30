@@ -1,6 +1,6 @@
 { "frames": [
    {
-    "filename": "Forest.aseprite",
+    "filename": "New_Forest.aseprite",
     "frame": { "x": 0, "y": 0, "w": 500, "h": 281 },
     "rotated": false,
     "trimmed": false,
@@ -19,14 +19,19 @@
   "frameTags": [
   ],
   "layers": [
-   { "name": "Sky", "opacity": 255, "blendMode": "normal" },
    { "name": "Background", "opacity": 255, "blendMode": "normal" },
+   { "name": "Light", "opacity": 255, "blendMode": "normal" },
+   { "name": "Ground", "opacity": 255, "blendMode": "normal" },
    { "name": "Trees Back", "opacity": 255, "blendMode": "normal" },
+   { "name": "Trees Middle", "opacity": 255, "blendMode": "normal" },
+   { "name": "Trees Front", "opacity": 255, "blendMode": "normal" },
+   { "name": "Tree Top Front", "opacity": 255, "blendMode": "normal" },
+   { "name": "Ground Foreground", "opacity": 255, "blendMode": "normal" },
    { "name": "Bin", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
-   { "name": "SafeZone", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 234, "w": 500, "h": 47 } }] },
-   { "name": "PlayerStart", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 246, "y": 234, "w": 11, "h": 7 } }] }
+   { "name": "SafeZone", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 39, "y": 240, "w": 461, "h": 35 } }] },
+   { "name": "PlayerStart", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 278, "y": 241, "w": 7, "h": 4 } }] }
   ]
  }
 }
