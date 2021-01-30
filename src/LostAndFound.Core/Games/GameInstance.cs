@@ -89,6 +89,8 @@ namespace LostAndFound.Core.Games
             player.AddComponent(Program.Resolve<ZoneInteractionComponent>());
             player.AddComponent(playerSoundComponent);
 
+            player.Position = playerStartCollider.Bounds.ToVector2() - playerFeetBoxCollider.Offset;
+            
             _camera.SetEntity(player, false);
             ActiveZone.Entities.Add(player);
         }
