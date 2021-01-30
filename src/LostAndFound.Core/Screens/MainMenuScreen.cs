@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using LostAndFound.Core.Config;
+using LostAndFound.Core.Content;
 using LostAndFound.Core.Content.Aseprite;
 using LostAndFound.Core.Content.ContentLoader;
 using LostAndFound.Core.Graphics;
 using LostAndFound.Core.Transitions;
 using LostAndFound.Core.UI;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Screens
@@ -18,6 +20,7 @@ namespace LostAndFound.Core.Screens
         private readonly IWindowConfiguration _windowConfiguration;
         private readonly ITransitionManager _transitionManager;
         private readonly IContentLoader<AsepriteSpriteMap> _spriteMapLoader;
+        private readonly IContentChest _contentChest;
         public Action<ScreenType> RequestScreenChange { get; set; }
         public ScreenType ScreenType => ScreenType.MainMenu;
 
@@ -28,12 +31,14 @@ namespace LostAndFound.Core.Screens
 
 
         public MainMenuScreen(IRenderManager renderManager, IWindowConfiguration windowConfiguration,
-            ITransitionManager transitionManager, IContentLoader<AsepriteSpriteMap> spriteMapLoader)
+            ITransitionManager transitionManager, IContentLoader<AsepriteSpriteMap> spriteMapLoader,
+            IContentChest contentChest)
         {
             _renderManager = renderManager;
             _windowConfiguration = windowConfiguration;
             _transitionManager = transitionManager;
             _spriteMapLoader = spriteMapLoader;
+            _contentChest = contentChest;
         }
 
         public void Load()
@@ -61,17 +66,34 @@ namespace LostAndFound.Core.Screens
                 _uiScale, Origin.Center);
             var optionsButton = new Button(optionsUp, optionsDown, playButton.Bottom, _uiScale, Origin.Center);
             var quitButton = new Button(quitUp, quitDown, optionsButton.Bottom, _uiScale, Origin.Center);
-
             var petItButton = new Button(petItUp, petItDown, optionsButton.Bottom, _uiScale, Origin.Center);
+
+            playButton.HoverOn = () =>
+            {
+                _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonHover").Play();
+            };
+            optionsButton.HoverOn = () =>
+            {
+                _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonHover").Play();
+            };
+            quitButton.HoverOn = () =>
+            {
+                _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonHover").Play();
+            };
 
             playButton.Click = () =>
             {
                 playButton.Click = null;
+                _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonClick").Play();
                 _transitionManager.SetState(FadeState.FadingOut);
                 _transitionManager.FadeOutEnded = () => { RequestScreenChange?.Invoke(ScreenType.GameScreen); };
             };
 
-            optionsButton.Click = () => { _activePanelName = "Options"; };
+            optionsButton.Click = () =>
+            {
+                _activePanelName = "Options";
+                _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonClick").Play();
+            };
 
             quitButton.Click = Game1.Quit;
 
@@ -79,7 +101,7 @@ namespace LostAndFound.Core.Screens
             mainPanel.AddElement(playButton);
             mainPanel.AddElement(optionsButton);
             mainPanel.AddElement(quitButton);
-            
+
             optionsPanel.AddElement(titleImage);
 
             _mainMenuPanels.Add(mainPanel);
