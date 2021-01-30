@@ -1,6 +1,7 @@
 ﻿using LostAndFound.Core.Config;
 using LostAndFound.Core.Content;
 using LostAndFound.Core.Graphics;
+using LostAndFound.Core.Input;
 using LostAndFound.Core.Screens;
 using LostAndFound.Core.System;
 using Microsoft.Xna.Framework;
@@ -17,10 +18,11 @@ namespace LostAndFound.Core
         private readonly IContentChest _contentChest;
         private readonly IWindowConfiguration _windowConfiguration;
         private readonly IApplicationFolder _applicationFolder;
+        private readonly IInputManager _inputManager;
         private readonly GraphicsDeviceManager _graphics;
 
         public Game1(IRenderManager renderManager, IScreenManager screenManager, IContentChest contentChest,
-            IWindowConfiguration windowConfiguration, IApplicationFolder applicationFolder)
+            IWindowConfiguration windowConfiguration, IApplicationFolder applicationFolder, IInputManager inputManager)
         {
             _instance = this;
 
@@ -29,6 +31,7 @@ namespace LostAndFound.Core
             _contentChest = contentChest;
             _windowConfiguration = windowConfiguration;
             _applicationFolder = applicationFolder;
+            _inputManager = inputManager;
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Assets";
             IsMouseVisible = true;
@@ -39,7 +42,7 @@ namespace LostAndFound.Core
             _graphics.PreferredBackBufferWidth = 1280;
             _graphics.PreferredBackBufferHeight = 720;
             _graphics.ApplyChanges();
-            
+
             _windowConfiguration.WindowHeight = _graphics.PreferredBackBufferHeight;
             _windowConfiguration.WindowWidth = _graphics.PreferredBackBufferWidth;
 
@@ -62,6 +65,7 @@ namespace LostAndFound.Core
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            _inputManager.Update(gameTime);
             _screenManager.GetActiveScreen().Update(gameTime);
 
             base.Update(gameTime);

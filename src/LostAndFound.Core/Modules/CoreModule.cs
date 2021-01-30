@@ -9,6 +9,7 @@ using LostAndFound.Core.Games.Interfaces;
 using LostAndFound.Core.Games.Person;
 using LostAndFound.Core.Games.Zones;
 using LostAndFound.Core.Graphics;
+using LostAndFound.Core.Input;
 using LostAndFound.Core.Screens;
 using LostAndFound.Core.System;
 using LostAndFound.Core.Transitions;
@@ -45,6 +46,8 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<GameInstance>().As<IGameInstance>().SingleInstance();
             builder.RegisterType<ZoneLoader>().As<IZoneLoader>().SingleInstance();
             builder.RegisterType<GameInterface>().InstancePerDependency();
+
+            builder.RegisterType<InputManager>().As<IInputManager>().SingleInstance();
 
             builder.RegisterType<AsepriteSpriteMapLoader>().As<IContentLoader<AsepriteSpriteMap>>().SingleInstance();
 

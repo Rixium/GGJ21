@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using LostAndFound.Core.Config;
 using LostAndFound.Core.Content;
@@ -7,6 +6,7 @@ using LostAndFound.Core.Content.Aseprite;
 using LostAndFound.Core.Content.ContentLoader;
 using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Graphics;
+using LostAndFound.Core.Input;
 using LostAndFound.Core.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,15 +16,13 @@ namespace LostAndFound.Core.Games.Interfaces
 {
     public class GameInterface
     {
-        public Action<int> OnMoneyChanged { get; set; }
-        public Action<QuestData> OnQuestAdded { get; set; }
-
         private IList<Text> _questTexts = new List<Text>();
 
         private readonly IRenderManager _renderManager;
         private readonly IContentChest _contentChest;
         private readonly IWindowConfiguration _windowConfiguration;
         private readonly IContentLoader<AsepriteSpriteMap> _asepriteSpriteMapLoader;
+        private readonly IInputManager _inputManager;
 
         private readonly IList<IPanel> _panels = new List<IPanel>();
         private string _activePanelName = "Game";
@@ -36,12 +34,14 @@ namespace LostAndFound.Core.Games.Interfaces
         private Image _questNotebook;
 
         public GameInterface(IRenderManager renderManager, IContentChest contentChest,
-            IWindowConfiguration windowConfiguration, IContentLoader<AsepriteSpriteMap> asepriteSpriteMapLoader)
+            IWindowConfiguration windowConfiguration, IContentLoader<AsepriteSpriteMap> asepriteSpriteMapLoader,
+            IInputManager inputManager)
         {
             _renderManager = renderManager;
             _contentChest = contentChest;
             _windowConfiguration = windowConfiguration;
             _asepriteSpriteMapLoader = asepriteSpriteMapLoader;
+            _inputManager = inputManager;
         }
 
         public void SetUp(GameData gameData)
@@ -64,8 +64,6 @@ namespace LostAndFound.Core.Games.Interfaces
                 _uiScale, Origin.Center);
             questPanel.AddElement(_questNotebook);
 
-            OnQuestAdded += AddNewQuestToPanel;
-
             _panels.Add(questPanel);
         }
 
@@ -75,9 +73,6 @@ namespace LostAndFound.Core.Games.Interfaces
             var gamePanel = new Panel(_renderManager, "Game");
             var panelText = new Text(font, string.Empty, Color.Black, new Vector2(10, 10), 1f, Origin.TopLeft);
             gamePanel.AddElement(panelText);
-
-            OnMoneyChanged += (newValue) => { panelText.SetText($"${newValue}"); };
-
             _panels.Add(gamePanel);
         }
 
@@ -108,9 +103,9 @@ namespace LostAndFound.Core.Games.Interfaces
 
         public void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Tab))
+            if (_inputManager.KeyPressed(Keys.Tab))
             {
-                _activePanelName = "Quest";
+                _activePanelName = _activePanelName.Equals("Quest") ? "Game" : "Quest";
             }
 
             ActivePanel.Update(gameTime);
