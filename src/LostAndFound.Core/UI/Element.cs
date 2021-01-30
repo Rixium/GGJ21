@@ -8,6 +8,8 @@ namespace LostAndFound.Core.UI
     {
         public Origin Origin { get; }
         public Action Click { get; set; }
+        public Action HoverOn { get; set; }
+        public Action HoverOff { get; set; }
 
         public Rectangle Bounds
         {

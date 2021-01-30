@@ -8,8 +8,8 @@ namespace LostAndFound.Core.UI
     public class Button : Element
     {
         private readonly Sprite _image;
-        private readonly Sprite _hoverImage;
-        private Sprite ActiveSprite => _clicked ? _hoverImage : _image;
+        private readonly Sprite _clickedImage;
+        private Sprite ActiveSprite => _clicked ? _clickedImage : _image;
         
         private bool _hovering;
         private bool _clicked;
@@ -17,18 +17,35 @@ namespace LostAndFound.Core.UI
         public override int Width => _image.Width;
         public override int Height => _image.Height;
 
-        public Button(Sprite image, Sprite hoverImage, Vector2 position, float scale,
+        public Button(Sprite image, Sprite clickedImage, Vector2 position, float scale,
             Origin origin = Origin.TopLeft) : base(
             position, scale, origin)
         {
             _image = image;
-            _hoverImage = hoverImage;
+            _clickedImage = clickedImage;
         }
 
         protected override void InternalUpdate(GameTime gameTime)
         {
+            var oldHover = _hovering;
+            
             _hovering = Bounds.Contains(Mouse.GetState().Position);
 
+            if (oldHover)
+            {
+                if (!_hovering)
+                {
+                    HoverOff?.Invoke();
+                }
+            }
+            else
+            {
+                if (_hovering)
+                {
+                    HoverOn?.Invoke();
+                }
+            }
+            
             if (!_hovering)
             {
                 return;

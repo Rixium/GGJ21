@@ -13,6 +13,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Audio/SoundEffects/buttonClick.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/buttonClick.wav
+
+#begin Audio/SoundEffects/buttonHover.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/buttonHover.wav
+
 #begin Data/Regions/Street.png
 /importer:TextureImporter
 /processor:TextureProcessor
