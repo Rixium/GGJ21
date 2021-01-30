@@ -8,10 +8,12 @@ namespace LostAndFound.Core.Games
         private GameData _gameData = new GameData();
         public void Draw()
         {
+            
         }
 
         public void Update(GameTime gameTime)
         {
+            
         }
     }
 }
