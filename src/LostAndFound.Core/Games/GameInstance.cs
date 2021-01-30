@@ -4,6 +4,7 @@ using System.Linq;
 using LostAndFound.Core.Config;
 using LostAndFound.Core.Content;
 using LostAndFound.Core.Extensions;
+using LostAndFound.Core.Games.Interfaces;
 using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Games.Zones;
 using LostAndFound.Core.Graphics;
@@ -14,6 +15,8 @@ namespace LostAndFound.Core.Games
 {
     class GameInstance : IGameInstance
     {
+        private GameInterface _gameInterface;
+
         private readonly IRenderManager _renderManager;
         private readonly IZoneLoader _zoneLoader;
         private readonly IContentChest _contentChest;
@@ -40,6 +43,9 @@ namespace LostAndFound.Core.Games
 
             _gameData.ActiveZone = ZoneType.Test;
             _camera.Position = new Vector2(500, 500);
+
+            _gameInterface = new GameInterface(_renderManager, _contentChest);
+            _gameInterface.SetUp();
         }
 
         public void Start()
@@ -81,6 +87,10 @@ namespace LostAndFound.Core.Games
             _renderManager.SpriteBatch.Draw(_player.Image, _gameData.PlayerData.Position, Color.White);
 
             _renderManager.SpriteBatch.End();
+            
+            _renderManager.SpriteBatch.Begin();
+            _gameInterface.Draw();
+            _renderManager.SpriteBatch.End();
         }
 
         public void Update(GameTime gameTime)
@@ -88,6 +98,7 @@ namespace LostAndFound.Core.Games
             _camera.Update(20000, 20000);
             _player.Update(_gameData.PlayerData, gameTime);
             _camera.ToGo = _gameData.PlayerData.Position;
+            _gameInterface.Update(gameTime);
         }
     }
 }

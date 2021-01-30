@@ -61,6 +61,13 @@
 /processorParam:TextureFormat=Color
 /build:Data/Regions/Test.png
 
+#begin Fonts/DefaultFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/DefaultFont.spritefont
+
 #begin Images/Player/Idle_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
