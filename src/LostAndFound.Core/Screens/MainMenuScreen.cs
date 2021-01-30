@@ -20,8 +20,8 @@ namespace LostAndFound.Core.Screens
         public Action<ScreenType> RequestScreenChange { get; set; }
         public ScreenType ScreenType => ScreenType.MainMenu;
 
-        private IList<IPanel> _mainMenuPanels = new List<IPanel>();
-        private float _uiScale = 2f;
+        private readonly IList<IPanel> _mainMenuPanels = new List<IPanel>();
+        private readonly float _uiScale = 4f;
 
         public MainMenuScreen(IRenderManager renderManager, IWindowConfiguration windowConfiguration,
             ITransitionManager transitionManager, IContentLoader<AsepriteSpriteMap> spriteMapLoader)
@@ -43,8 +43,8 @@ namespace LostAndFound.Core.Screens
             var quitDown = spriteMap.CreateSpriteFromRegion("quit down");
 
             var mainPanel = new Panel(_renderManager);
-            var playButton = new Button(upButton, downButton, _windowConfiguration.Center, _uiScale);
-            var quitButton = new Button(quitUp, quitDown, _windowConfiguration.Center + new Vector2(0, 100), _uiScale);
+            var playButton = new Button(upButton, downButton, _windowConfiguration.Center, _uiScale, Origin.Center);
+            var quitButton = new Button(quitUp, quitDown, _windowConfiguration.Center + new Vector2(0, 100), _uiScale,Origin.Center);
 
             playButton.Click = () =>
             {
