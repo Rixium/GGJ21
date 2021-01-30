@@ -3,11 +3,9 @@ using System.Linq;
 using LostAndFound.Core.Config;
 using LostAndFound.Core.Content;
 using LostAndFound.Core.Extensions;
-using LostAndFound.Core.Games.Animals;
 using LostAndFound.Core.Games.Components;
 using LostAndFound.Core.Games.Interfaces;
 using LostAndFound.Core.Games.Models;
-using LostAndFound.Core.Games.Person;
 using LostAndFound.Core.Games.Zones;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -19,7 +17,7 @@ namespace LostAndFound.Core.Games
     {
         private const ZoneType StartingZone = ZoneType.Street;
 
-        public IList<IZone> _zones = new List<IZone>();
+        private readonly IList<IZone> _zones = new List<IZone>();
         public IZone ActiveZone => _zones.First(x => x.ZoneType == _currentZone);
         private ZoneType _currentZone = StartingZone;
 
@@ -29,21 +27,14 @@ namespace LostAndFound.Core.Games
         private readonly IRenderManager _renderManager;
         private readonly IContentChest _contentChest;
 
-        private readonly IPersonFactory _personFactory;
-        private readonly IAnimalFactory _animalFactory;
-
         private readonly Camera _camera;
-        private Player _player;
 
         public GameInstance(IRenderManager renderManager, IZoneLoader zoneLoader,
-            IWindowConfiguration windowConfiguration, IContentChest contentChest, IPersonFactory personFactory,
-            IAnimalFactory animalFactory, GameInterface gameInterface)
+            IWindowConfiguration windowConfiguration, IContentChest contentChest, GameInterface gameInterface)
         {
             _renderManager = renderManager;
             _zoneLoader = zoneLoader;
             _contentChest = contentChest;
-            _personFactory = personFactory;
-            _animalFactory = animalFactory;
             _gameInterface = gameInterface;
 
             _camera = new Camera(windowConfiguration);
@@ -52,7 +43,6 @@ namespace LostAndFound.Core.Games
         public void Load()
         {
             _gameInterface.Load();
-            _personFactory.Load();
 
             var zoneData = _zoneLoader.LoadZones();
 
@@ -80,7 +70,7 @@ namespace LostAndFound.Core.Games
 
             var staticDrawComponent = Program.Resolve<StaticDrawComponent>();
             staticDrawComponent.Image = playerImage;
-            
+
             player.AddComponent(staticDrawComponent);
             player.AddComponent(Program.Resolve<PlayerControllerComponent>());
 
