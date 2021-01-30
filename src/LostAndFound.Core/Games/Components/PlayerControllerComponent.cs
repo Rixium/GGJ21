@@ -113,7 +113,7 @@ namespace LostAndFound.Core.Games.Components
                 }
             }
 
-            var mapBottom = new Rectangle(0, _gameInstance.ActiveZone.Image.Height, _gameInstance.ActiveZone.Image.Width, 100);
+            var mapBottom = new Rectangle(0, _gameInstance.ActiveZone.Image.Height - boundingBox.Height, _gameInstance.ActiveZone.Image.Width, 100);
             if (bounds.Intersects(mapBottom))
             {
                 var depth = bounds.GetIntersectionDepth(mapBottom);
