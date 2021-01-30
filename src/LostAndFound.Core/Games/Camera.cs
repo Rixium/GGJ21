@@ -1,4 +1,5 @@
 ﻿using LostAndFound.Core.Config;
+using LostAndFound.Core.Games.Models;
 using Microsoft.Xna.Framework;
 
 namespace LostAndFound.Core.Games
@@ -15,6 +16,8 @@ namespace LostAndFound.Core.Games
 
         private int _zoom = 3;
 
+        private PlayerData _following;
+
         public Camera(IWindowConfiguration windowConfiguration)
         {
             _windowConfiguration = windowConfiguration;
@@ -24,16 +27,24 @@ namespace LostAndFound.Core.Games
         }
         
         public Vector2 ToGo { get; set; }
-
+        public void Goto(Vector2 pos)
+        {
+            ToGo = pos;
+        }
+        
         public void Update(int maxX, int maxY)
         {
             maxX -= _windowConfiguration.WindowWidth / 2 / _zoom + 3;
             maxY -= _windowConfiguration.WindowHeight / 2 / _zoom + 3;
             _minX = 0;
             _minY = 0;
-
-            var (x, y) = Vector2.Lerp(Position, ToGo, 0.1f);
             
+            if (_following != null)
+                Goto(new Vector2(_following.Position.X,
+                    _following.Position.Y));
+
+            var (x, y) = Vector2.Lerp(Position, ToGo, 0.03f);
+
             if (Vector2.Distance(Position, ToGo) < 10)
             {
                 return;
@@ -45,7 +56,15 @@ namespace LostAndFound.Core.Games
             _position.X = MathHelper.Clamp(_position.X, _minX, maxX);
             _position.Y = MathHelper.Clamp(_position.Y, _minY, maxY);
         }
+        
+        public void SetEntity(PlayerData player, bool immediate)
+        {
+            _following = player;
 
+            if (immediate)
+                Position = player.Position;
+        }
+        
         public Vector2 Position
         {
             get => _position;

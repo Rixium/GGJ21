@@ -51,7 +51,7 @@ namespace LostAndFound.Core.Games
             _gameData.PlayerData.Position = playerStartCollider.Bounds.ToVector2();
 
             _player = new Player(_contentChest.Get<Texture2D>("Images/Player/Idle_1"));
-            _camera.ToGo = _gameData.PlayerData.Position;
+            _camera.SetEntity(_gameData.PlayerData, false);
         }
 
         private void SetupGameData()
@@ -78,16 +78,8 @@ namespace LostAndFound.Core.Games
         public void Update(GameTime gameTime)
         {
             _camera.Update(20000, 20000);
-        }
-    }
-
-    public class Player
-    {
-        public Texture2D Image;
-
-        public Player(Texture2D texture)
-        {
-            Image = texture;
+            _player.Update(_gameData.PlayerData, gameTime);
+            _camera.ToGo = _gameData.PlayerData.Position;
         }
     }
 }
