@@ -1,4 +1,5 @@
-﻿using LostAndFound.Core.Games.Models;
+﻿using LostAndFound.Core.Games.Entities;
+using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

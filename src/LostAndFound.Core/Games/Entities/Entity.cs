@@ -1,21 +1,10 @@
 ﻿using System.Collections.Generic;
 using LostAndFound.Core.Games.Components;
-using LostAndFound.Core.Games.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace LostAndFound.Core.Games
+namespace LostAndFound.Core.Games.Entities
 {
-    public interface IEntity
-    {
-        public Vector2 Position { get; set; }
-        GameInstance GameInstance { get; set; }
-        public void AddComponent(IComponent component);
-        public T GetComponent<T>();
-        public void Update(GameTime gameTime);
-        public void Draw(SpriteBatch spriteBatch);
-    }
-
     public class Entity : IEntity
     {
         private readonly IList<IComponent> _components = new List<IComponent>();
@@ -60,27 +49,6 @@ namespace LostAndFound.Core.Games
             {
                 component.Draw(spriteBatch);
             }
-        }
-    }
-
-    public class Player
-    {
-        private readonly GameData _gameData;
-        private PlayerData PlayerData => _gameData.PlayerData;
-
-        public Texture2D Image;
-
-        public Rectangle Bounds =>
-            new Rectangle((int) PlayerData.Position.X, (int) PlayerData.Position.Y, Image.Width, Image.Height);
-
-        public Player(Texture2D texture, GameData gameData)
-        {
-            Image = texture;
-            _gameData = gameData;
-        }
-
-        public void Update(PlayerData playerData, GameTime gameTime)
-        {
         }
     }
 }

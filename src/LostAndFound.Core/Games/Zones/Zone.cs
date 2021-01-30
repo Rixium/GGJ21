@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using LostAndFound.Core.Extensions;
 using LostAndFound.Core.Games.Components;
+using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
