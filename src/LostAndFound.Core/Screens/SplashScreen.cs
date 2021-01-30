@@ -4,7 +4,9 @@ using LostAndFound.Core.Content;
 using LostAndFound.Core.Graphics;
 using LostAndFound.Core.Transitions;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace LostAndFound.Core.Screens
 {
@@ -35,6 +37,11 @@ namespace LostAndFound.Core.Screens
             _image = _contentChest.Get<Texture2D>("images/splash");
             _transitionManager.Load();
 
+            _transitionManager.FadeInEnded = () =>
+            {
+                _contentChest.Get<SoundEffect>("Audio/SoundEffects/start").Play();
+            };
+            
             _transitionManager.FadeOutEnded = () => RequestScreenChange(ScreenType.MainMenu);
         }
 
@@ -51,6 +58,10 @@ namespace LostAndFound.Core.Screens
             if (_splashTime <= 0)
             {
                 _transitionManager.SetState(FadeState.FadingOut);
+                var song = _contentChest.Get<Song>("Audio/Music/Floating");
+                MediaPlayer.IsRepeating = true;
+                MediaPlayer.Volume = 0.5f;
+                MediaPlayer.Play(song);
             }
         }
 

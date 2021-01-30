@@ -13,6 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Audio/Music/Floating.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/Floating.mp3
+
 #begin Audio/SoundEffects/buttonClick.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -24,6 +30,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Audio/SoundEffects/buttonHover.wav
+
+#begin Audio/SoundEffects/start.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/start.wav
 
 #begin Data/Regions/Street.png
 /importer:TextureImporter
