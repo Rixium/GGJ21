@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using LostAndFound.Core.Config;
 using LostAndFound.Core.Content;
 using LostAndFound.Core.Extensions;
 using LostAndFound.Core.Games.Interfaces;
 using LostAndFound.Core.Games.Models;
+using LostAndFound.Core.Games.Person;
 using LostAndFound.Core.Games.Zones;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -21,6 +21,7 @@ namespace LostAndFound.Core.Games
         private readonly IRenderManager _renderManager;
         private readonly IZoneLoader _zoneLoader;
         private readonly IContentChest _contentChest;
+        private readonly IPersonFactory _personFactory;
         private readonly Camera _camera;
 
         private GameData _gameData = new GameData();
@@ -30,11 +31,12 @@ namespace LostAndFound.Core.Games
         private Player _player;
 
         public GameInstance(IRenderManager renderManager, IZoneLoader zoneLoader,
-            IWindowConfiguration windowConfiguration, IContentChest contentChest)
+            IWindowConfiguration windowConfiguration, IContentChest contentChest, IPersonFactory personFactory)
         {
             _renderManager = renderManager;
             _zoneLoader = zoneLoader;
             _contentChest = contentChest;
+            _personFactory = personFactory;
             _camera = new Camera(windowConfiguration);
         }
 
@@ -63,6 +65,12 @@ namespace LostAndFound.Core.Games
             _player.PlayerMove += CanPlayerMove;
         }
 
+        public void SpawnPerson()
+        {
+            var person = _personFactory.Create();
+            _gameData.PersonData.Add(person);
+        }
+        
         public bool CanPlayerMove(Movement movement, Rectangle bounds)
         {
             var newBounds = new Rectangle(bounds.X + movement.X, bounds.Y + movement.Y, bounds.Width, bounds.Height);
@@ -74,7 +82,7 @@ namespace LostAndFound.Core.Games
             _gameData = new GameData
             {
                 ActiveZone = ZoneType.Test,
-                PersonData = Array.Empty<PersonData>(),
+                PersonData = new List<PersonData>(),
                 PlayerData = new PlayerData()
             };
         }
