@@ -24,6 +24,8 @@ namespace LostAndFound.Core.Games
         public void Load()
         {
             _zoneData = _zoneLoader.LoadZones();
+            
+            _gameData.ActiveZone = ZoneType.Test;
         }
 
         public void Draw()
