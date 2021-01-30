@@ -50,5 +50,13 @@ namespace LostAndFound.Core.Games.Entities
                 component.Draw(spriteBatch);
             }
         }
+
+        public void Start()
+        {
+            foreach (var component in _components)
+            {
+                component.Start();
+            }
+        }
     }
 }

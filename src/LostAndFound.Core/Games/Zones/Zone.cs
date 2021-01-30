@@ -86,5 +86,13 @@ namespace LostAndFound.Core.Games.Zones
 
             return null;
         }
+
+        public void Start()
+        {
+            foreach (var entity in Entities)
+            {
+                entity.Start();
+            }
+        }
     }
 }

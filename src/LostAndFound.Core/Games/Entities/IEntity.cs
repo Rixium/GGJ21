@@ -12,5 +12,6 @@ namespace LostAndFound.Core.Games.Entities
         public T GetComponent<T>();
         public void Update(GameTime gameTime);
         public void Draw(SpriteBatch spriteBatch);
+        void Start();
     }
 }

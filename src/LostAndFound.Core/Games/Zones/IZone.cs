@@ -19,5 +19,6 @@ namespace LostAndFound.Core.Games.Zones
         void RemoveEntity(IEntity entity);
         void AddEntity(IEntity entity);
         Collider GetColliderWithProperty(string propertyName);
+        void Start();
     }
 }

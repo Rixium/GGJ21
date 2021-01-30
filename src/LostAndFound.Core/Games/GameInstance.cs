@@ -153,6 +153,11 @@ namespace LostAndFound.Core.Games
             
             _camera.SetEntity(player, false);
             ActiveZone.Entities.Add(player);
+
+            foreach (var zone in _zones)
+            {
+                zone.Start();
+            }
         }
 
         public void Draw()
