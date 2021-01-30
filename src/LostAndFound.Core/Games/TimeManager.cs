@@ -7,15 +7,13 @@ namespace LostAndFound.Core.Games
     public class TimeManager
     {
         public int Hour { get; set; } = 8;
-        public int Minutes { get; set; }
-        public int TimeScale { get; set; } = 1;
-
-        private int _lastTick;
+        public double Minutes { get; set; }
+        public int TimeScale { get; set; } = 3;
 
         public void UpdateTime(GameTime gameTime)
         {
 
-            Minutes += gameTime.ElapsedGameTime.Seconds * TimeScale;
+            Minutes += gameTime.ElapsedGameTime.TotalSeconds * TimeScale;
             
             if (Minutes > 59)
             {
