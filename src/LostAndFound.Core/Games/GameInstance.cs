@@ -53,10 +53,13 @@ namespace LostAndFound.Core.Games
             _player = new Player(_contentChest.Get<Texture2D>("Images/Player/Idle_1"), _gameData);
             _camera.SetEntity(_gameData.PlayerData, true);
 
-            _player.PlayerMove += ((movement, rectangle) =>
-            {
-                return true;
-            });
+            _player.PlayerMove += CanPlayerMove;
+        }
+
+        public bool CanPlayerMove(Movement movement, Rectangle bounds)
+        {
+            var newBounds = new Rectangle(bounds.X + movement.X, bounds.Y + movement.Y, bounds.Width, bounds.Height);
+            return ActiveZone.Colliders.Any(x => x.Bounds.Intersects(newBounds));
         }
 
         private void SetupGameData()
