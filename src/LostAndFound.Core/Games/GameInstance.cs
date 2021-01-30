@@ -6,7 +6,6 @@ using LostAndFound.Core.Games.Zones;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace LostAndFound.Core.Games
 {
@@ -48,10 +47,7 @@ namespace LostAndFound.Core.Games
 
         public void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                _camera.Update(20000, 20000);
-            }
+            _camera.Update(20000, 20000);
         }
     }
 }
