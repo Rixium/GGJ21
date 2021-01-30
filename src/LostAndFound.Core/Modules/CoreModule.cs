@@ -5,6 +5,7 @@ using LostAndFound.Core.Games;
 using LostAndFound.Core.Graphics;
 using LostAndFound.Core.Screens;
 using LostAndFound.Core.System;
+using LostAndFound.Core.Transitions;
 using Microsoft.Xna.Framework;
 
 namespace LostAndFound.Core.Modules
@@ -21,6 +22,7 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<RenderManager>().As<IRenderManager>().SingleInstance();
 
             builder.RegisterType<ScreenManager>().As<IScreenManager>().SingleInstance();
+            builder.RegisterType<TransitionManager>().As<ITransitionManager>().InstancePerDependency();
 
             builder.RegisterType<SplashScreen>().As<IScreen>();
             builder.RegisterType<EmptyScreen>().As<IScreen>();
@@ -30,7 +32,7 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<ContentChest>().As<IContentChest>().SingleInstance();
 
             builder.RegisterType<WindowConfiguration>().As<IWindowConfiguration>().SingleInstance();
-            
+
             builder.RegisterType<GameInstance>().As<IGameInstance>().SingleInstance();
 
             base.Load(builder);
