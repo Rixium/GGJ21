@@ -40,7 +40,8 @@
    { "name": "Walk_Down_4", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 128, "y": 185, "w": 32, "h": 55 } }] },
    { "name": "Walk_Down_5", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 160, "y": 185, "w": 32, "h": 55 } }] },
    { "name": "Walk_Down_6", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 192, "y": 185, "w": 32, "h": 55 } }] },
-   { "name": "Walk_Down_7", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 224, "y": 185, "w": 32, "h": 55 } }] }
+   { "name": "Walk_Down_7", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 224, "y": 185, "w": 32, "h": 55 } }] },
+   { "name": "Idle_1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 224, "y": 57, "w": 32, "h": 55 } }] }
   ]
  }
 }

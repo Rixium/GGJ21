@@ -79,7 +79,6 @@ namespace LostAndFound.Core.Games
             var playerStartCollider = zoneColliders.First(x => x.Name.Equals("PlayerStart"));
 
             var player = new Entity(playerStartCollider.Bounds.ToVector2());
-            var playerImage = _contentChest.Get<Texture2D>("Images/Player/Idle_1");
             var playerFeetBoxCollider = Program.Resolve<BoxColliderComponent>();
             playerFeetBoxCollider.Width = 14;
             playerFeetBoxCollider.Height = 5;
@@ -129,6 +128,14 @@ namespace LostAndFound.Core.Games
                 playerAnimationMap.CreateSpriteFromRegion("Walk_Down_5"),
                 playerAnimationMap.CreateSpriteFromRegion("Walk_Down_6"),
                 playerAnimationMap.CreateSpriteFromRegion("Walk_Down_7")
+            })
+            {
+                FrameDuration = 0.2f
+            });
+            
+            animatorComponent.AddAnimation("Idle", new Animation(new List<Sprite>
+            {
+                playerAnimationMap.CreateSpriteFromRegion("Idle_1")
             })
             {
                 FrameDuration = 0.2f

@@ -25,14 +25,16 @@ namespace LostAndFound.Core.Games.Components
             } else if (_moveComponent.XVelocity < 0)
             {
                 animatorComponent.SetAnimation("Walk_Left");
-            }
-            
-            if (_moveComponent.YVelocity > 0)
+            } else if (_moveComponent.YVelocity > 0)
             {
                 animatorComponent.SetAnimation("Walk_Down");
             } else if (_moveComponent.YVelocity < 0)
             {
                 animatorComponent.SetAnimation("Walk_Up");
+            }
+            else
+            {
+                animatorComponent.SetAnimation("Idle");
             }
         }
 
