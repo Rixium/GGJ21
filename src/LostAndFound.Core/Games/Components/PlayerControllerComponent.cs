@@ -15,6 +15,9 @@ namespace LostAndFound.Core.Games.Components
 
     public class PlayerControllerComponent : IComponent
     {
+        public int XVelocity { get; set; }
+        public int YVelocity { get; set; }
+        
         private readonly IGameInstance _gameInstance;
         private readonly IInputManager _inputManager;
         private int _speed = 2;
@@ -73,6 +76,9 @@ namespace LostAndFound.Core.Games.Components
             {
                 Move(Entity, xChange, yChange);
             }
+
+            XVelocity = xChange;
+            YVelocity = yChange;
         }
         
         public void Move(IEntity entity, int xMove, int yMove)

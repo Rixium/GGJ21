@@ -83,6 +83,7 @@ namespace LostAndFound.Core.Games
             var staticDrawComponent = Program.Resolve<StaticDrawComponent>();
             staticDrawComponent.Image = playerImage;
 
+            player.AddComponent(Program.Resolve<PlayerAnimationComponent>());
             player.AddComponent(staticDrawComponent);
             player.AddComponent(playerFeetBoxCollider);
             player.AddComponent(Program.Resolve<PlayerControllerComponent>());
