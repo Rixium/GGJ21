@@ -1,5 +1,4 @@
 ﻿using System;
-using LostAndFound.Core.Extensions;
 using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Games.Zones;
 using Microsoft.Xna.Framework;
@@ -10,6 +9,7 @@ namespace LostAndFound.Core.Games.Components
     public class ZoneInteractionComponent : IComponent
     {
         private readonly IGameInstance _gameInstance;
+        private bool _transitioning;
         public IEntity Entity { get; set; }
 
         public ZoneInteractionComponent(IGameInstance gameInstance)
@@ -28,7 +28,12 @@ namespace LostAndFound.Core.Games.Components
 
             if (entityCollider.Bounds.X < 0)
             {
-                var collider = entityZone.GetColliderWithProperty("Left");
+                var collider = entityZone.GetColliderWithProperty("Left");                
+                if (collider == null)
+                {
+                    return;
+                }
+
                 var property = collider.GetProperty("Left");
                 Enum.TryParse<ZoneType>(property, out var zoneType);
                 
@@ -42,6 +47,11 @@ namespace LostAndFound.Core.Games.Components
             } else if (entityCollider.Bounds.X > entityZone.Image.Width)
             {
                 var collider = entityZone.GetColliderWithProperty("Right");
+                if (collider == null)
+                {
+                    return;
+                }
+                
                 var property = collider.GetProperty("Right");
                 Enum.TryParse<ZoneType>(property, out var zoneType);
                 

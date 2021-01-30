@@ -15,6 +15,7 @@ namespace LostAndFound.Core.Games.Components
     {
         private readonly IGameInstance _gameInstance;
         private readonly IInputManager _inputManager;
+        private int _speed = 2;
 
         public PlayerControllerComponent(IGameInstance gameInstance, IInputManager inputManager)
         {
@@ -35,20 +36,20 @@ namespace LostAndFound.Core.Games.Components
 
             if (_inputManager.KeyDown(Keys.A))
             {
-                xChange = -1;
+                xChange = -_speed;
             }
             else if (_inputManager.KeyDown(Keys.D))
             {
-                xChange = 1;
+                xChange = _speed;
             }
 
             if (_inputManager.KeyDown(Keys.W))
             {
-                yChange = -1;
+                yChange = -_speed;
             }
             else if (_inputManager.KeyDown(Keys.S))
             {
-                yChange = 1;
+                yChange = _speed;
             }
 
             Entity.Position += new Vector2(xChange, yChange);

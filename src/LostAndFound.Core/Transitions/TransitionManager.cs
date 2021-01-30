@@ -24,6 +24,7 @@ namespace LostAndFound.Core.Transitions
 
         public Action FadeOutEnded { get; set; }
         public Action FadeInEnded { get; set; }
+        public int FadeScale { get; set; } = 1;
 
         private float _currentFade = 1;
         private FadeState _fadeState = FadeState.FadingIn;
@@ -55,7 +56,7 @@ namespace LostAndFound.Core.Transitions
 
         private void FadeOut(GameTime gameTime)
         {
-            _currentFade += gameTime.AsDelta();
+            _currentFade += gameTime.AsDelta() * FadeScale;
 
             if (_currentFade < 1)
             {
@@ -70,7 +71,7 @@ namespace LostAndFound.Core.Transitions
 
         private void FadeIn(GameTime gameTime)
         {
-            _currentFade -= gameTime.AsDelta();
+            _currentFade -= gameTime.AsDelta() * FadeScale;
 
             if (_currentFade > 0)
             {

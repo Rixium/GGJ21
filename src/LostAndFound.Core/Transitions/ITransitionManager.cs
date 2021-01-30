@@ -7,6 +7,7 @@ namespace LostAndFound.Core.Transitions
     {
         Action FadeOutEnded { get; set; }
         Action FadeInEnded { get; set; }
+        int FadeScale { get; set; }
         void Load();
         void Update(GameTime gameTime);
         void Draw();
