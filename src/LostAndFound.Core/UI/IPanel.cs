@@ -1,9 +1,11 @@
-﻿namespace LostAndFound.Core.UI
+﻿using Microsoft.Xna.Framework;
+
+namespace LostAndFound.Core.UI
 {
     public interface IPanel
     {
         void AddElement<T>(T element) where T : IElement;
-        void Update();
+        void Update(GameTime gameTime);
         void Draw();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using LostAndFound.Core.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace LostAndFound.Core.UI
 {
@@ -19,8 +20,12 @@ namespace LostAndFound.Core.UI
             _elements.Add(element);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
+            foreach (var element in _elements)
+            {
+                element.Update(gameTime);
+            }
         }
 
         public void Draw()

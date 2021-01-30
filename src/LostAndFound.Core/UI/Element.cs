@@ -5,11 +5,14 @@ namespace LostAndFound.Core.UI
 {
     public abstract class Element : IElement
     {
+        public float Scale { get; set; }
         public Vector2 Position { get; set; }
         public IPanel Panel { get; set; }
+        public abstract Rectangle Bounds { get; }
 
-        protected Element(Vector2 position)
+        protected Element(Vector2 position, float scale)
         {
+            Scale = scale;
             Position = position;
         }
 

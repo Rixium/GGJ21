@@ -1,0 +1,53 @@
+{ "frames": [
+   {
+    "filename": "ui.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 1000, "h": 1000 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1000, "h": 1000 },
+    "sourceSize": { "w": 1000, "h": 1000 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.25-x64",
+  "image": "ui.png",
+  "format": "RGBA8888",
+  "size": { "w": 1000, "h": 1000 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "play up", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 4, "w": 57, "h": 24 } }] },
+   { "name": "quit up", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 28, "w": 57, "h": 24 } }] },
+   { "name": "pet it up", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 52, "w": 57, "h": 24 } }] },
+   { "name": "options up", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 76, "w": 57, "h": 26 } }] },
+   { "name": "play down", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 60, "y": 4, "w": 57, "h": 24 } }] },
+   { "name": "quit down", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 60, "y": 28, "w": 57, "h": 24 } }] },
+   { "name": "pet it down", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 60, "y": 52, "w": 57, "h": 24 } }] },
+   { "name": "options down", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 60, "y": 76, "w": 57, "h": 25 } }] },
+   { "name": "tittle off the leash \"unleashed\"", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 125, "y": 4, "w": 127, "h": 24 } }] },
+   { "name": "task manager/notepad", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 129, "y": 32, "w": 107, "h": 131 } }] },
+   { "name": "cash count UI", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 262, "y": 2, "w": 50, "h": 18 } }] },
+   { "name": "volume mute", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 256, "y": 31, "w": 117, "h": 34 } }] },
+   { "name": "volume low", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 255, "y": 66, "w": 118, "h": 34 } }] },
+   { "name": "volume low 2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 104, "w": 118, "h": 34 } }] },
+   { "name": "volume low 3", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 140, "w": 118, "h": 34 } }] },
+   { "name": "volume low 4", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 176, "w": 118, "h": 34 } }] },
+   { "name": "volume 4", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 211, "w": 118, "h": 34 } }] },
+   { "name": "volume medium 1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 247, "w": 118, "h": 33 } }] },
+   { "name": "volume medium 2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 281, "w": 118, "h": 34 } }] },
+   { "name": "volume medium 3", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 318, "w": 118, "h": 34 } }] },
+   { "name": "volume medium 4", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 253, "y": 353, "w": 119, "h": 34 } }] },
+   { "name": "volume medium high 1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 424, "w": 118, "h": 34 } }] },
+   { "name": "volume mediumhigh 2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 460, "w": 118, "h": 33 } }] },
+   { "name": "volume high 1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 494, "w": 118, "h": 34 } }] },
+   { "name": "volume high 2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 529, "w": 118, "h": 34 } }] },
+   { "name": "volume high 3", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 565, "w": 118, "h": 33 } }] }
+  ]
+ }
+}
