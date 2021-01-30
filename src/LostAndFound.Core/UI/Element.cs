@@ -19,6 +19,15 @@ namespace LostAndFound.Core.UI
                     (int) (Height * Scale));
             }
         }
+        
+        public Vector2 Bottom
+        {
+            get
+            {
+                var (xOffset, yOffset) = GetOriginOffset();
+                return new Vector2(Bounds.Left + xOffset, Bounds.Bottom + yOffset);
+            }
+        }
 
         public float Scale { get; set; }
         public Vector2 Position { get; set; }
