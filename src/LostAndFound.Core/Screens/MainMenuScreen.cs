@@ -66,7 +66,7 @@ namespace LostAndFound.Core.Screens
                 _transitionManager.FadeOutEnded = () => { RequestScreenChange?.Invoke(ScreenType.GameScreen); };
             };
 
-            quitButton.Click = () => { Game1.Quit(); };
+            quitButton.Click = Game1.Quit;
 
             mainPanel.AddElement(titleImage);
             mainPanel.AddElement(playButton);
