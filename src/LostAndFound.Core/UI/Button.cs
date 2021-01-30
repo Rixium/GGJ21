@@ -1,5 +1,4 @@
-﻿using System;
-using LostAndFound.Core.Graphics;
+﻿using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -21,13 +20,20 @@ namespace LostAndFound.Core.UI
         public override Rectangle Bounds =>
             new Rectangle((int) Position.X, (int) Position.Y, (int) (_image.Width * Scale),
                 (int) (_image.Height * Scale));
-
+        
         protected override void InternalUpdate(GameTime gameTime)
         {
             _hovering = Bounds.Contains(Mouse.GetState().Position);
 
-            if (_hovering)
-                Console.WriteLine("Hovering Button");
+            if (!_hovering)
+            {
+                return;
+            }
+            
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                Click?.Invoke();
+            }
         }
 
         protected override void InternalDraw(SpriteBatch spriteBatch)

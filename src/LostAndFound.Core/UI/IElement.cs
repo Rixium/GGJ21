@@ -1,10 +1,12 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.UI
 {
     public interface IElement
     {
+        public Action Click { get; set; }
         public Vector2 Position { get; set; }
         public float Scale { get; set; }
         public IPanel Panel { get; set; }
