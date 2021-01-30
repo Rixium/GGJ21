@@ -1,0 +1,5 @@
+﻿<?xml version="1.0"?>
+<ZoneData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <ZoneType>Street</ZoneType>
+    <AsepriteFile>Street</AsepriteFile>
+</ZoneData>
