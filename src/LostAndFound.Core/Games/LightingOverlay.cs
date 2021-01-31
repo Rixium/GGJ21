@@ -97,7 +97,7 @@ namespace LostAndFound.Core.Games
 
             _renderManager.SpriteBatch.Draw(Texture,
                 new Rectangle(0, 0, _zoneManager.ActiveZone.Image.Width, _zoneManager.ActiveZone.Image.Height),
-                Color.White * 0.5f);
+                Color.White * 0.1f);
 
             foreach (var light in _lights)
             {
