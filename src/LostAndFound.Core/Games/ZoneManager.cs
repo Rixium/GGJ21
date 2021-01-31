@@ -12,7 +12,7 @@ namespace LostAndFound.Core.Games
     public class ZoneManager
     {
         public Action<ZoneType> ZoneChanged { get; set; }
-        
+
         private readonly IZoneLoader _zoneLoader;
 
         private readonly IList<IZone> _zones = new List<IZone>();
@@ -55,7 +55,10 @@ namespace LostAndFound.Core.Games
             zoneToGoTo.AddEntity(entity);
         }
 
-        public void Update(GameTime gameTime) => ActiveZone.Update(gameTime);
+        public void Update(GameTime gameTime)
+        {
+            ActiveZone.Update(gameTime);
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {

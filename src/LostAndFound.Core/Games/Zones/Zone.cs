@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using LostAndFound.Core.Extensions;
 using LostAndFound.Core.Games.Components;
 using LostAndFound.Core.Games.Entities;
@@ -38,6 +39,8 @@ namespace LostAndFound.Core.Games.Zones
             {
                 entity.Update(gameTime);
             }
+
+            Entities = Entities.OrderBy(x => x.Position.Y).ToList();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -73,6 +76,7 @@ namespace LostAndFound.Core.Games.Zones
 
         public void RemoveEntity(IEntity entity) => _entitiesToRemove.Add(entity);
         public void AddEntity(IEntity entity) => _entitiesToAdd.Add(entity);
+
         public Collider GetColliderWithProperty(string propertyName)
         {
             foreach (var collider in Colliders)

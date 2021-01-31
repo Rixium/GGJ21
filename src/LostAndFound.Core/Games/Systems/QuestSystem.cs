@@ -30,8 +30,8 @@ namespace LostAndFound.Core.Games.Systems
                     continue;
                 }
 
-                var questGiver = new Entity(collider.Bounds.ToVector2());
                 var person = _contentChest.Get<Texture2D>("Images/People/Marge");
+                var questGiver = new Entity(collider.Bounds.ToVector2() - new Vector2(0, person.Height) + new Vector2(0, 10));
                 questGiver.AddComponent(new StaticDrawComponent
                 {
                     Image = person
