@@ -49,6 +49,7 @@ namespace LostAndFound.Core.Games.Components
 
         public void Update(GameTime gameTime)
         {
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -56,10 +57,11 @@ namespace LostAndFound.Core.Games.Components
             if (!HasQuestToGive()) return;
 
             var positionToDraw = Entity.Position + new Vector2(
-                _staticDrawComponent.Image.Width / 2f - _questIcon.Width / 2f,
+                _staticDrawComponent.Image.Width / 2f,
                 -_questIcon.Height);
-            spriteBatch.Draw(_questIcon.Texture, positionToDraw, _questIcon.Source, Color.White, 0,
-                _questIcon.Origin, Highlighted ? 0.5f : 0.3f, SpriteEffects.None, 0f);
+            var scale = Highlighted ? 1.5f : 1f;
+            spriteBatch.Draw(_questIcon.Texture, positionToDraw, _questIcon.Source, Color.White, 0f,
+                _questIcon.Origin, scale, SpriteEffects.None, 0f);
         }
 
         public bool HasQuestToGive() => true;
