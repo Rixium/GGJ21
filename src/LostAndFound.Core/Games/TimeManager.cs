@@ -1,8 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LostAndFound.Core.Games.Systems;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games
 {
-    public class TimeManager
+    public class TimeManager : ISystem
     {
         public int Hour { get; set; } = 8;
         public double Minutes { get; set; }
@@ -16,9 +18,13 @@ namespace LostAndFound.Core.Games
             _dayBegin = Hour;
         }
 
-        public void UpdateTime(GameTime gameTime)
+        public void Start()
         {
+            
+        }
 
+        public void Update(GameTime gameTime)
+        {
             Minutes += gameTime.ElapsedGameTime.TotalSeconds * TimeScale;
             DayTotalMinutes += gameTime.ElapsedGameTime.TotalSeconds * TimeScale;
             
@@ -37,6 +43,11 @@ namespace LostAndFound.Core.Games
                     DayTotalMinutes = 0;
                 }
             }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            
         }
     }
 }

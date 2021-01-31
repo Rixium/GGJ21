@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -30,5 +31,7 @@ namespace LostAndFound.Core.Games.Systems
                 system.Start();
             }
         }
+
+        public T GetSystem<T>() => (T) _systems.First(x => x.GetType() == typeof(T));
     }
 }

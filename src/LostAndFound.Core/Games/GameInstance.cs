@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using LostAndFound.Core.Config;
-using LostAndFound.Core.Content;
 using LostAndFound.Core.Content.Aseprite;
 using LostAndFound.Core.Content.ContentLoader;
 using LostAndFound.Core.Extensions;
@@ -18,25 +17,22 @@ namespace LostAndFound.Core.Games
     public class GameInstance : IGameInstance
     {
         private readonly GameInterface _gameInterface;
-        private readonly TimeManager _timeManager;
         private readonly LightingOverlay _lightingOverlay;
         private readonly IContentLoader<AsepriteSpriteMap> _spriteMapLoader;
         private readonly SystemManager _systemManager;
         private readonly ZoneManager _zoneManager;
         private readonly IRenderManager _renderManager;
-        private readonly IContentChest _contentChest;
 
         private readonly Camera _camera;
 
         public GameInstance(IRenderManager renderManager,
-            IWindowConfiguration windowConfiguration, IContentChest contentChest, GameInterface gameInterface,
-            TimeManager timeManager, LightingOverlay lightingOverlay, IContentLoader<AsepriteSpriteMap> spriteMapLoader,
+            IWindowConfiguration windowConfiguration,
+            GameInterface gameInterface, 
+            LightingOverlay lightingOverlay, IContentLoader<AsepriteSpriteMap> spriteMapLoader,
             SystemManager systemManager, ZoneManager zoneManager)
         {
             _renderManager = renderManager;
-            _contentChest = contentChest;
             _gameInterface = gameInterface;
-            _timeManager = timeManager;
             _lightingOverlay = lightingOverlay;
             _spriteMapLoader = spriteMapLoader;
             _systemManager = systemManager;
@@ -54,8 +50,6 @@ namespace LostAndFound.Core.Games
 
         public void Start()
         {
-            _timeManager.TimeScale = 100;
-            
             var playerAnimationMap = _spriteMapLoader.GetContent("Assets/Images/Player/PlayerAnimations.json");
 
             var zoneColliders = _zoneManager.ActiveZone.Colliders.ToList();
@@ -164,7 +158,6 @@ namespace LostAndFound.Core.Games
             _camera.Update(500, 281);
             _gameInterface.Update(gameTime);
             _zoneManager.Update(gameTime);
-            _timeManager.UpdateTime(gameTime);
             _systemManager.Update(gameTime);
         }
     }

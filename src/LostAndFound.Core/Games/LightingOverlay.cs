@@ -1,4 +1,5 @@
 ﻿using LostAndFound.Core.Content;
+using LostAndFound.Core.Games.Systems;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,9 +19,9 @@ namespace LostAndFound.Core.Games
         private Color _dayColor = new Color(252, 219, 3);
         private Color _overlayColor = Color.Black * 0;
 
-        public LightingOverlay(TimeManager timeManager, IRenderManager renderManager, IContentChest contentChest)
+        public LightingOverlay(SystemManager systemManager, IRenderManager renderManager, IContentChest contentChest)
         {
-            _timeManager = timeManager;
+            _timeManager = systemManager.GetSystem<TimeManager>();
             _renderManager = renderManager;
             _contentChest = contentChest;
         }

@@ -53,7 +53,6 @@ namespace LostAndFound.Core.Modules
 
             builder.RegisterType<AsepriteSpriteMapLoader>().As<IContentLoader<AsepriteSpriteMap>>().SingleInstance();
 
-            builder.RegisterType<TimeManager>().SingleInstance();
             builder.RegisterType<LightingOverlay>();
 
             builder.RegisterType<PersonFactory>().As<IPersonFactory>().SingleInstance();
@@ -71,6 +70,7 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<SystemManager>().SingleInstance();
             builder.RegisterType<QuestSystem>().As<ISystem>().SingleInstance();
             builder.RegisterType<AmbientSoundManager>().As<ISystem>().SingleInstance();
+            builder.RegisterType<TimeManager>().As<ISystem>().SingleInstance();
         }
 
         private static void RegisterComponents(ContainerBuilder builder)
