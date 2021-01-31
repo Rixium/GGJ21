@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Models;
@@ -10,6 +11,8 @@ namespace LostAndFound.Core.Games
 {
     public class ZoneManager
     {
+        public Action<ZoneType> ZoneChanged { get; set; }
+        
         private readonly IZoneLoader _zoneLoader;
 
         private readonly IList<IZone> _zones = new List<IZone>();
@@ -40,7 +43,11 @@ namespace LostAndFound.Core.Games
 
         public IZone GetZone(ZoneType zoneType) => _zones.First(x => x.ZoneType == zoneType);
 
-        public void SetActiveZone(ZoneType zoneType) => _currentZone = zoneType;
+        public void SetActiveZone(ZoneType zoneType)
+        {
+            _currentZone = zoneType;
+            ZoneChanged?.Invoke(zoneType);
+        }
 
         public void MoveEntityToZone(IZone oldZone, IZone zoneToGoTo, IEntity entity)
         {
