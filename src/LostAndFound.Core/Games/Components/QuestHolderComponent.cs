@@ -14,6 +14,7 @@ namespace LostAndFound.Core.Games.Components
         public IEntity Entity { get; set; }
 
         private readonly IList<Quest> _quests = new List<Quest>();
+        private QuestGiverComponent _questGiverNextTo;
 
         public QuestHolderComponent(ZoneManager zoneManager, IInputManager inputManager)
         {
@@ -37,13 +38,25 @@ namespace LostAndFound.Core.Games.Components
 
                 if (Vector2.Distance(Entity.Position, questGiverComponent.Entity.Position) < 20)
                 {
-                    break;
+                    _questGiverNextTo = questGiverComponent;
+                    return;
                 }
             }
+
+            if (_questGiverNextTo != null)
+            {
+                _questGiverNextTo.Highlighted = false;
+            }
+
+            _questGiverNextTo = null;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            if (_questGiverNextTo != null)
+            {
+                _questGiverNextTo.Highlighted = true;
+            }
         }
 
         public void GiveQuest(Quest quest) => _quests.Add(quest);
