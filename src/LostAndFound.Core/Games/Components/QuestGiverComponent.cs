@@ -18,7 +18,6 @@ namespace LostAndFound.Core.Games.Components
         private readonly IContentLoader<AsepriteSpriteMap> _spriteMapLoader;
         private StaticDrawComponent _staticDrawComponent;
         private Random _random = new Random();
-        private SpriteFont _font;
         private Sprite _questIcon;
         private bool _hasQuest = true;
         public IEntity Entity { get; set; }
@@ -40,8 +39,6 @@ namespace LostAndFound.Core.Games.Components
             _staticDrawComponent.Image = _contentChest.Get<Texture2D>(selected);
 
             Entity.Position -= new Vector2(0, _staticDrawComponent.Image.Height) - new Vector2(0, 10);
-
-            _font = _contentChest.Get<SpriteFont>("Fonts/DefaultFont");
 
             Name = selected.Split('\\').Last().Split('.').First();
 
@@ -70,10 +67,12 @@ namespace LostAndFound.Core.Games.Components
         public Quest GetQuest()
         {
             _hasQuest = false;
-
+            
             return new Quest
             {
-                AnimalName = "Joey"
+                HandIn = Entity,
+                AnimalName = "Joey",
+                Completed = false
             };
         }
     }
