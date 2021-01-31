@@ -20,6 +20,7 @@ namespace LostAndFound.Core.Games.Components
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            Entity.Bottom = (int) (Entity.Position.Y + Image.Height);
             spriteBatch.Draw(Image, Entity.Position, Color.White);
         }
     }

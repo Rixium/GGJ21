@@ -40,7 +40,7 @@ namespace LostAndFound.Core.Games.Zones
                 entity.Update(gameTime);
             }
 
-            Entities = Entities.OrderBy(x => x.Position.Y).ToList();
+            Entities = Entities.OrderBy(x => x.Bottom).ToList();
         }
 
         public void Draw(SpriteBatch spriteBatch)
