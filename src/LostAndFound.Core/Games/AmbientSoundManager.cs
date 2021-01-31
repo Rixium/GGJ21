@@ -42,8 +42,6 @@ namespace LostAndFound.Core.Games
                     _ambientInstance.Volume = 0.3f;
                     break;
                 case ZoneType.Park:
-                    _ambientInstance = _forestAmbientSound.CreateInstance();
-                    _ambientInstance.Volume = 0.3f;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(zoneType), zoneType, null);

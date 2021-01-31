@@ -99,6 +99,7 @@ namespace LostAndFound.Core.Games.Interfaces
 
             var element = new Image(_questPopupImage, _windowConfiguration.Center, 1f, Origin.Center);
             element.AddEffect(new FadeOutEffect());
+            element.AddEffect(new MoveUpEffect());
 
             _audioSystem.Play("Audio\\SoundEffects\\quest_taken");
             

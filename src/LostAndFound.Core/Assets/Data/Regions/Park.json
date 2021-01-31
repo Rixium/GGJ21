@@ -1,6 +1,6 @@
 { "frames": [
    {
-    "filename": "Forest.aseprite",
+    "filename": "Park.aseprite",
     "frame": { "x": 0, "y": 0, "w": 500, "h": 281 },
     "rotated": false,
     "trimmed": false,
@@ -12,18 +12,18 @@
  "meta": {
   "app": "http://www.aseprite.org/",
   "version": "1.2.25-x64",
-  "image": "Forest.png",
+  "image": "Park.png",
   "format": "RGBA8888",
   "size": { "w": 500, "h": 281 },
   "scale": "1",
   "frameTags": [
   ],
   "layers": [
-   { "name": "Background", "opacity": 255, "blendMode": "normal" }
+   { "name": "Flattened", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
-   { "name": "SafeZone", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": -1, "y": 201, "w": 501, "h": 35 } }] },
-   { "name": "LevelProperties", "color": "#0000ffff", "data": "(Left:Park)(Right:Street)", "keys": [{ "frame": 0, "bounds": {"x": 9, "y": 8, "w": 25, "h": 24 } }] }
+   { "name": "Slice 1", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 193, "w": 500, "h": 49 } }] },
+   { "name": "LevelProperties", "color": "#0000ffff", "data": "(Left:City)(Right:Forest)", "keys": [{ "frame": 0, "bounds": {"x": 10, "y": 6, "w": 16, "h": 17 } }] }
   ]
  }
 }
