@@ -135,6 +135,7 @@ namespace LostAndFound.Core.Games
 
             _camera.SetEntity(player, false);
 
+            _systemManager.Start();
             _zoneManager.AddToActiveZone(player);
             _zoneManager.Start();
         }

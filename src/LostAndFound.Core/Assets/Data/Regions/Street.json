@@ -25,7 +25,11 @@
    { "name": "PlayerStart", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 292, "y": 246, "w": 3, "h": 3 } }] },
    { "name": "To", "color": "#0000ffff", "data": "(Left:Forest)(Right:Test)", "keys": [{ "frame": 0, "bounds": {"x": -1, "y": 241, "w": 17, "h": 33 } }] },
    { "name": "Collider1", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 1, "y": 218, "w": 500, "h": 19 } }] },
-   { "name": "Slice 1", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 430, "y": 237, "w": 64, "h": 23 } }] }
+   { "name": "Slice 1", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 430, "y": 237, "w": 64, "h": 23 } }] },
+   { "name": "Slice 2", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 43, "y": 240, "w": 8, "h": 6 } }] },
+   { "name": "Slice 3", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 140, "y": 239, "w": 7, "h": 6 } }] },
+   { "name": "Slice 4", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 235, "y": 238, "w": 7, "h": 6 } }] },
+   { "name": "Slice 5", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 325, "y": 238, "w": 6, "h": 5 } }] }
   ]
  }
 }
