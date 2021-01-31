@@ -24,7 +24,7 @@
   "slices": [
    { "name": "SafeZone", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 233, "w": 501, "h": 35 } }] },
    { "name": "LevelProperties", "color": "#0000ffff", "data": "(Left:Park)(Right:Street)", "keys": [{ "frame": 0, "bounds": {"x": 9, "y": 8, "w": 25, "h": 24 } }] },
-   { "name": "Slice 1", "color": "#0000ffff", "data": "(SpawnZone:true)", "keys": [{ "frame": 0, "bounds": {"x": 52, "y": 272, "w": 419, "h": 62 } }] },
+   { "name": "Slice 1", "color": "#0000ffff", "data": "(SpawnZone:true)", "keys": [{ "frame": 0, "bounds": {"x": 52, "y": 272, "w": 419, "h": 39 } }] },
    { "name": "StartZoneProperties", "color": "#0000ffff", "data": "(StartY:true)", "keys": [{ "frame": 0, "bounds": {"x": 489, "y": 273, "w": 10, "h": 17 } }] },
    { "name": "Slice 2", "color": "#0000ffff", "data": "(Light:true)", "keys": [{ "frame": 0, "bounds": {"x": 113, "y": 197, "w": 8, "h": 5 } }] }
   ]
