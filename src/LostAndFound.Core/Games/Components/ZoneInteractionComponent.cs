@@ -43,7 +43,8 @@ namespace LostAndFound.Core.Games.Components
                 if (zoneToGoTo != null)
                 {
                     TeleportToZone(entityZone, zoneToGoTo);
-                    Entity.Position = new Vector2(zoneToGoTo.Image.Width, Entity.Position.Y);
+                    var startYCollider = zoneToGoTo.GetColliderWithProperty("StartY");
+                    Entity.Position = new Vector2(zoneToGoTo.Image.Width, startYCollider.Bounds.Y);
                 }
             }
             else if (_entityCollider.Bounds.X > entityZone.Image.Width)
@@ -62,7 +63,8 @@ namespace LostAndFound.Core.Games.Components
                 if (zoneToGoTo != null)
                 {
                     TeleportToZone(entityZone, zoneToGoTo);
-                    Entity.Position = new Vector2(0, Entity.Position.Y);
+                    var startYCollider = zoneToGoTo.GetColliderWithProperty("StartY");
+                    Entity.Position = new Vector2(0, startYCollider.Bounds.Y);
                 }
             }
         }

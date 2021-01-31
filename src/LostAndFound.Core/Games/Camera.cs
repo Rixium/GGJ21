@@ -1,5 +1,6 @@
 ﻿using LostAndFound.Core.Config;
 using LostAndFound.Core.Games.Entities;
+using LostAndFound.Core.Games.Models;
 using Microsoft.Xna.Framework;
 
 namespace LostAndFound.Core.Games
@@ -58,6 +59,12 @@ namespace LostAndFound.Core.Games
 
             _position.X = MathHelper.Clamp(_position.X, _minX, maxX);
             _position.Y = MathHelper.Clamp(_position.Y, _minY, maxY);
+        }
+
+        public void OnZoneChanged(ZoneType zoneType)
+        {
+            var zoneSize = _zoneManager.ActiveZone.Image;
+            _position = new Vector2(zoneSize.Width, zoneSize.Height) / 2f;
         }
 
         public void SetEntity(IEntity entity, bool immediate)

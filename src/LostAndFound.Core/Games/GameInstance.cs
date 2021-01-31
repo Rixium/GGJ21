@@ -92,6 +92,7 @@ namespace LostAndFound.Core.Games
             _lightingOverlay.Start();
 
             questHolderComponent.QuestTaken += _systemManager.GetSystem<QuestSystem>().OnQuestTaken;
+            _zoneManager.ZoneChanged += _camera.OnZoneChanged;
         }
 
         public void Draw()
