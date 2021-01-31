@@ -36,6 +36,8 @@ namespace LostAndFound.Core.Games.Interfaces
 
         private Sprite _questPopupImage;
         private AudioSystem _audioSystem;
+        private MoneyBagComponent _moneyBagComponent;
+        private Text _moneyText;
 
 
         private IPanel ActivePanel => _panels.First(x => x.Name.Equals(_activePanelName));
@@ -66,13 +68,14 @@ namespace LostAndFound.Core.Games.Interfaces
         {
             _font = _contentChest.Get<SpriteFont>("Fonts/DefaultFont");
             var gamePanel = new Panel(_renderManager, "Game");
-            var panelText = new Text(_font, "NO MONEY", Color.Black, new Vector2(10, 10), 1f, Origin.TopLeft);
-            gamePanel.AddElement(panelText);
+            _moneyText = new Text(_font, "NO MONEY", Color.Black, new Vector2(10, 10), 1f, Origin.TopLeft);
+            gamePanel.AddElement(_moneyText);
             _panels.Add(gamePanel);
         }
 
         public void Update(GameTime gameTime)
         {
+            _moneyText.SetText($"${_moneyBagComponent.Money}");
             if (_inputManager.KeyPressed(Keys.Tab))
             {
                 _activePanelName = _activePanelName.Equals("Quest") ? "Game" : "Quest";
@@ -90,6 +93,8 @@ namespace LostAndFound.Core.Games.Interfaces
         {
             // Register to the quest holder component action, so we can show some UI when taking quest
             _questHolderComponent = entity.GetComponent<QuestHolderComponent>();
+            _moneyBagComponent = entity.GetComponent<MoneyBagComponent>();
+
             _questHolderComponent.QuestTaken += ShowQuestTaken;
         }
 
@@ -102,7 +107,7 @@ namespace LostAndFound.Core.Games.Interfaces
             element.AddEffect(new MoveUpEffect());
 
             _audioSystem.Play("Audio\\SoundEffects\\quest_taken");
-            
+
             gamePanel.AddElement(element);
         }
     }

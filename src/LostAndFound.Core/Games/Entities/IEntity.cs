@@ -9,8 +9,8 @@ namespace LostAndFound.Core.Games.Entities
         public Vector2 Position { get; set; }
         GameInstance GameInstance { get; set; }
         int Bottom { get; set; }
-        double Width { get; set; }
-        double Height { get; set; }
+        int Width { get; set; }
+        int Height { get; set; }
         public void AddComponent(IComponent component);
         public T GetComponent<T>();
         public void Update(GameTime gameTime);

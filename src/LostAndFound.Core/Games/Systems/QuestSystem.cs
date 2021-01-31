@@ -71,6 +71,10 @@ namespace LostAndFound.Core.Games.Systems
             staticDrawComponent.Image = animal;
 
             entity.AddComponent(staticDrawComponent);
+            
+            var questFulfilmentComponent = Program.Resolve<QuestFulfilmentComponent>();
+            questFulfilmentComponent.Quest = quest;
+            entity.AddComponent(questFulfilmentComponent);
 
             animalZone.AddEntity(entity);
         }

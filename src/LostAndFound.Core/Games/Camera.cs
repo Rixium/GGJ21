@@ -16,7 +16,7 @@ namespace LostAndFound.Core.Games
         private int _minY;
         private readonly int _maxY;
 
-        private int _zoom = 3;
+        private int _zoom = 4;
 
         private IEntity _following;
 

@@ -12,5 +12,6 @@ namespace LostAndFound.Core.Games.Questing
         public bool Completed { get; set; }
         public Color AnimalColor { get; set; }
         public string AnimalImage { get; set; }
+        public int Reward { get; set; }
     }
 }
