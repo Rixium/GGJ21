@@ -58,6 +58,7 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<PersonFactory>().As<IPersonFactory>().SingleInstance();
             builder.RegisterType<AnimalFactory>().As<IAnimalFactory>().SingleInstance();
             builder.RegisterType<ZoneManager>().SingleInstance();
+            builder.RegisterType<SkyboxManager>().SingleInstance();
 
             RegisterComponents(builder);
             RegisterSystems(builder);
