@@ -32,8 +32,6 @@ namespace LostAndFound.Core.Games
             {
                 case ZoneType.None:
                     break;
-                case ZoneType.Test:
-                    break;
                 case ZoneType.Street:
                     _ambientInstance = _streetAmbientSound.CreateInstance();
                     _ambientInstance.Volume = 0.5f;

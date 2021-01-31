@@ -18,7 +18,8 @@ namespace LostAndFound.Core.Games.Components
     public enum AnimalType
     {
         Cat,
-        Dog
+        Dog,
+        END
     }
 
     public class QuestGiverComponent : IComponent
@@ -130,7 +131,7 @@ namespace LostAndFound.Core.Games.Components
         public Quest TakeQuest()
         {
             _hasQuest = false;
-            var randomAnimalType = (AnimalType) _random.Next(0, (int) AnimalType.Dog);
+            var randomAnimalType = (AnimalType) _random.Next(0, (int) AnimalType.END);
 
             _givenQuest = new Quest
             {

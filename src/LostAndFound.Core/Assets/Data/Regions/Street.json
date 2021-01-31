@@ -23,7 +23,7 @@
   ],
   "slices": [
    { "name": "PlayerStart", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 308, "y": 196, "w": 17, "h": 9 } }] },
-   { "name": "LevelProperties", "color": "#0000ffff", "data": "(Left:Forest)(Right:Test)", "keys": [{ "frame": 0, "bounds": {"x": 6, "y": 7, "w": 34, "h": 33 } }] },
+   { "name": "LevelProperties", "color": "#0000ffff", "data": "(Left:Forest)(Right:Park)", "keys": [{ "frame": 0, "bounds": {"x": 6, "y": 7, "w": 34, "h": 33 } }] },
    { "name": "Collider1", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": -38, "y": 143, "w": 570, "h": 46 } }] },
    { "name": "Slice 1", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 425, "y": 182, "w": 76, "h": 23 } }] },
    { "name": "Slice 2", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 38, "y": 221, "w": 8, "h": 6 } }] },
