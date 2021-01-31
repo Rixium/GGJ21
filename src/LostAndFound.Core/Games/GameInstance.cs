@@ -9,10 +9,10 @@ using LostAndFound.Core.Games.Components;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Interfaces;
 using LostAndFound.Core.Games.Models;
+using LostAndFound.Core.Games.Systems;
 using LostAndFound.Core.Games.Zones;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games
@@ -22,6 +22,8 @@ namespace LostAndFound.Core.Games
         private const ZoneType StartingZone = ZoneType.Street;
 
         private readonly IList<IZone> _zones = new List<IZone>();
+        private IList<ISystem> _systems = new List<ISystem>();
+            
         public IZone ActiveZone => _zones.First(x => x.ZoneType == _currentZone);
         private ZoneType _currentZone = StartingZone;
 
