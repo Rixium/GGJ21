@@ -25,6 +25,7 @@ namespace LostAndFound.Core.Games
         private readonly IRenderManager _renderManager;
 
         private readonly Camera _camera;
+        private Entity _player;
 
         public GameInstance(IRenderManager renderManager,
             IWindowConfiguration windowConfiguration,
@@ -135,6 +136,8 @@ namespace LostAndFound.Core.Games
 
             _camera.SetEntity(player, false);
 
+            _player = player;
+            
             _systemManager.Start();
             _zoneManager.AddToActiveZone(player);
             _zoneManager.Start();
@@ -150,8 +153,8 @@ namespace LostAndFound.Core.Games
                 _camera.GetMatrix());
             _zoneManager.Draw(_renderManager.SpriteBatch);
             _renderManager.SpriteBatch.End();
-
-            _lightingOverlay.Draw(_renderManager.SpriteBatch);
+            
+            _lightingOverlay.Draw(_camera, _player);
             
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             _gameInterface.Draw();

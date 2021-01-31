@@ -1,4 +1,5 @@
 ﻿using LostAndFound.Core.Content;
+using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Systems;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -14,17 +15,20 @@ namespace LostAndFound.Core.Games
         private readonly TimeManager _timeManager;
         private readonly IRenderManager _renderManager;
         private readonly IContentChest _contentChest;
+        private readonly ZoneManager _zoneManager;
 
         private Color _nightColor = new Color(0, 2, 20);
         private Color _dayColor = new Color(252, 219, 3);
         private Color _overlayColor = Color.Black * 0;
         private Texture2D _light;
 
-        public LightingOverlay(SystemManager systemManager, IRenderManager renderManager, IContentChest contentChest)
+        public LightingOverlay(SystemManager systemManager, IRenderManager renderManager, IContentChest contentChest,
+            ZoneManager zoneManager)
         {
             _timeManager = systemManager.GetSystem<TimeManager>();
             _renderManager = renderManager;
             _contentChest = contentChest;
+            _zoneManager = zoneManager;
         }
 
         public void Load()
@@ -33,7 +37,7 @@ namespace LostAndFound.Core.Games
             _light = _contentChest.Get<Texture2D>("Utils/light");
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(Camera camera, IEntity player)
         {
             if (_timeManager.DayTotalMinutes < 960)
             {
@@ -41,13 +45,26 @@ namespace LostAndFound.Core.Games
             }
             else if (_timeManager.DayTotalMinutes < 1440 && _timeManager.DayTotalMinutes > 1200)
             {
-                _overlayColor = _nightColor * (float) (Map(1200, 1440, NightIntensity, 0, _timeManager.DayTotalMinutes));
+                _overlayColor =
+                    _nightColor * (float) (Map(1200, 1440, NightIntensity, 0, _timeManager.DayTotalMinutes));
             }
 
+
+            _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp,
+                null, null, null, camera.GetMatrix());
             
-            _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp);
-            _renderManager.SpriteBatch.Draw(Texture, new Rectangle(0, 0, 1280, 720), _overlayColor);
-            _renderManager.SpriteBatch.Draw(_light, new Rectangle(100, 100, 500, 500), Color.White);
+            _renderManager.SpriteBatch.Draw(Texture,
+                new Rectangle(0, 0, _zoneManager.ActiveZone.Image.Width, _zoneManager.ActiveZone.Image.Height),
+                _overlayColor);
+            
+            _renderManager.SpriteBatch.End();
+            
+            _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp,
+                null, null, null, camera.GetMatrix());
+            
+            _renderManager.SpriteBatch.Draw(_light,
+                new Rectangle((int) player.Position.X, (int) player.Position.Y, 300, 300), Color.White);
+
             _renderManager.SpriteBatch.End();
         }
 
