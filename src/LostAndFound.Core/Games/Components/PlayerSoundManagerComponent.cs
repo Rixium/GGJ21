@@ -14,7 +14,7 @@ namespace LostAndFound.Core.Games.Components
         private PlayerControllerComponent _playerControllerComponent;
         
         private double _footStepLength = 0.5;
-        List<string> soundPaths = new List<string>();
+        private List<string> _soundPaths = new List<string>();
         private bool _isMoving;
         private double _lastStepTime;
 
@@ -23,14 +23,14 @@ namespace LostAndFound.Core.Games.Components
             _soundComponent = Entity.GetComponent<SoundComponent>();
             _playerControllerComponent = Entity.GetComponent<PlayerControllerComponent>();
 
-            soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_1");
-            soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_2");
-            soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_3");
-            soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_4");
-            soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_5");
-            soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_6");
-            soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_7");
-            soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_8");
+            _soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_1");
+            _soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_2");
+            _soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_3");
+            _soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_4");
+            _soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_5");
+            _soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_6");
+            _soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_7");
+            _soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_8");
         }
 
         public void Update(GameTime gameTime)
@@ -38,7 +38,7 @@ namespace LostAndFound.Core.Games.Components
             if ((_playerControllerComponent.XVelocity != 0 || _playerControllerComponent.YVelocity != 0) && !_isMoving)
             { 
                 _isMoving = true;
-                PlayRandomFootstep();
+                _soundComponent.PlayRandomSoundFromList(_soundPaths);
                 _lastStepTime = gameTime.TotalGameTime.TotalSeconds;
             }
             else if (_playerControllerComponent.XVelocity == 0 && _playerControllerComponent.YVelocity == 0)
@@ -50,17 +50,10 @@ namespace LostAndFound.Core.Games.Components
             {
                 if (_lastStepTime + _footStepLength < gameTime.TotalGameTime.TotalSeconds)
                 {
-                    PlayRandomFootstep();
+                    _soundComponent.PlayRandomSoundFromList(_soundPaths);
                     _lastStepTime = gameTime.TotalGameTime.TotalSeconds;
                 }
             }
-        }
-
-        private void PlayRandomFootstep()
-        {
-            Random random = new Random();
-            var i = random.Next(0, 7);
-            _soundComponent.PlaySoundByName(soundPaths[i]);
         }
 
         public void Draw(SpriteBatch spriteBatch)

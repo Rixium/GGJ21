@@ -1,4 +1,6 @@
-﻿using LostAndFound.Core.Content;
+﻿using System;
+using System.Collections.Generic;
+using LostAndFound.Core.Content;
 using LostAndFound.Core.Games.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -31,6 +33,13 @@ namespace LostAndFound.Core.Games.Components
         public void PlaySoundByName(string name, float volume = 1)
         {
             _contentChest.Get<SoundEffect>(name).Play(volume, 0, 0);
+        }
+        
+        public void PlayRandomSoundFromList(List<string> soundPaths, float volume = 1)
+        {
+            Random random = new Random();
+            var i = random.Next(0, soundPaths.Count - 1);
+            PlaySoundByName(soundPaths[i]);
         }
     }
 }
