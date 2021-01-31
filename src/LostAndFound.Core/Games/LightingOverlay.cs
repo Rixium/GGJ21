@@ -21,7 +21,7 @@ namespace LostAndFound.Core.Games
         private Color _nightColor = new Color(0, 2, 20);
         private Color _dayColor = new Color(252, 219, 3);
         private Color _overlayColor = Color.Black * 0;
-        
+
         private Texture2D _lightTexture;
         private List<LightComponent> _lights = new List<LightComponent>();
 
@@ -101,13 +101,15 @@ namespace LostAndFound.Core.Games
 
             foreach (var light in _lights)
             {
-                light.Draw(_renderManager.SpriteBatch);
+                _renderManager.SpriteBatch.Draw(light.Texture,
+                    new Rectangle((int) (light.Entity.Position.X + light.Offset.X) - light.Size / 2,
+                        (int) (light.Entity.Position.Y + light.Offset.Y) - light.Size / 2, light.Size, light.Size),
+                    light.LightColor * 0.5f);
             }
 
             _renderManager.SpriteBatch.End();
 
             _renderManager.SpriteBatch.GraphicsDevice.SetRenderTarget(null);
-
         }
 
         public void DrawNow()
