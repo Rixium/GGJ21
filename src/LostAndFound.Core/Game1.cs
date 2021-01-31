@@ -32,7 +32,10 @@ namespace LostAndFound.Core
             _windowConfiguration = windowConfiguration;
             _applicationFolder = applicationFolder;
             _inputManager = inputManager;
-            _graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredDepthStencilFormat = DepthFormat.Depth24Stencil8
+            };
             Content.RootDirectory = "Assets";
             IsMouseVisible = true;
         }

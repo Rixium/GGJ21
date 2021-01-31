@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using LostAndFound.Core.Content;
 using LostAndFound.Core.Games.Components;
-using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Systems;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -12,7 +11,7 @@ namespace LostAndFound.Core.Games
     public class LightingOverlay
     {
         public Texture2D Texture { get; set; }
-        public double NightIntensity { get; set; } = 0.6;
+        public double NightIntensity { get; set; } = 1;
 
         private readonly TimeManager _timeManager;
         private readonly IRenderManager _renderManager;
@@ -73,22 +72,53 @@ namespace LostAndFound.Core.Games
                     _nightColor * (float) (Map(1200, 1440, NightIntensity, 0, _timeManager.DayTotalMinutes));
             }
 
-            _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp,
-                null, null, null, camera.GetMatrix());
-            
-            _renderManager.SpriteBatch.Draw(Texture,
-                new Rectangle(0, 0, _zoneManager.ActiveZone.Image.Width, _zoneManager.ActiveZone.Image.Height),
-                _overlayColor);
-            
-            _renderManager.SpriteBatch.End();
-            
-            _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp,
-                null, null, null, camera.GetMatrix());
+            /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            var m = Matrix.CreateOrthographicOffCenter(0,
+                _renderManager.GraphicsDeviceManager.GraphicsDevice.PresentationParameters.BackBufferWidth,
+                _renderManager.GraphicsDeviceManager.GraphicsDevice.PresentationParameters.BackBufferHeight,
+                0, 0, 1
+            );
+
+            var a = new AlphaTestEffect(_renderManager.GraphicsDeviceManager.GraphicsDevice)
+            {
+                Projection = camera.GetMatrix() * m
+            };
+
+            var s1 = new DepthStencilState
+            {
+                StencilEnable = true,
+                StencilFunction = CompareFunction.Always,
+                StencilPass = StencilOperation.Replace,
+                ReferenceStencil = 1,
+                DepthBufferEnable = false,
+            };
+
+            var s2 = new DepthStencilState
+            {
+                StencilEnable = true,
+                StencilFunction = CompareFunction.LessEqual,
+                StencilPass = StencilOperation.Keep,
+                ReferenceStencil = 1,
+                DepthBufferEnable = false,
+            };
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, null, s1, null, a);
 
             foreach (var light in _lights)
             {
                 light.Draw(_renderManager.SpriteBatch);
             }
+
+            _renderManager.SpriteBatch.End();
+
+            _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, null, s2, null, a);
+
+            _renderManager.SpriteBatch.Draw(Texture,
+                new Rectangle(0, 0, _zoneManager.ActiveZone.Image.Width, _zoneManager.ActiveZone.Image.Height),
+                _overlayColor);
 
             _renderManager.SpriteBatch.End();
         }

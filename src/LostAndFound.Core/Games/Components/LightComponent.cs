@@ -33,7 +33,7 @@ namespace LostAndFound.Core.Games.Components
         {
             spriteBatch.Draw(Texture,
                 new Rectangle((int) (Entity.Position.X + Offset.X) - Size / 2, (int) (Entity.Position.Y + Offset.Y) - Size / 2, Size, Size),
-                LightColor);
+                LightColor * 0.5f);
         }
     }
 }
