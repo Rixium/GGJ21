@@ -35,15 +35,13 @@ namespace LostAndFound.Core.Games.Components
 
         public void Update(GameTime gameTime)
         {
-            var playerVelocity = _playerControllerComponent.XVelocity + _playerControllerComponent.YVelocity;
-            
-            if (playerVelocity != 0 && !_isMoving)
+            if ((_playerControllerComponent.XVelocity != 0 || _playerControllerComponent.YVelocity != 0) && !_isMoving)
             { 
                 _isMoving = true;
                 PlayRandomFootstep();
                 _lastStepTime = gameTime.TotalGameTime.TotalSeconds;
             }
-            else if (playerVelocity == 0)
+            else if (_playerControllerComponent.XVelocity == 0 && _playerControllerComponent.YVelocity == 0)
             {
                 _isMoving = false;
             }
@@ -56,6 +54,8 @@ namespace LostAndFound.Core.Games.Components
                     _lastStepTime = gameTime.TotalGameTime.TotalSeconds;
                 }
             }
+            
+            Console.WriteLine(_playerControllerComponent.XVelocity);
 
             // if ((lastFootstepPos - Entity.Position).Length() > footStepLenght)
             // {
