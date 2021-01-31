@@ -28,7 +28,7 @@ namespace LostAndFound.Core.Content.Aseprite
                 throw new RegionNotFoundException();
 
             var regionBounds = region.Keys.First().Bounds.ToRectangle();
-            return new Sprite(Image, regionBounds, new Vector2(regionBounds.Width, 0) / 4f);
+            return new Sprite(Image, regionBounds, Vector2.One * 0.5f);
         }
     }
 

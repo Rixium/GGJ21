@@ -1,0 +1,39 @@
+{ "frames": [
+   {
+    "filename": "animals.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 100, "h": 100 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 100 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.25-x64",
+  "image": "animals.png",
+  "format": "RGBA8888",
+  "size": { "w": 100, "h": 100 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "Cat_1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 5, "y": 6, "w": 9, "h": 9 } }] },
+   { "name": "Cat_2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 17, "y": 5, "w": 7, "h": 10 } }] },
+   { "name": "Cat_3", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 28, "y": 7, "w": 6, "h": 8 } }] },
+   { "name": "Cat_4", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 37, "y": 6, "w": 7, "h": 9 } }] },
+   { "name": "Cat_5", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 46, "y": 9, "w": 3, "h": 6 } }] },
+   { "name": "Cat_6", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 54, "y": 6, "w": 6, "h": 9 } }] },
+   { "name": "Dog_1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 4, "y": 25, "w": 7, "h": 7 } }] },
+   { "name": "Dog_2", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 13, "y": 22, "w": 5, "h": 10 } }] },
+   { "name": "Dog_3", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 20, "y": 20, "w": 9, "h": 12 } }] },
+   { "name": "Dog_4", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 22, "w": 8, "h": 10 } }] },
+   { "name": "Dog_5", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 42, "y": 19, "w": 10, "h": 13 } }] },
+   { "name": "Dog_6", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 56, "y": 23, "w": 5, "h": 9 } }] }
+  ]
+ }
+}
