@@ -104,7 +104,7 @@ namespace LostAndFound.Core.Games
                 _renderManager.SpriteBatch.Draw(light.Texture,
                     new Rectangle((int) (light.Entity.Position.X + light.Offset.X + light.Entity.Width / 2f) - light.Size / 2,
                         (int) (light.Entity.Position.Y + light.Offset.Y+ light.Entity.Height / 2f) - light.Size / 2, light.Size, light.Size),
-                    _overlayColor);
+                    light.LightColor);
             }
 
             _renderManager.SpriteBatch.End();

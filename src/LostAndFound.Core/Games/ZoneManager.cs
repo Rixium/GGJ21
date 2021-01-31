@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LostAndFound.Core.Games.Components;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Games.Zones;
@@ -31,13 +32,28 @@ namespace LostAndFound.Core.Games
 
             foreach (var zone in zoneData)
             {
-                _zones.Add(new Zone
+                var collidersWithLight = zone.Colliders.Where(x => x.GetProperty("Light") != null);
+
+                var newZone = new Zone
                 {
                     ZoneType = zone.ZoneType,
                     Entities = new List<IEntity>(),
                     Colliders = zone.Colliders,
                     Image = zone.BackgroundImage
-                });
+                };
+
+                foreach (var collider in collidersWithLight)
+                {
+                    var lightEntity = new Entity(collider.Bounds.Center.ToVector2());
+                    var lightComponent = Program.Resolve<LightComponent>();
+                    lightComponent.Size = 100;
+                    lightComponent.LightColor = Color.Yellow;
+
+                    lightEntity.AddComponent(lightComponent);
+                    newZone.Entities.Add(lightEntity);
+                }
+
+                _zones.Add(newZone);
             }
         }
 

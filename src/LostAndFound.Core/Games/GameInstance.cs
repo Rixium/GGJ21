@@ -66,7 +66,11 @@ namespace LostAndFound.Core.Games
             var animatorComponent = Program.Resolve<AnimatorComponent>();
             animatorComponent.SetUp(Program.Resolve<PlayerAnimationSet>());
 
-            player.AddComponent(Program.Resolve<LightComponent>());
+            var lightComponent = Program.Resolve<LightComponent>();
+            lightComponent.LightColor *= 0.2f;
+            lightComponent.Size = 200;
+            
+            player.AddComponent(lightComponent);
             player.AddComponent(Program.Resolve<PlayerAnimationComponent>());
             player.AddComponent(Program.Resolve<AnimationDrawComponent>());
             player.AddComponent(playerFeetBoxCollider);

@@ -11,7 +11,7 @@ namespace LostAndFound.Core.Games.Components
         public Texture2D Texture { get; set; }
         public Color LightColor { get; set; } = Color.White;
         public Vector2 Offset { get; set; }
-        public int Size { get; set; } = 220;
+        public int Size { get; set; } = 30;
 
         private readonly IContentChest _contentChest;
 
