@@ -13,7 +13,7 @@ namespace LostAndFound.Core.Games.Components
 
         private SoundComponent _soundComponent;
         private List<string> _soundPaths = new List<string>();
-        private float _lastSoundTime;
+        private double _lastSoundTime;
 
         public void Start()
         {
@@ -30,6 +30,7 @@ namespace LostAndFound.Core.Games.Components
             if (gameTime.TotalGameTime.TotalMilliseconds + (SoundInterval * 60) > _lastSoundTime)
             {
                 _soundComponent.PlayRandomSoundFromList(_soundPaths);
+                _lastSoundTime = gameTime.TotalGameTime.TotalMilliseconds;
             }
         }
 
