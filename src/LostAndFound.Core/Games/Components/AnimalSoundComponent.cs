@@ -15,9 +15,12 @@ namespace LostAndFound.Core.Games.Components
         private SoundComponent _soundComponent;
         private List<string> _soundPaths = new List<string>();
         private double _lastSoundTime;
+        
+        Random random = new Random();
 
         public void Start()
         {
+            _lastSoundTime = random.Next(0, 5000);
             _soundComponent = Entity.GetComponent<SoundComponent>();
 
             _animalType = Entity.GetComponent<QuestFulfilmentComponent>().Quest.AnimalType;
@@ -48,10 +51,10 @@ namespace LostAndFound.Core.Games.Components
 
         public void Update(GameTime gameTime)
         {
-            if (_lastSoundTime < gameTime.TotalGameTime.Seconds - SoundInterval)
+            if (_lastSoundTime < gameTime.TotalGameTime.TotalMilliseconds - (SoundInterval * 100))
             {
                 _soundComponent.PlayRandomSoundFromList(_soundPaths);
-                _lastSoundTime = gameTime.TotalGameTime.Seconds;
+                _lastSoundTime = gameTime.TotalGameTime.TotalMilliseconds + random.Next(0, 4000);
             }
         }
 
