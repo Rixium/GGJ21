@@ -21,6 +21,6 @@ namespace LostAndFound.Core.UI
         }
 
         protected override void InternalDraw(SpriteBatch spriteBatch) =>
-            spriteBatch.Draw(_image.Texture, Bounds, _image.Source, Color.White);
+            spriteBatch.Draw(_image.Texture, Bounds, _image.Source, Color.White * Opacity);
     }
 }

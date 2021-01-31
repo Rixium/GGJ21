@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using LostAndFound.Core.UI.Effects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -6,6 +8,8 @@ namespace LostAndFound.Core.UI
 {
     public abstract class Element : IElement
     {
+        public bool MarkedForDeath { get; set; } = false;
+        public IList<IElementEffect> ElementEffects { get; } = new List<IElementEffect>();
         public Origin Origin { get; }
         public Action Click { get; set; }
         public Action HoverOn { get; set; }
@@ -21,7 +25,7 @@ namespace LostAndFound.Core.UI
                     (int) (Height * Scale));
             }
         }
-        
+
         public Vector2 Bottom
         {
             get
@@ -34,6 +38,7 @@ namespace LostAndFound.Core.UI
         public float Scale { get; set; }
         public Vector2 Position { get; set; }
         public IPanel Panel { get; set; }
+        public float Opacity { get; set; } = 1f;
         public abstract int Width { get; }
         public abstract int Height { get; }
 
@@ -62,6 +67,11 @@ namespace LostAndFound.Core.UI
         public void Update(GameTime gameTime)
         {
             InternalUpdate(gameTime);
+
+            foreach (var elementEffect in ElementEffects)
+            {
+                elementEffect.Update(gameTime);
+            }
         }
 
         protected abstract void InternalUpdate(GameTime gameTime);
@@ -70,6 +80,14 @@ namespace LostAndFound.Core.UI
         {
             InternalDraw(spriteBatch);
         }
+
+        public void AddEffect(IElementEffect elementEffect)
+        {
+            elementEffect.Element = this;
+            ElementEffects.Add(elementEffect);
+        }
+
+        public void MarkForDeath() => MarkedForDeath = true;
 
         protected abstract void InternalDraw(SpriteBatch spriteBatch);
     }

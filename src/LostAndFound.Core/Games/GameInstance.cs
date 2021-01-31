@@ -82,6 +82,7 @@ namespace LostAndFound.Core.Games
 
             _player = player;
             
+            _gameInterface.RegisterToEntity(player);
             _systemManager.Start();
             _zoneManager.AddToActiveZone(player);
             _zoneManager.Start();

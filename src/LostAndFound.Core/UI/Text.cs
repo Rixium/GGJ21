@@ -33,7 +33,7 @@ namespace LostAndFound.Core.UI
                 _font,
                 _text,
                 Position,
-                _color,
+                _color * Opacity,
                 0f,
                 GetOriginOffset(),
                 Scale,
