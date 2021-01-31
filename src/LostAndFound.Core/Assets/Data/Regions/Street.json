@@ -30,7 +30,10 @@
    { "name": "Slice 3", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 125, "y": 243, "w": 7, "h": 6 } }] },
    { "name": "Slice 4", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 250, "y": 222, "w": 7, "h": 6 } }] },
    { "name": "Slice 5", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 339, "y": 247, "w": 6, "h": 5 } }] },
-   { "name": "StartZoneProperties", "color": "#0000ffff", "data": "(StartY:true)", "keys": [{ "frame": 0, "bounds": {"x": 3, "y": 198, "w": 10, "h": 17 } }] }
+   { "name": "StartZoneProperties", "color": "#0000ffff", "data": "(StartY:true)", "keys": [{ "frame": 0, "bounds": {"x": 3, "y": 198, "w": 10, "h": 17 } }] },
+   { "name": "Slice 6", "color": "#0000ffff", "data": "(Light:true)", "keys": [{ "frame": 0, "bounds": {"x": 169, "y": 122, "w": 6, "h": 4 } }] },
+   { "name": "Slice 7", "color": "#0000ffff", "data": "(Light:true)", "keys": [{ "frame": 0, "bounds": {"x": 87, "y": 122, "w": 6, "h": 4 } }] },
+   { "name": "Slice 8", "color": "#0000ffff", "data": "(Light:true)", "keys": [{ "frame": 0, "bounds": {"x": 21, "y": 122, "w": 6, "h": 4 } }] }
   ]
  }
 }
