@@ -43,6 +43,24 @@
 /processorParam:Quality=Best
 /build:Audio/SoundEffects/AnimalSounds/bark_1.wav
 
+#begin Audio/SoundEffects/AnimalSounds/bark_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/AnimalSounds/bark_2.wav
+
+#begin Audio/SoundEffects/AnimalSounds/bark_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/AnimalSounds/bark_3.wav
+
+#begin Audio/SoundEffects/AnimalSounds/bark_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/AnimalSounds/bark_4.wav
+
 #begin Audio/SoundEffects/buttonClick.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
