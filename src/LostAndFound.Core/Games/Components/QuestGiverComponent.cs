@@ -44,6 +44,7 @@ namespace LostAndFound.Core.Games.Components
             Name = selected.Split('\\').Last().Split('.').First();
 
             _questIcon = _spriteMapLoader.GetContent("Assets\\UI\\ui.json").CreateSpriteFromRegion("Quest_Alert");
+            _questIcon.Origin = _questIcon.Center;
         }
 
         public void Update(GameTime gameTime)
@@ -52,23 +53,13 @@ namespace LostAndFound.Core.Games.Components
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (HasQuestToGive())
-            {
-                var positionToDraw = Entity.Position + new Vector2(
-                    _staticDrawComponent.Image.Width / 2f - (_questIcon.Width / 2f),
-                    -_questIcon.Height);
-                spriteBatch.Draw(_questIcon.Texture, positionToDraw, _questIcon.Source, Color.White, 0,
-                    _questIcon.Origin, 0.5f, SpriteEffects.None, 0f);
-            }
+            if (!HasQuestToGive()) return;
 
-            //
-            // if (Highlighted)
-            // {
-            //     spriteBatch.Draw(_staticDrawComponent.Image, Entity.Position - new Vector2(1, 1), Color.Black);
-            //     spriteBatch.Draw(_staticDrawComponent.Image, Entity.Position - new Vector2(1, -1), Color.Black);
-            //     spriteBatch.Draw(_staticDrawComponent.Image, Entity.Position - new Vector2(-1, 1), Color.Black);
-            //     spriteBatch.Draw(_staticDrawComponent.Image, Entity.Position - new Vector2(-1, -1), Color.Black);
-            // }
+            var positionToDraw = Entity.Position + new Vector2(
+                _staticDrawComponent.Image.Width / 2f - _questIcon.Width / 2f,
+                -_questIcon.Height);
+            spriteBatch.Draw(_questIcon.Texture, positionToDraw, _questIcon.Source, Color.White, 0,
+                _questIcon.Origin, Highlighted ? 0.5f : 0.3f, SpriteEffects.None, 0f);
         }
 
         public bool HasQuestToGive() => true;
