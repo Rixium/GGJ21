@@ -82,6 +82,7 @@ namespace LostAndFound.Core.Games.Systems
             
             entity.AddComponent(Program.Resolve<AnimalSoundComponent>());
             entity.AddComponent(Program.Resolve<SoundComponent>());
+            entity.AddComponent(Program.Resolve<BounceComponent>());
 
             animalZone.AddEntity(entity);
         }
