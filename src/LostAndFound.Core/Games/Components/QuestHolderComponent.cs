@@ -42,6 +42,11 @@ namespace LostAndFound.Core.Games.Components
                 if (Vector2.Distance(Entity.Position, questGiverComponent.Entity.Position) < 20)
                 {
                     _questGiverNextTo = questGiverComponent;
+
+                    if (!questGiverComponent.HasQuestToGive())
+                    {
+                        continue;
+                    }
                     
                     if (_inputManager.KeyPressed(Keys.E))
                     {
@@ -49,7 +54,7 @@ namespace LostAndFound.Core.Games.Components
                         _quests.Add(newQuest);
                         QuestTaken?.Invoke(newQuest);
                     }
-                    
+
                     return;
                 }
             }
