@@ -54,14 +54,6 @@ namespace LostAndFound.Core.Games.Components
                     _lastStepTime = gameTime.TotalGameTime.TotalSeconds;
                 }
             }
-            
-            Console.WriteLine(_playerControllerComponent.XVelocity);
-
-            // if ((lastFootstepPos - Entity.Position).Length() > footStepLenght)
-            // {
-            //     lastFootstepPos = Entity.Position;
-            //     PlayRandomFootstep();
-            // }
         }
 
         private void PlayRandomFootstep()

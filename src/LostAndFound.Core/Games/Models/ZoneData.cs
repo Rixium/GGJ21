@@ -6,7 +6,6 @@ namespace LostAndFound.Core.Games.Models
     public enum ZoneType
     {
         None,
-        Test,
         Street,
         Forest,
         Park
