@@ -61,8 +61,7 @@ namespace LostAndFound.Core.Content
                 playerAnimationMap.CreateSpriteFromRegion("Walk_Down_3"),
                 playerAnimationMap.CreateSpriteFromRegion("Walk_Down_4"),
                 playerAnimationMap.CreateSpriteFromRegion("Walk_Down_5"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Down_6"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Down_7")
+                playerAnimationMap.CreateSpriteFromRegion("Walk_Down_6")
             })
             {
                 FrameDuration = 0.2f
