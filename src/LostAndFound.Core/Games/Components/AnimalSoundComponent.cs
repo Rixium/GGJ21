@@ -9,7 +9,7 @@ namespace LostAndFound.Core.Games.Components
     {
         public IEntity Entity { get; set; }
         public AnimalType _animalType = AnimalType.Dog;
-        public int SoundInterval = 6;
+        public int SoundInterval = 2;
 
         private SoundComponent _soundComponent;
         private List<string> _soundPaths = new List<string>();
@@ -27,10 +27,10 @@ namespace LostAndFound.Core.Games.Components
 
         public void Update(GameTime gameTime)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds + (SoundInterval * 60) > _lastSoundTime)
+            if (_lastSoundTime < gameTime.TotalGameTime.Seconds - SoundInterval)
             {
                 _soundComponent.PlayRandomSoundFromList(_soundPaths);
-                _lastSoundTime = gameTime.TotalGameTime.TotalMilliseconds;
+                _lastSoundTime = gameTime.TotalGameTime.Seconds;
             }
         }
 
