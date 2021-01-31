@@ -60,13 +60,19 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<ZoneManager>().SingleInstance();
             builder.RegisterType<SkyboxManager>().SingleInstance();
 
+            RegisterAnimationSets(builder);
             RegisterComponents(builder);
             RegisterSystems(builder);
 
             base.Load(builder);
         }
 
-        private void RegisterSystems(ContainerBuilder builder)
+        private static void RegisterAnimationSets(ContainerBuilder builder)
+        {
+            builder.RegisterType<PlayerAnimationSet>().As<IAnimationSet>();
+        }
+
+        private static void RegisterSystems(ContainerBuilder builder)
         {
             builder.RegisterType<SystemManager>().SingleInstance();
             builder.RegisterType<QuestSystem>().As<ISystem>().SingleInstance();
@@ -79,7 +85,7 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<PlayerAnimationComponent>().InstancePerDependency();
             builder.RegisterType<AnimatorComponent>().InstancePerDependency();
             builder.RegisterType<AnimationDrawComponent>().InstancePerDependency();
-            
+
             builder.RegisterType<PersonInteractionComponent>().InstancePerDependency();
             builder.RegisterType<StaticDrawComponent>().InstancePerDependency();
             builder.RegisterType<PlayerControllerComponent>().InstancePerDependency();
