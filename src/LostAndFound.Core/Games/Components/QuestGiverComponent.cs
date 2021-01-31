@@ -61,6 +61,7 @@ namespace LostAndFound.Core.Games.Components
             _questIcon.Origin = _questIcon.Center;
 
             _animalScroll = asepriteSpriteMap.CreateSpriteFromRegion("Animal_Scroll");
+            _animalScroll.Origin = _animalScroll.Center;
 
             var animalSpriteMap = _spriteMapLoader.GetContent("Assets\\Images\\Animals\\animals.json");
 
@@ -109,18 +110,17 @@ namespace LostAndFound.Core.Games.Components
         {
             var animal = _animalSprites[_givenQuest.AnimalImage];
 
-            var animalScrollPosition = Entity.Position;
-            animalScrollPosition -= new Vector2(0, _animalScroll.Height);
+            var animalScrollPosition = Entity.Position + new Vector2(_staticDrawComponent.Image.Width / 2f, 0);
+            animalScrollPosition -= new Vector2(0, _animalScroll.Height) - new Vector2(0, 10);
+
+            animal.Origin = animal.Center;
 
             spriteBatch.Draw(_animalScroll.Texture, animalScrollPosition, _animalScroll.Source, Color.White, 0f,
                 _animalScroll.Origin, 1f, SpriteEffects.None, 0f);
 
-            var position = new Vector2(animalScrollPosition.X,
-                animalScrollPosition.Y) + new Vector2(_animalScroll.Width, _animalScroll.Height) / 4f;
-
             spriteBatch.Draw(animal.Texture,
-                position, animal.Source, _givenQuest.AnimalColor, 0f,
-                Vector2.One * 0.5f, 1.5f, SpriteEffects.None, 0f);
+                animalScrollPosition, animal.Source, _givenQuest.AnimalColor, 0f,
+                animal.Origin, 1f, SpriteEffects.None, 0f);
         }
 
         private bool GivenQuest() => _givenQuest != null;
