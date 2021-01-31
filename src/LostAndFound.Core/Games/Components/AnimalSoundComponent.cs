@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using LostAndFound.Core.Games.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,12 +20,29 @@ namespace LostAndFound.Core.Games.Components
         {
             _soundComponent = Entity.GetComponent<SoundComponent>();
 
-            if (_animalType == AnimalType.Dog)
+            _animalType = Entity.GetComponent<QuestFulfilmentComponent>().Quest.AnimalType;
+
+            switch (_animalType)
             {
-                _soundPaths.Add("Audio/SoundEffects/AnimalSounds/bark_1");
-                _soundPaths.Add("Audio/SoundEffects/AnimalSounds/bark_2");
-                _soundPaths.Add("Audio/SoundEffects/AnimalSounds/bark_3");
-                _soundPaths.Add("Audio/SoundEffects/AnimalSounds/bark_4");
+                case AnimalType.Cat:
+                    _soundPaths.Add("Audio/SoundEffects/AnimalSounds/meow_1");
+                    _soundPaths.Add("Audio/SoundEffects/AnimalSounds/meow_2");
+                    _soundPaths.Add("Audio/SoundEffects/AnimalSounds/meow_3");
+                    _soundPaths.Add("Audio/SoundEffects/AnimalSounds/meow_4");
+                    _soundPaths.Add("Audio/SoundEffects/AnimalSounds/meow_5");
+                    _soundPaths.Add("Audio/SoundEffects/AnimalSounds/meow_6");
+                    _soundPaths.Add("Audio/SoundEffects/AnimalSounds/meow_7");
+                    _soundPaths.Add("Audio/SoundEffects/AnimalSounds/meow_8");
+                    break;
+                case AnimalType.Dog:
+                    _soundPaths.Add("Audio/SoundEffects/AnimalSounds/bark_1");
+                    _soundPaths.Add("Audio/SoundEffects/AnimalSounds/bark_2");
+                    _soundPaths.Add("Audio/SoundEffects/AnimalSounds/bark_3");
+                    break;
+                case AnimalType.END:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 

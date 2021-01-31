@@ -141,7 +141,8 @@ namespace LostAndFound.Core.Games.Components
                 AnimalColor = ColorRandomizer.GetRandomColor(),
                 AnimalName = "Joey",
                 Completed = false,
-                Reward = 1000
+                Reward = 1000,
+                AnimalType = randomAnimalType
             };
             return _givenQuest;
         }
