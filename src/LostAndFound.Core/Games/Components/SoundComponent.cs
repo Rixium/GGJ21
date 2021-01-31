@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using LostAndFound.Core.Content;
+﻿using LostAndFound.Core.Content;
 using LostAndFound.Core.Games.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
