@@ -21,6 +21,7 @@ namespace LostAndFound.Core.Games
         private readonly IContentLoader<AsepriteSpriteMap> _spriteMapLoader;
         private readonly SystemManager _systemManager;
         private readonly ZoneManager _zoneManager;
+        private readonly SkyboxManager _skyboxManager;
         private readonly IRenderManager _renderManager;
 
         private readonly Camera _camera;
@@ -29,7 +30,7 @@ namespace LostAndFound.Core.Games
             IWindowConfiguration windowConfiguration,
             GameInterface gameInterface, 
             LightingOverlay lightingOverlay, IContentLoader<AsepriteSpriteMap> spriteMapLoader,
-            SystemManager systemManager, ZoneManager zoneManager)
+            SystemManager systemManager, ZoneManager zoneManager, SkyboxManager skyboxManager)
         {
             _renderManager = renderManager;
             _gameInterface = gameInterface;
@@ -37,6 +38,7 @@ namespace LostAndFound.Core.Games
             _spriteMapLoader = spriteMapLoader;
             _systemManager = systemManager;
             _zoneManager = zoneManager;
+            _skyboxManager = skyboxManager;
 
             _camera = new Camera(windowConfiguration);
         }
@@ -45,6 +47,7 @@ namespace LostAndFound.Core.Games
         {
             _gameInterface.Load();
             _lightingOverlay.Load();
+            _skyboxManager.Load();
             _zoneManager.Load();
         }
 
@@ -139,16 +142,17 @@ namespace LostAndFound.Core.Games
 
         public void Draw()
         {
+            _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
+            _skyboxManager.Draw();
+            _renderManager.SpriteBatch.End();
+            
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null,
                 _camera.GetMatrix());
             _zoneManager.Draw(_renderManager.SpriteBatch);
             _renderManager.SpriteBatch.End();
 
-            _renderManager.SpriteBatch.Begin();
-            _lightingOverlay.Draw();
-            _renderManager.SpriteBatch.End();
-
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
+            _lightingOverlay.Draw();
             _gameInterface.Draw();
             _systemManager.Draw(_renderManager.SpriteBatch);
             _renderManager.SpriteBatch.End();
