@@ -25,7 +25,8 @@ namespace LostAndFound.Core.Content
                 playerAnimationMap.CreateSpriteFromRegion("Walk_Right_2"),
                 playerAnimationMap.CreateSpriteFromRegion("Walk_Right_3"),
                 playerAnimationMap.CreateSpriteFromRegion("Walk_Right_4"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Right_5")
+                playerAnimationMap.CreateSpriteFromRegion("Walk_Right_5"),
+                playerAnimationMap.CreateSpriteFromRegion("Walk_Right_6")
             })
             {
                 FrameDuration = 0.2f
@@ -37,7 +38,8 @@ namespace LostAndFound.Core.Content
                 playerAnimationMap.CreateSpriteFromRegion("Walk_Left_2"),
                 playerAnimationMap.CreateSpriteFromRegion("Walk_Left_3"),
                 playerAnimationMap.CreateSpriteFromRegion("Walk_Left_4"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Left_5")
+                playerAnimationMap.CreateSpriteFromRegion("Walk_Left_5"),
+                playerAnimationMap.CreateSpriteFromRegion("Walk_Left_6")
             })
             {
                 FrameDuration = 0.2f
@@ -59,8 +61,7 @@ namespace LostAndFound.Core.Content
                 playerAnimationMap.CreateSpriteFromRegion("Walk_Down_3"),
                 playerAnimationMap.CreateSpriteFromRegion("Walk_Down_4"),
                 playerAnimationMap.CreateSpriteFromRegion("Walk_Down_5"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Down_6"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Down_7")
+                playerAnimationMap.CreateSpriteFromRegion("Walk_Down_6")
             })
             {
                 FrameDuration = 0.2f
