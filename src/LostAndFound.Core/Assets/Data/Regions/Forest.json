@@ -1,11 +1,11 @@
 { "frames": [
    {
     "filename": "Forest.aseprite",
-    "frame": { "x": 0, "y": 0, "w": 500, "h": 281 },
+    "frame": { "x": 0, "y": 0, "w": 500, "h": 340 },
     "rotated": false,
     "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 500, "h": 281 },
-    "sourceSize": { "w": 500, "h": 281 },
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 500, "h": 340 },
+    "sourceSize": { "w": 500, "h": 340 },
     "duration": 100
    }
  ],
@@ -14,7 +14,7 @@
   "version": "1.2.25-x64",
   "image": "Forest.png",
   "format": "RGBA8888",
-  "size": { "w": 500, "h": 281 },
+  "size": { "w": 500, "h": 340 },
   "scale": "1",
   "frameTags": [
   ],
@@ -22,10 +22,11 @@
    { "name": "Background", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
-   { "name": "SafeZone", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": -1, "y": 201, "w": 501, "h": 35 } }] },
+   { "name": "SafeZone", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 233, "w": 501, "h": 35 } }] },
    { "name": "LevelProperties", "color": "#0000ffff", "data": "(Left:Park)(Right:Street)", "keys": [{ "frame": 0, "bounds": {"x": 9, "y": 8, "w": 25, "h": 24 } }] },
-   { "name": "Slice 1", "color": "#0000ffff", "data": "(SpawnZone:true)", "keys": [{ "frame": 0, "bounds": {"x": 49, "y": 238, "w": 419, "h": 18 } }] },
-   { "name": "StartZoneProperties", "color": "#0000ffff", "data": "(StartY:true)", "keys": [{ "frame": 0, "bounds": {"x": 489, "y": 250, "w": 10, "h": 17 } }] }
+   { "name": "Slice 1", "color": "#0000ffff", "data": "(SpawnZone:true)", "keys": [{ "frame": 0, "bounds": {"x": 52, "y": 272, "w": 419, "h": 62 } }] },
+   { "name": "StartZoneProperties", "color": "#0000ffff", "data": "(StartY:true)", "keys": [{ "frame": 0, "bounds": {"x": 489, "y": 273, "w": 10, "h": 17 } }] },
+   { "name": "Slice 2", "color": "#0000ffff", "data": "(Light:true)", "keys": [{ "frame": 0, "bounds": {"x": 113, "y": 197, "w": 8, "h": 5 } }] }
   ]
  }
 }
