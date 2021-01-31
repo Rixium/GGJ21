@@ -13,6 +13,7 @@ namespace LostAndFound.Core.Games.Components
         public int SoundInterval = 2;
 
         private SoundComponent _soundComponent;
+        private QuestFulfilmentComponent _questFulfilmentComponent;
         private List<string> _soundPaths = new List<string>();
         private double _lastSoundTime;
         
@@ -22,8 +23,9 @@ namespace LostAndFound.Core.Games.Components
         {
             _lastSoundTime = random.Next(0, 5000);
             _soundComponent = Entity.GetComponent<SoundComponent>();
+            _questFulfilmentComponent = Entity.GetComponent<QuestFulfilmentComponent>();
 
-            _animalType = Entity.GetComponent<QuestFulfilmentComponent>().Quest.AnimalType;
+            _animalType = _questFulfilmentComponent.Quest.AnimalType;
 
             switch (_animalType)
             {
@@ -51,9 +53,12 @@ namespace LostAndFound.Core.Games.Components
 
         public void Update(GameTime gameTime)
         {
+            var distance = Vector2.Distance(Entity.Position, _questFulfilmentComponent.QuestFulfiller.Position);
+            var soundVolume = Map(100, 0, 0, 1, distance);
+            
             if (_lastSoundTime < gameTime.TotalGameTime.TotalMilliseconds - (SoundInterval * 100))
             {
-                _soundComponent.PlayRandomSoundFromList(_soundPaths);
+                _soundComponent.PlayRandomSoundFromList(_soundPaths, (float)soundVolume);
                 _lastSoundTime = gameTime.TotalGameTime.TotalMilliseconds + random.Next(0, 4000);
             }
         }
@@ -61,5 +66,7 @@ namespace LostAndFound.Core.Games.Components
         public void Draw(SpriteBatch spriteBatch)
         {
         }
+        
+        double Map(double a1, double a2, double b1, double b2, double s) => b1 + (s - a1) * (b2 - b1) / (a2 - a1);
     }
 }

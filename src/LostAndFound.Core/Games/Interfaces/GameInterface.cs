@@ -98,7 +98,7 @@ namespace LostAndFound.Core.Games.Interfaces
             _questHolderComponent.QuestTaken += ShowQuestTaken;
         }
 
-        private void ShowQuestTaken(Quest quest)
+        private void ShowQuestTaken(Quest quest, IEntity taker)
         {
             var gamePanel = _panels.First(x => x.Name.Equals("Game"));
 

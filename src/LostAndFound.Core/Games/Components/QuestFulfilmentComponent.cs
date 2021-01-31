@@ -9,6 +9,7 @@ namespace LostAndFound.Core.Games.Components
     {
         public IEntity Entity { get; set; }
         public Quest Quest { get; set; }
+        public IEntity QuestFulfiller { get; set; }
 
         public void Start()
         {

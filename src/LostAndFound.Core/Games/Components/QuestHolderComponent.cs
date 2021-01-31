@@ -11,7 +11,7 @@ namespace LostAndFound.Core.Games.Components
 {
     public class QuestHolderComponent : IComponent
     {
-        public Action<Quest> QuestTaken { get; set; }
+        public Action<Quest, IEntity> QuestTaken { get; set; }
         public Action<Quest> QuestComplete { get; set; }
 
         private readonly ZoneManager _zoneManager;
@@ -99,7 +99,7 @@ namespace LostAndFound.Core.Games.Components
 
                 var newQuest = questGiverComponent.TakeQuest();
                 _quests.Add(newQuest);
-                QuestTaken?.Invoke(newQuest);
+                QuestTaken?.Invoke(newQuest, Entity);
             }
         }
 

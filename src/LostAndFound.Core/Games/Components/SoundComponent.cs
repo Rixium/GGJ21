@@ -32,14 +32,15 @@ namespace LostAndFound.Core.Games.Components
 
         public void PlaySoundByName(string name, float volume = 1)
         {
-            _contentChest.Get<SoundEffect>(name).Play(volume, 0, 0);
+            var actualVolume = MathHelper.Clamp(volume, 0, 1);
+            _contentChest.Get<SoundEffect>(name).Play(actualVolume, 0, 0);
         }
         
         public void PlayRandomSoundFromList(List<string> soundPaths, float volume = 1)
         {
             Random random = new Random();
             var i = random.Next(1, soundPaths.Count);
-            PlaySoundByName(soundPaths[i]);
+            PlaySoundByName(soundPaths[i], volume);
         }
     }
 }

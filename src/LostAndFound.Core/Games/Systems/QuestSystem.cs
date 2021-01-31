@@ -56,7 +56,7 @@ namespace LostAndFound.Core.Games.Systems
             }
         }
 
-        public void OnQuestTaken(Quest quest)
+        public void OnQuestTaken(Quest quest, IEntity taker)
         {
             var animalZone = _zoneManager.GetZone(quest.AnimalZone);
 
@@ -78,6 +78,7 @@ namespace LostAndFound.Core.Games.Systems
             entity.AddComponent(lightComponent);
             var questFulfilmentComponent = Program.Resolve<QuestFulfilmentComponent>();
             questFulfilmentComponent.Quest = quest;
+            questFulfilmentComponent.QuestFulfiller = taker;
             entity.AddComponent(questFulfilmentComponent);
             
             entity.AddComponent(Program.Resolve<AnimalSoundComponent>());
