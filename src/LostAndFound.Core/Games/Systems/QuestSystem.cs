@@ -31,13 +31,13 @@ namespace LostAndFound.Core.Games.Systems
                 }
 
                 var person = _contentChest.Get<Texture2D>("Images/People/Marge");
-                var questGiver = new Entity(collider.Bounds.ToVector2() - new Vector2(0, person.Height) + new Vector2(0, 10));
+                var questGiver = new Entity(collider.Bounds.ToVector2());
                 questGiver.AddComponent(new StaticDrawComponent
                 {
                     Image = person
                 });
 
-                questGiver.AddComponent(new QuestGiverComponent());
+                questGiver.AddComponent(Program.Resolve<QuestGiverComponent>());
 
                 questZone.AddEntity(questGiver);
             }

@@ -75,7 +75,11 @@ namespace LostAndFound.Core.Games.Zones
         }
 
         public void RemoveEntity(IEntity entity) => _entitiesToRemove.Add(entity);
-        public void AddEntity(IEntity entity) => _entitiesToAdd.Add(entity);
+        public void AddEntity(IEntity entity)
+        {
+            _entitiesToAdd.Add(entity);
+            entity.Start();
+        }
 
         public Collider GetColliderWithProperty(string propertyName)
         {
