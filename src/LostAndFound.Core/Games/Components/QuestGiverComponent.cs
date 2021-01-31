@@ -148,5 +148,11 @@ namespace LostAndFound.Core.Games.Components
         }
 
         public bool QuestIs(Quest compareQuest) => compareQuest == _givenQuest;
+
+        public void RefreshQuest()
+        {
+            _hasQuest = true;
+            _givenQuest = null;
+        }
     }
 }

@@ -103,6 +103,7 @@ namespace LostAndFound.Core.Games.Components
                     if (questGiverComponent.QuestIs(_animalHolder.Quest))
                     {
                         FulfilQuest(_animalHolder.Quest);
+                        questGiverComponent.RefreshQuest();
                     }
                 }
             }
