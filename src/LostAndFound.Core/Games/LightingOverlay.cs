@@ -53,7 +53,7 @@ namespace LostAndFound.Core.Games
         {
             _lights.Clear();
 
-            foreach (var light in _zoneManager.ActiveZone.Entities)
+            foreach (var light in _zoneManager.ActiveZone.NextEntities)
             {
                 var lightComponent = light.GetComponent<LightComponent>();
 

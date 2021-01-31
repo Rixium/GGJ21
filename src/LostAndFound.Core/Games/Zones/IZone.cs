@@ -13,6 +13,7 @@ namespace LostAndFound.Core.Games.Zones
         ZoneType ZoneType { get; set; }
         Collider[] Colliders { get; set; }
         Texture2D Image { get; set; }
+        IEnumerable<IEntity> NextEntities { get; }
         void Update(GameTime gameTime);
         void Draw(SpriteBatch spriteBatch);
         Vector2 GetTeleportPoint(Direction direction);

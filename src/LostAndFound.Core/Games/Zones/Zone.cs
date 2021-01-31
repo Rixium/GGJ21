@@ -20,6 +20,17 @@ namespace LostAndFound.Core.Games.Zones
         public Collider[] Colliders { get; set; }
         public Texture2D Image { get; set; }
 
+        public IEnumerable<IEntity> NextEntities
+        {
+            get
+            {
+                var newList = new List<IEntity>();
+                newList.AddRange(Entities);
+                newList.AddRange(_entitiesToAdd);
+                return newList;
+            }
+        }
+
         public void Update(GameTime gameTime)
         {
             foreach (var entity in _entitiesToRemove)
@@ -75,6 +86,7 @@ namespace LostAndFound.Core.Games.Zones
         }
 
         public void RemoveEntity(IEntity entity) => _entitiesToRemove.Add(entity);
+
         public void AddEntity(IEntity entity)
         {
             _entitiesToAdd.Add(entity);
