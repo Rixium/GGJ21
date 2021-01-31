@@ -24,16 +24,16 @@
   "slices": [
    { "name": "PlayerStart", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 308, "y": 196, "w": 17, "h": 9 } }] },
    { "name": "LevelProperties", "color": "#0000ffff", "data": "(Left:Forest)(Right:Park)", "keys": [{ "frame": 0, "bounds": {"x": 6, "y": 7, "w": 34, "h": 33 } }] },
-   { "name": "Collider1", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": -38, "y": 143, "w": 570, "h": 46 } }] },
+   { "name": "Collider1", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": -38, "y": 144, "w": 570, "h": 46 } }] },
    { "name": "Slice 1", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 425, "y": 182, "w": 76, "h": 23 } }] },
-   { "name": "Slice 2", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 38, "y": 221, "w": 8, "h": 6 } }] },
-   { "name": "Slice 3", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 125, "y": 243, "w": 7, "h": 6 } }] },
-   { "name": "Slice 4", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 250, "y": 222, "w": 7, "h": 6 } }] },
-   { "name": "Slice 5", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 339, "y": 247, "w": 6, "h": 5 } }] },
-   { "name": "StartZoneProperties", "color": "#0000ffff", "data": "(StartY:true)", "keys": [{ "frame": 0, "bounds": {"x": 3, "y": 198, "w": 10, "h": 17 } }] },
-   { "name": "Slice 6", "color": "#0000ffff", "data": "(Light:true)", "keys": [{ "frame": 0, "bounds": {"x": 169, "y": 122, "w": 6, "h": 4 } }] },
-   { "name": "Slice 7", "color": "#0000ffff", "data": "(Light:true)", "keys": [{ "frame": 0, "bounds": {"x": 87, "y": 122, "w": 6, "h": 4 } }] },
-   { "name": "Slice 8", "color": "#0000ffff", "data": "(Light:true)", "keys": [{ "frame": 0, "bounds": {"x": 21, "y": 122, "w": 6, "h": 4 } }] }
+   { "name": "Slice 2", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 187, "y": 265, "w": 8, "h": 6 } }] },
+   { "name": "Slice 3", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 110, "y": 229, "w": 7, "h": 6 } }] },
+   { "name": "Slice 4", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 249, "y": 225, "w": 7, "h": 6 } }] },
+   { "name": "Slice 5", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 415, "y": 207, "w": 6, "h": 5 } }] },
+   { "name": "StartZoneProperties", "color": "#0000ffff", "data": "(StartY:true)", "keys": [{ "frame": 0, "bounds": {"x": 2, "y": 207, "w": 10, "h": 17 } }] },
+   { "name": "Slice 7", "color": "#0000ffff", "data": "(Light:true)", "keys": [{ "frame": 0, "bounds": {"x": 204, "y": 123, "w": 6, "h": 4 } }] },
+   { "name": "Slice 8", "color": "#0000ffff", "data": "(Light:true)", "keys": [{ "frame": 0, "bounds": {"x": 71, "y": 123, "w": 6, "h": 5 } }] },
+   { "name": "Slice 9", "color": "#0000ffff", "data": "(Light:true)", "keys": [{ "frame": 0, "bounds": {"x": 407, "y": 123, "w": 6, "h": 3 } }] }
   ]
  }
 }

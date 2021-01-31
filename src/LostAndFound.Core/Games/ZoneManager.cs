@@ -46,7 +46,7 @@ namespace LostAndFound.Core.Games
                 {
                     var lightEntity = new Entity(collider.Bounds.Center.ToVector2());
                     var lightComponent = Program.Resolve<LightComponent>();
-                    lightComponent.Size = 300;
+                    lightComponent.Size = 100;
                     lightComponent.LightColor = Color.Yellow;
 
                     lightEntity.AddComponent(lightComponent);
