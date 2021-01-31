@@ -146,5 +146,7 @@ namespace LostAndFound.Core.Games.Components
             };
             return _givenQuest;
         }
+
+        public bool QuestIs(Quest compareQuest) => compareQuest == _givenQuest;
     }
 }

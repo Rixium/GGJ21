@@ -44,7 +44,7 @@ namespace LostAndFound.Core.Games.Components
                 foreach (var entity in _zoneManager.ActiveZone.Entities)
                 {
                     CheckForQuests(entity);
-                    CheckForQuestFulfilment(entity);
+                    CheckForQuestPickup(entity);
                 }
             }
 
@@ -56,7 +56,7 @@ namespace LostAndFound.Core.Games.Components
             _questGiverNextTo = null;
         }
 
-        private void CheckForQuestFulfilment(IEntity entity)
+        private void CheckForQuestPickup(IEntity entity)
         {
             if (_animalHolder.Quest != null)
             {
@@ -64,19 +64,19 @@ namespace LostAndFound.Core.Games.Components
             }
 
             var questFulfilmentComponent = entity.GetComponent<QuestFulfilmentComponent>();
+
             var bounds = new Rectangle((int) entity.Position.X, (int) entity.Position.Y, entity.Width, entity.Height);
 
             if (questFulfilmentComponent == null)
             {
                 return;
             }
-            
+
             if (!_boxColliderComponent.Bounds.Intersects(bounds))
             {
                 return;
             }
 
-            _moneyBagComponent.AddMoney(questFulfilmentComponent.Quest.Reward);
             _animalHolder.SetQuest(questFulfilmentComponent.Quest);
         }
 
@@ -92,15 +92,27 @@ namespace LostAndFound.Core.Games.Components
             {
                 _questGiverNextTo = questGiverComponent;
 
-                if (!questGiverComponent.HasQuestToGive())
+                if (questGiverComponent.HasQuestToGive())
                 {
-                    return;
+                    var newQuest = questGiverComponent.TakeQuest();
+                    _quests.Add(newQuest);
+                    QuestTaken?.Invoke(newQuest);
                 }
-
-                var newQuest = questGiverComponent.TakeQuest();
-                _quests.Add(newQuest);
-                QuestTaken?.Invoke(newQuest);
+                else if (_animalHolder.Quest != null)
+                {
+                    if (questGiverComponent.QuestIs(_animalHolder.Quest))
+                    {
+                        FulfilQuest(_animalHolder.Quest);
+                    }
+                }
             }
+        }
+
+        private void FulfilQuest(Quest quest)
+        {
+            _moneyBagComponent.AddMoney(quest.Reward);
+            QuestComplete?.Invoke(quest);
+            _animalHolder.RemoveQuest();
         }
 
         public void Draw(SpriteBatch spriteBatch)
