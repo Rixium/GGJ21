@@ -61,6 +61,54 @@
 /processorParam:Quality=Best
 /build:Audio/SoundEffects/AnimalSounds/bark_4.wav
 
+#begin Audio/SoundEffects/AnimalSounds/meow_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/AnimalSounds/meow_1.wav
+
+#begin Audio/SoundEffects/AnimalSounds/meow_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/AnimalSounds/meow_2.wav
+
+#begin Audio/SoundEffects/AnimalSounds/meow_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/AnimalSounds/meow_3.wav
+
+#begin Audio/SoundEffects/AnimalSounds/meow_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/AnimalSounds/meow_4.wav
+
+#begin Audio/SoundEffects/AnimalSounds/meow_5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/AnimalSounds/meow_5.wav
+
+#begin Audio/SoundEffects/AnimalSounds/meow_6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/AnimalSounds/meow_6.wav
+
+#begin Audio/SoundEffects/AnimalSounds/meow_7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/AnimalSounds/meow_7.wav
+
+#begin Audio/SoundEffects/AnimalSounds/meow_8.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/AnimalSounds/meow_8.wav
+
 #begin Audio/SoundEffects/buttonClick.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
