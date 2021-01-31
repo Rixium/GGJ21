@@ -69,7 +69,7 @@ namespace LostAndFound.Core.Modules
 
         private static void RegisterAnimationSets(ContainerBuilder builder)
         {
-            builder.RegisterType<PlayerAnimationSet>().As<IAnimationSet>();
+            builder.RegisterType<PlayerAnimationSet>();
         }
 
         private static void RegisterSystems(ContainerBuilder builder)
