@@ -65,7 +65,8 @@ namespace LostAndFound.Core.Games
             var playerSoundComponent = Program.Resolve<SoundComponent>();
             var animatorComponent = Program.Resolve<AnimatorComponent>();
             animatorComponent.SetUp(Program.Resolve<PlayerAnimationSet>());
-
+            
+            player.AddComponent(Program.Resolve<LightComponent>());
             player.AddComponent(Program.Resolve<PlayerAnimationComponent>());
             player.AddComponent(Program.Resolve<AnimationDrawComponent>());
             player.AddComponent(playerFeetBoxCollider);
@@ -88,6 +89,7 @@ namespace LostAndFound.Core.Games
             _systemManager.Start();
             _zoneManager.AddToActiveZone(player);
             _zoneManager.Start();
+            _lightingOverlay.Start();
 
             questHolderComponent.QuestTaken += _systemManager.GetSystem<QuestSystem>().OnQuestTaken;
         }
@@ -102,9 +104,9 @@ namespace LostAndFound.Core.Games
                 _camera.GetMatrix());
             _zoneManager.Draw(_renderManager.SpriteBatch);
             _renderManager.SpriteBatch.End();
-
-            _lightingOverlay.Draw(_camera, _player);
-
+            
+            _lightingOverlay.Draw(_camera);
+            
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             _gameInterface.Draw();
             _systemManager.Draw(_renderManager.SpriteBatch);

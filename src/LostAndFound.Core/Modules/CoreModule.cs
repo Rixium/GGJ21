@@ -96,6 +96,7 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<PlayerSoundManagerComponent>().InstancePerDependency();
             builder.RegisterType<QuestGiverComponent>().InstancePerDependency();
             builder.RegisterType<QuestHolderComponent>().InstancePerDependency();
+            builder.RegisterType<LightComponent>().InstancePerDependency();
         }
     }
 }

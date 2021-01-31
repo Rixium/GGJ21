@@ -1,4 +1,6 @@
-﻿using LostAndFound.Core.Content;
+﻿using System.Collections.Generic;
+using LostAndFound.Core.Content;
+using LostAndFound.Core.Games.Components;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Systems;
 using LostAndFound.Core.Graphics;
@@ -10,7 +12,7 @@ namespace LostAndFound.Core.Games
     public class LightingOverlay
     {
         public Texture2D Texture { get; set; }
-        public double NightIntensity { get; set; } = 0.7;
+        public double NightIntensity { get; set; } = 1;
 
         private readonly TimeManager _timeManager;
         private readonly IRenderManager _renderManager;
@@ -20,7 +22,8 @@ namespace LostAndFound.Core.Games
         private Color _nightColor = new Color(0, 2, 20);
         private Color _dayColor = new Color(252, 219, 3);
         private Color _overlayColor = Color.Black * 0;
-        private Texture2D _light;
+        private Texture2D _lightTexture;
+        private List<LightComponent> _lights = new List<LightComponent>();
 
         public LightingOverlay(SystemManager systemManager, IRenderManager renderManager, IContentChest contentChest,
             ZoneManager zoneManager)
@@ -31,13 +34,34 @@ namespace LostAndFound.Core.Games
             _zoneManager = zoneManager;
         }
 
+        public void Start()
+        {
+            GetLightComponents();
+            _zoneManager.ZoneChanged += (type => GetLightComponents());
+        }
+
+        private void GetLightComponents()
+        {
+            _lights.Clear();
+
+            foreach (var light in _zoneManager.ActiveZone.Entities)
+            {
+                var lightComponent = light.GetComponent<LightComponent>();
+
+                if (lightComponent != null)
+                {
+                    _lights.Add(lightComponent);
+                }
+            }
+        }
+
         public void Load()
         {
             Texture = _contentChest.Get<Texture2D>("Utils/pixel");
-            _light = _contentChest.Get<Texture2D>("Utils/light");
+            _lightTexture = _contentChest.Get<Texture2D>("Utils/light");
         }
 
-        public void Draw(Camera camera, IEntity player)
+        public void Draw(Camera camera)
         {
             if (_timeManager.DayTotalMinutes < 960)
             {
@@ -61,9 +85,11 @@ namespace LostAndFound.Core.Games
             
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp,
                 null, null, null, camera.GetMatrix());
-            //
-            // _renderManager.SpriteBatch.Draw(_light,
-            //     new Rectangle((int) player.Position.X, (int) player.Position.Y, 300, 300), Color.White);
+
+            foreach (var light in _lights)
+            {
+                light.Draw(_renderManager.SpriteBatch);
+            }
 
             _renderManager.SpriteBatch.End();
         }
