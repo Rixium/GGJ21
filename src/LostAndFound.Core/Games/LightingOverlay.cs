@@ -61,9 +61,9 @@ namespace LostAndFound.Core.Games
             
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp,
                 null, null, null, camera.GetMatrix());
-            
-            _renderManager.SpriteBatch.Draw(_light,
-                new Rectangle((int) player.Position.X, (int) player.Position.Y, 300, 300), Color.White);
+            //
+            // _renderManager.SpriteBatch.Draw(_light,
+            //     new Rectangle((int) player.Position.X, (int) player.Position.Y, 300, 300), Color.White);
 
             _renderManager.SpriteBatch.End();
         }
