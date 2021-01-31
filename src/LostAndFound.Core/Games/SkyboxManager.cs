@@ -14,6 +14,8 @@ namespace LostAndFound.Core.Games
 
         private Texture2D _pixel;
         private Color _skyboxColor;
+        private Color _dayColor = new Color(161, 230, 255);
+        private Color _nightColor = new Color(7, 11, 28);
 
         public SkyboxManager(IRenderManager renderManager, SystemManager systemManager, IContentChest contentChest)
         {
@@ -31,13 +33,13 @@ namespace LostAndFound.Core.Games
         {
             if (_systemManager.GetSystem<TimeManager>().DayTotalMinutes < 960)
             {
-                _skyboxColor = Color.Lerp(Color.Black, Color.White, (float) Map(720, 960, 0, 1,
+                _skyboxColor = Color.Lerp(_dayColor, _nightColor, (float) Map(720, 960, 0, 1,
                     _systemManager.GetSystem<TimeManager>().DayTotalMinutes)) ;
             }
             else if (_systemManager.GetSystem<TimeManager>().DayTotalMinutes < 1440 &&
                      _systemManager.GetSystem<TimeManager>().DayTotalMinutes > 1200)
             {
-                _skyboxColor = Color.Lerp(Color.White, Color.Black, (float) Map(1200, 1440, 1, 0,
+                _skyboxColor = Color.Lerp(_nightColor, _dayColor, (float) Map(1200, 1440, 0, 1,
                     _systemManager.GetSystem<TimeManager>().DayTotalMinutes));
             }
 
