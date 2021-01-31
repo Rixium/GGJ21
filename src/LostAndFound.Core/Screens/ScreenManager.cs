@@ -31,6 +31,7 @@ namespace LostAndFound.Core.Screens
             {
                 if (screen.ScreenType != screenType) continue;
                 _activeScreen = screen;
+                _activeScreen.OnMadeActiveScreen();
                 break;
             }
         }

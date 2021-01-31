@@ -18,14 +18,12 @@ namespace LostAndFound.Core.Games
     {
         private readonly GameInterface _gameInterface;
         private readonly LightingOverlay _lightingOverlay;
-        private readonly IContentLoader<AsepriteSpriteMap> _spriteMapLoader;
         private readonly SystemManager _systemManager;
         private readonly ZoneManager _zoneManager;
         private readonly SkyboxManager _skyboxManager;
         private readonly IRenderManager _renderManager;
 
         private readonly Camera _camera;
-        private Entity _player;
 
         public GameInstance(IRenderManager renderManager,
             IWindowConfiguration windowConfiguration,
@@ -36,7 +34,6 @@ namespace LostAndFound.Core.Games
             _renderManager = renderManager;
             _gameInterface = gameInterface;
             _lightingOverlay = lightingOverlay;
-            _spriteMapLoader = spriteMapLoader;
             _systemManager = systemManager;
             _zoneManager = zoneManager;
             _skyboxManager = skyboxManager;
@@ -88,8 +85,6 @@ namespace LostAndFound.Core.Games
             player.Position = playerStartCollider.Bounds.ToVector2() - playerFeetBoxCollider.Offset;
 
             _camera.SetEntity(player, false);
-
-            _player = player;
 
             _gameInterface.RegisterToEntity(player);
             _systemManager.Start();

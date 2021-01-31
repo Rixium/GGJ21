@@ -19,5 +19,6 @@ namespace LostAndFound.Core.Screens
         void Load();
         void Update(GameTime gameTime);
         void Draw();
+        void OnMadeActiveScreen();
     }
 }
