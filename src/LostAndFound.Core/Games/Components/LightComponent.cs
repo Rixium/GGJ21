@@ -8,12 +8,12 @@ namespace LostAndFound.Core.Games.Components
     public class LightComponent : IComponent
     {
         public IEntity Entity { get; set; }
+        public Texture2D Texture { get; set; }
         public Color LightColor { get; set; } = Color.Orange;
         public Vector2 Offset { get; set; }
         public int Size { get; set; } = 220;
 
         private readonly IContentChest _contentChest;
-        private Texture2D _texture;
 
         public LightComponent(IContentChest contentChest)
         {
@@ -22,7 +22,7 @@ namespace LostAndFound.Core.Games.Components
 
         public void Start()
         {
-            _texture = _contentChest.Get<Texture2D>("Utils/light");
+            Texture = _contentChest.Get<Texture2D>("Utils/light");
         }
 
         public void Update(GameTime gameTime)
@@ -31,7 +31,7 @@ namespace LostAndFound.Core.Games.Components
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_texture,
+            spriteBatch.Draw(Texture,
                 new Rectangle((int) (Entity.Position.X + Offset.X) - Size / 2, (int) (Entity.Position.Y + Offset.Y) - Size / 2, Size, Size),
                 LightColor);
         }
