@@ -26,7 +26,9 @@
    { "name": "LevelProperties", "color": "#0000ffff", "data": "(Left:Park)(Right:Street)", "keys": [{ "frame": 0, "bounds": {"x": 9, "y": 8, "w": 25, "h": 24 } }] },
    { "name": "Slice 1", "color": "#0000ffff", "data": "(SpawnZone:true)", "keys": [{ "frame": 0, "bounds": {"x": 45, "y": 236, "w": 419, "h": 54 } }] },
    { "name": "StartZoneProperties", "color": "#0000ffff", "data": "(StartY:true)", "keys": [{ "frame": 0, "bounds": {"x": 491, "y": 237, "w": 10, "h": 17 } }] },
-   { "name": "Slice 2", "color": "#0000ffff", "data": "(Light:true)", "keys": [{ "frame": 0, "bounds": {"x": 113, "y": 165, "w": 8, "h": 5 } }] }
+   { "name": "Slice 2", "color": "#0000ffff", "data": "(Light:true)", "keys": [{ "frame": 0, "bounds": {"x": 91, "y": 165, "w": 8, "h": 5 } }] },
+   { "name": "Slice 3", "color": "#0000ffff", "data": "(Light:true)", "keys": [{ "frame": 0, "bounds": {"x": 224, "y": 165, "w": 5, "h": 4 } }] },
+   { "name": "Slice 4", "color": "#0000ffff", "data": "(Light:true)", "keys": [{ "frame": 0, "bounds": {"x": 348, "y": 165, "w": 8, "h": 4 } }] }
   ]
  }
 }
