@@ -78,6 +78,7 @@ namespace LostAndFound.Core.Games.Components
             }
 
             _animalHolder.SetQuest(questFulfilmentComponent.Quest);
+            _zoneManager.ActiveZone.RemoveEntity(questFulfilmentComponent.Entity);
         }
 
         private void CheckForQuests(IEntity entity)
