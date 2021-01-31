@@ -19,20 +19,12 @@
   "frameTags": [
   ],
   "layers": [
-   { "name": "Background", "opacity": 255, "blendMode": "normal" },
-   { "name": "Light", "opacity": 255, "blendMode": "normal" },
-   { "name": "Ground", "opacity": 255, "blendMode": "normal" },
-   { "name": "Trees Back", "opacity": 255, "blendMode": "normal" },
-   { "name": "Trees Middle", "opacity": 255, "blendMode": "normal" },
-   { "name": "Trees Front", "opacity": 255, "blendMode": "normal" },
-   { "name": "Tree Top Front", "opacity": 255, "blendMode": "normal" },
-   { "name": "Ground Foreground", "opacity": 255, "blendMode": "normal" },
-   { "name": "Bin", "opacity": 255, "blendMode": "normal" }
+   { "name": "Background", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
    { "name": "SafeZone", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 39, "y": 240, "w": 461, "h": 35 } }] },
    { "name": "PlayerStart", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 278, "y": 241, "w": 7, "h": 4 } }] },
-   { "name": "Slice 1", "color": "#0000ffff", "data": "(To:Street,Left)(Direction:Right)(Right:Street)(Left:Test)", "keys": [{ "frame": 0, "bounds": {"x": 490, "y": 250, "w": 9, "h": 14 } }] }
+   { "name": "Slice 1", "color": "#0000ffff", "data": "(Direction:Right)", "keys": [{ "frame": 0, "bounds": {"x": 490, "y": 250, "w": 9, "h": 14 } }] }
   ]
  }
 }

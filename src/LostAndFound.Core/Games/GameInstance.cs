@@ -126,6 +126,7 @@ namespace LostAndFound.Core.Games
             player.AddComponent(Program.Resolve<ZoneInteractionComponent>());
             player.AddComponent(playerSoundComponent);
             player.AddComponent(Program.Resolve<PlayerSoundManagerComponent>());
+            player.AddComponent(Program.Resolve<QuestHolderComponent>());
 
             player.Position = playerStartCollider.Bounds.ToVector2() - playerFeetBoxCollider.Offset;
 
