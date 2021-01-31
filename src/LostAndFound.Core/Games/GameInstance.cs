@@ -54,6 +54,8 @@ namespace LostAndFound.Core.Games
 
         public void Start()
         {
+            _timeManager.TimeScale = 100;
+            
             var playerAnimationMap = _spriteMapLoader.GetContent("Assets/Images/Player/PlayerAnimations.json");
 
             var zoneColliders = _zoneManager.ActiveZone.Colliders.ToList();
