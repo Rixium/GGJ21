@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Questing;
 using LostAndFound.Core.Input;
@@ -10,6 +11,7 @@ namespace LostAndFound.Core.Games.Components
 {
     public class QuestHolderComponent : IComponent
     {
+        public Action<Quest> QuestTaken { get; set; }
         private readonly ZoneManager _zoneManager;
         private readonly IInputManager _inputManager;
         public IEntity Entity { get; set; }
@@ -43,7 +45,9 @@ namespace LostAndFound.Core.Games.Components
                     
                     if (_inputManager.KeyPressed(Keys.E))
                     {
-                        _quests.Add(questGiverComponent.GetQuest());
+                        var newQuest = questGiverComponent.TakeQuest();
+                        _quests.Add(newQuest);
+                        QuestTaken?.Invoke(newQuest);
                     }
                     
                     return;
@@ -65,7 +69,6 @@ namespace LostAndFound.Core.Games.Components
                 _questGiverNextTo.Highlighted = true;
             }
         }
-
-        public void GiveQuest(Quest quest) => _quests.Add(quest);
     }
+
 }

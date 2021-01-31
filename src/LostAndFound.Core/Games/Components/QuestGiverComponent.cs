@@ -64,7 +64,7 @@ namespace LostAndFound.Core.Games.Components
 
         public bool HasQuestToGive() => _hasQuest;
 
-        public Quest GetQuest()
+        public Quest TakeQuest()
         {
             _hasQuest = false;
             
