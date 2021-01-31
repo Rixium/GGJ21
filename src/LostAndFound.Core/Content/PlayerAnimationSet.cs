@@ -73,10 +73,11 @@ namespace LostAndFound.Core.Content
 
             animatorComponent.AddAnimation("Idle", new Animation(new List<Sprite>
             {
-                playerAnimationMap.CreateSpriteFromRegion("Idle_1")
+                playerAnimationMap.CreateSpriteFromRegion("Idle_1"),
+                playerAnimationMap.CreateSpriteFromRegion("Idle_2")
             })
             {
-                FrameDuration = 0.2f
+                FrameDuration = 0.6f
             });
         }
     }

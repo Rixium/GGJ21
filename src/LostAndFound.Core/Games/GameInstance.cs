@@ -75,6 +75,8 @@ namespace LostAndFound.Core.Games
             player.AddComponent(Program.Resolve<ZoneInteractionComponent>());
             player.AddComponent(playerSoundComponent);
             player.AddComponent(Program.Resolve<PlayerSoundManagerComponent>());
+            player.AddComponent(Program.Resolve<MoneyBagComponent>());
+            player.AddComponent(Program.Resolve<AnimalHolderComponent>());
 
             var questHolderComponent = Program.Resolve<QuestHolderComponent>();
             player.AddComponent(questHolderComponent);
@@ -112,7 +114,7 @@ namespace LostAndFound.Core.Games
             _gameInterface.Draw();
             _systemManager.Draw(_renderManager.SpriteBatch);
             _renderManager.SpriteBatch.End();
-            
+
             _lightingOverlay.DrawNow();
         }
 
