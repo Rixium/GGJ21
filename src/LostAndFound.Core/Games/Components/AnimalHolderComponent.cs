@@ -55,7 +55,7 @@ namespace LostAndFound.Core.Games.Components
             var animalImage = Quest.AnimalImage;
             var sprite = _animalSprites[animalImage];
 
-            spriteBatch.Draw(sprite.Texture, Entity.Position, sprite.Source, Quest.AnimalColor);
+            spriteBatch.Draw(sprite.Texture, Entity.Position + new Vector2(Entity.Width / 2f - sprite.Width / 2f, 0), sprite.Source, Quest.AnimalColor);
         }
 
         public void SetQuest(Quest quest) => Quest = quest;

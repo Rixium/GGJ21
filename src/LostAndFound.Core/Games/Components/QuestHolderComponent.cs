@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using LostAndFound.Core.Content;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Questing;
 using LostAndFound.Core.Input;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -16,6 +18,7 @@ namespace LostAndFound.Core.Games.Components
 
         private readonly ZoneManager _zoneManager;
         private readonly IInputManager _inputManager;
+        private readonly IContentChest _contentChest;
         public IEntity Entity { get; set; }
 
         private readonly IList<Quest> _quests = new List<Quest>();
@@ -23,11 +26,13 @@ namespace LostAndFound.Core.Games.Components
         private MoneyBagComponent _moneyBagComponent;
         private BoxColliderComponent _boxColliderComponent;
         private AnimalHolderComponent _animalHolder;
+        private SoundEffect _questSuccessSound;
 
-        public QuestHolderComponent(ZoneManager zoneManager, IInputManager inputManager)
+        public QuestHolderComponent(ZoneManager zoneManager, IInputManager inputManager, IContentChest contentChest)
         {
             _zoneManager = zoneManager;
             _inputManager = inputManager;
+            _contentChest = contentChest;
         }
 
         public void Start()
@@ -35,6 +40,8 @@ namespace LostAndFound.Core.Games.Components
             _moneyBagComponent = Entity.GetComponent<MoneyBagComponent>();
             _boxColliderComponent = Entity.GetComponent<BoxColliderComponent>();
             _animalHolder = Entity.GetComponent<AnimalHolderComponent>();
+
+            _questSuccessSound = _contentChest.Get<SoundEffect>("Audio\\SoundEffects\\quest_complete");
         }
 
         public void Update(GameTime gameTime)
@@ -115,6 +122,7 @@ namespace LostAndFound.Core.Games.Components
             _moneyBagComponent.AddMoney(quest.Reward);
             QuestComplete?.Invoke(quest);
             _animalHolder.RemoveQuest();
+            _questSuccessSound.Play();
         }
 
         public void Draw(SpriteBatch spriteBatch)
