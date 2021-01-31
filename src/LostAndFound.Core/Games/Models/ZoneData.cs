@@ -8,7 +8,8 @@ namespace LostAndFound.Core.Games.Models
         None,
         Test,
         Street,
-        Forest
+        Forest,
+        Park
     }
 
     public class ZoneData
