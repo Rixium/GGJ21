@@ -2,6 +2,8 @@
 using System.Linq;
 using LostAndFound.Core.Config;
 using LostAndFound.Core.Content;
+using LostAndFound.Core.Content.Aseprite;
+using LostAndFound.Core.Content.ContentLoader;
 using LostAndFound.Core.Games.Components;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Questing;
@@ -23,23 +25,34 @@ namespace LostAndFound.Core.Games.Interfaces
         private readonly IContentChest _contentChest;
         private readonly IInputManager _inputManager;
         private readonly IWindowConfiguration _windowConfiguration;
+        private readonly IContentLoader<AsepriteSpriteMap> _spriteMapLoader;
 
         private readonly IList<IPanel> _panels = new List<IPanel>();
         private string _activePanelName = "Game";
         private SpriteFont _font;
+        private AsepriteSpriteMap _uiSpriteMap;
+
+        private Sprite _questPopupImage;
+
+
         private IPanel ActivePanel => _panels.First(x => x.Name.Equals(_activePanelName));
 
         public GameInterface(IRenderManager renderManager, IContentChest contentChest,
-            IInputManager inputManager, IWindowConfiguration windowConfiguration)
+            IInputManager inputManager, IWindowConfiguration windowConfiguration,
+            IContentLoader<AsepriteSpriteMap> spriteMapLoader)
         {
             _renderManager = renderManager;
             _contentChest = contentChest;
             _inputManager = inputManager;
             _windowConfiguration = windowConfiguration;
+            _spriteMapLoader = spriteMapLoader;
         }
 
         public void Load()
         {
+            _uiSpriteMap = _spriteMapLoader.GetContent("Assets\\UI\\UI.json");
+            _questPopupImage = _uiSpriteMap.CreateSpriteFromRegion("QuestAccepted_Popup");
+
             SetupGameUi();
         }
 
@@ -78,8 +91,7 @@ namespace LostAndFound.Core.Games.Interfaces
         {
             var gamePanel = _panels.First(x => x.Name.Equals("Game"));
 
-            var element = new Text(_font, quest.AnimalName, Color.White, _windowConfiguration.Center, 1f,
-                Origin.Center);
+            var element = new Image(_questPopupImage, _windowConfiguration.Center, 1f, Origin.Center);
             element.AddEffect(new FadeOutEffect());
 
             gamePanel.AddElement(element);
