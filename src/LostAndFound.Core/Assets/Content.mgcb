@@ -19,6 +19,12 @@
 /processorParam:Quality=Best
 /build:Audio/Ambience/ForestAmbience.wav
 
+#begin Audio/Ambience/ParkAmbience.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Ambience/ParkAmbience.wav
+
 #begin Audio/Ambience/StreetAmbience.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
