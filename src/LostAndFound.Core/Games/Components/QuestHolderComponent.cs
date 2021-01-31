@@ -70,20 +70,13 @@ namespace LostAndFound.Core.Games.Components
             {
                 return;
             }
-
-            if (questFulfilmentComponent.Quest.Completed)
-            {
-                return;
-            }
-
+            
             if (!_boxColliderComponent.Bounds.Intersects(bounds))
             {
                 return;
             }
 
-            questFulfilmentComponent.Quest.Completed = true;
             _moneyBagComponent.AddMoney(questFulfilmentComponent.Quest.Reward);
-
             _animalHolder.SetQuest(questFulfilmentComponent.Quest);
         }
 
