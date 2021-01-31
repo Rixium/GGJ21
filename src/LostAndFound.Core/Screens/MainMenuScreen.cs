@@ -11,6 +11,7 @@ using LostAndFound.Core.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace LostAndFound.Core.Screens
 {
@@ -68,25 +69,22 @@ namespace LostAndFound.Core.Screens
             var quitButton = new Button(quitUp, quitDown, optionsButton.Bottom, _uiScale, Origin.Center);
             var petItButton = new Button(petItUp, petItDown, optionsButton.Bottom, _uiScale, Origin.Center);
 
-            playButton.HoverOn = () =>
-            {
-                _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonHover").Play();
-            };
-            optionsButton.HoverOn = () =>
-            {
-                _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonHover").Play();
-            };
-            quitButton.HoverOn = () =>
-            {
-                _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonHover").Play();
-            };
+            playButton.HoverOn = () => { _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonHover").Play(); };
+            optionsButton.HoverOn = () => { _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonHover").Play(); };
+            quitButton.HoverOn = () => { _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonHover").Play(); };
 
             playButton.Click = () =>
             {
                 playButton.Click = null;
                 _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonClick").Play();
                 _transitionManager.SetState(FadeState.FadingOut);
-                _transitionManager.FadeOutEnded = () => { RequestScreenChange?.Invoke(ScreenType.GameScreen); };
+                _transitionManager.FadeOutEnded = () =>
+                {
+                    RequestScreenChange?.Invoke(ScreenType.GameScreen);
+                    MediaPlayer.Play(_contentChest.Get<Song>("Audio/Music/game"));
+                    MediaPlayer.IsRepeating = true;
+                    MediaPlayer.Volume = 0.2f;
+                };
             };
 
             optionsButton.Click = () =>
