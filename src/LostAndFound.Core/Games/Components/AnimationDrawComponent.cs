@@ -27,6 +27,9 @@ namespace LostAndFound.Core.Games.Components
             }
 
             Entity.Bottom = (int) (Entity.Position.Y + frame.Source.Height);
+            Entity.Width = frame.Source.Width;
+            Entity.Height = frame.Source.Height;
+            
             spriteBatch.Draw(frame.Texture, Entity.Position, frame.Source, Color.White, 0f, frame.Origin, 1f,
                 SpriteEffects.None, 0f);
         }

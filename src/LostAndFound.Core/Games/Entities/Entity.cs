@@ -10,7 +10,9 @@ namespace LostAndFound.Core.Games.Entities
         private readonly IList<IComponent> _components = new List<IComponent>();
         public Vector2 Position { get; set; }
         public GameInstance GameInstance { get; set; }
-        public int Bottom { get; set; } 
+        public int Bottom { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
 
         public Entity(Vector2 position)
         {

@@ -9,7 +9,7 @@ namespace LostAndFound.Core.Games
         public int Hour { get; set; } = 8;
         public double Minutes { get; set; }
         public double DayTotalMinutes { get; set; }
-        public int TimeScale { get; set; } = 500;
+        public int TimeScale { get; set; } = 100;
 
         private int _dayBegin;
 
