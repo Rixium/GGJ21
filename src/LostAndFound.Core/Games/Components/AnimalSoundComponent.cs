@@ -22,6 +22,9 @@ namespace LostAndFound.Core.Games.Components
             if (_animalType == AnimalType.Dog)
             {
                 _soundPaths.Add("Audio/SoundEffects/AnimalSounds/bark_1");
+                _soundPaths.Add("Audio/SoundEffects/AnimalSounds/bark_2");
+                _soundPaths.Add("Audio/SoundEffects/AnimalSounds/bark_3");
+                _soundPaths.Add("Audio/SoundEffects/AnimalSounds/bark_4");
             }
         }
 

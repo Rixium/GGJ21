@@ -38,7 +38,7 @@ namespace LostAndFound.Core.Games.Components
         public void PlayRandomSoundFromList(List<string> soundPaths, float volume = 1)
         {
             Random random = new Random();
-            var i = random.Next(0, soundPaths.Count - 1);
+            var i = random.Next(1, soundPaths.Count);
             PlaySoundByName(soundPaths[i]);
         }
     }
