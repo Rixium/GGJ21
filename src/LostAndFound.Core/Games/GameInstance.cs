@@ -151,8 +151,9 @@ namespace LostAndFound.Core.Games
             _zoneManager.Draw(_renderManager.SpriteBatch);
             _renderManager.SpriteBatch.End();
 
+            _lightingOverlay.Draw(_renderManager.SpriteBatch);
+            
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
-            _lightingOverlay.Draw();
             _gameInterface.Draw();
             _systemManager.Draw(_renderManager.SpriteBatch);
             _renderManager.SpriteBatch.End();

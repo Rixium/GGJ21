@@ -18,6 +18,7 @@ namespace LostAndFound.Core.Games
         private Color _nightColor = new Color(0, 2, 20);
         private Color _dayColor = new Color(252, 219, 3);
         private Color _overlayColor = Color.Black * 0;
+        private Texture2D _light;
 
         public LightingOverlay(SystemManager systemManager, IRenderManager renderManager, IContentChest contentChest)
         {
@@ -29,9 +30,10 @@ namespace LostAndFound.Core.Games
         public void Load()
         {
             Texture = _contentChest.Get<Texture2D>("Utils/pixel");
+            _light = _contentChest.Get<Texture2D>("Utils/light");
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             if (_timeManager.DayTotalMinutes < 960)
             {
@@ -42,7 +44,11 @@ namespace LostAndFound.Core.Games
                 _overlayColor = _nightColor * (float) (Map(1200, 1440, NightIntensity, 0, _timeManager.DayTotalMinutes));
             }
 
+            
+            _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp);
             _renderManager.SpriteBatch.Draw(Texture, new Rectangle(0, 0, 1280, 720), _overlayColor);
+            _renderManager.SpriteBatch.Draw(_light, new Rectangle(100, 100, 500, 500), Color.White);
+            _renderManager.SpriteBatch.End();
         }
 
         double Map(double a1, double a2, double b1, double b2, double s) => b1 + (s - a1) * (b2 - b1) / (a2 - a1);
