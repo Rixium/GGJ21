@@ -41,7 +41,7 @@ namespace LostAndFound.Core.Games
             _zoneManager = zoneManager;
             _skyboxManager = skyboxManager;
 
-            _camera = new Camera(windowConfiguration);
+            _camera = new Camera(windowConfiguration, zoneManager);
         }
 
         public void Load()
@@ -65,7 +65,7 @@ namespace LostAndFound.Core.Games
             var playerSoundComponent = Program.Resolve<SoundComponent>();
             var animatorComponent = Program.Resolve<AnimatorComponent>();
             animatorComponent.SetUp(Program.Resolve<PlayerAnimationSet>());
-            
+
             player.AddComponent(Program.Resolve<LightComponent>());
             player.AddComponent(Program.Resolve<PlayerAnimationComponent>());
             player.AddComponent(Program.Resolve<AnimationDrawComponent>());
@@ -104,9 +104,9 @@ namespace LostAndFound.Core.Games
                 _camera.GetMatrix());
             _zoneManager.Draw(_renderManager.SpriteBatch);
             _renderManager.SpriteBatch.End();
-            
+
             _lightingOverlay.Draw(_camera);
-            
+
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             _gameInterface.Draw();
             _systemManager.Draw(_renderManager.SpriteBatch);

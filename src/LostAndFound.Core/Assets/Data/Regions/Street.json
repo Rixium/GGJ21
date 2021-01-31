@@ -1,11 +1,11 @@
 { "frames": [
    {
     "filename": "Street.aseprite",
-    "frame": { "x": 0, "y": 0, "w": 500, "h": 281 },
+    "frame": { "x": 0, "y": 0, "w": 500, "h": 340 },
     "rotated": false,
     "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 500, "h": 281 },
-    "sourceSize": { "w": 500, "h": 281 },
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 500, "h": 340 },
+    "sourceSize": { "w": 500, "h": 340 },
     "duration": 100
    }
  ],
@@ -14,7 +14,7 @@
   "version": "1.2.25-x64",
   "image": "Street.png",
   "format": "RGBA8888",
-  "size": { "w": 500, "h": 281 },
+  "size": { "w": 500, "h": 340 },
   "scale": "1",
   "frameTags": [
   ],
@@ -22,14 +22,14 @@
    { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
-   { "name": "PlayerStart", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 292, "y": 246, "w": 3, "h": 3 } }] },
-   { "name": "To", "color": "#0000ffff", "data": "(Left:Forest)(Right:Test)", "keys": [{ "frame": 0, "bounds": {"x": -1, "y": 241, "w": 17, "h": 33 } }] },
-   { "name": "Collider1", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 1, "y": 218, "w": 500, "h": 19 } }] },
-   { "name": "Slice 1", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 430, "y": 237, "w": 64, "h": 23 } }] },
-   { "name": "Slice 2", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 43, "y": 240, "w": 8, "h": 6 } }] },
-   { "name": "Slice 3", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 140, "y": 239, "w": 7, "h": 6 } }] },
-   { "name": "Slice 4", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 235, "y": 238, "w": 7, "h": 6 } }] },
-   { "name": "Slice 5", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 325, "y": 238, "w": 6, "h": 5 } }] }
+   { "name": "PlayerStart", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 308, "y": 196, "w": 17, "h": 9 } }] },
+   { "name": "LevelProperties", "color": "#0000ffff", "data": "(Left:Forest)(Right:Test)", "keys": [{ "frame": 0, "bounds": {"x": 6, "y": 7, "w": 34, "h": 33 } }] },
+   { "name": "Collider1", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": -38, "y": 143, "w": 570, "h": 46 } }] },
+   { "name": "Slice 1", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 425, "y": 182, "w": 76, "h": 23 } }] },
+   { "name": "Slice 2", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 38, "y": 221, "w": 8, "h": 6 } }] },
+   { "name": "Slice 3", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 125, "y": 243, "w": 7, "h": 6 } }] },
+   { "name": "Slice 4", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 250, "y": 222, "w": 7, "h": 6 } }] },
+   { "name": "Slice 5", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 339, "y": 247, "w": 6, "h": 5 } }] }
   ]
  }
 }

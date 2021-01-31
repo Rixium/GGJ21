@@ -48,7 +48,11 @@ namespace LostAndFound.Core.Content
             animatorComponent.AddAnimation("Walk_Up", new Animation(new List<Sprite>
             {
                 playerAnimationMap.CreateSpriteFromRegion("Walk_Up_1"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Up_2")
+                playerAnimationMap.CreateSpriteFromRegion("Walk_Up_2"),
+                playerAnimationMap.CreateSpriteFromRegion("Walk_Up_3"),
+                playerAnimationMap.CreateSpriteFromRegion("Walk_Up_4"),
+                playerAnimationMap.CreateSpriteFromRegion("Walk_Up_5"),
+                playerAnimationMap.CreateSpriteFromRegion("Walk_Up_6")
             })
             {
                 FrameDuration = 0.2f

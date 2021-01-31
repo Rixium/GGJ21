@@ -7,6 +7,7 @@ namespace LostAndFound.Core.Games
     public class Camera
     {
         private readonly IWindowConfiguration _windowConfiguration;
+        private readonly ZoneManager _zoneManager;
         private Vector2 _position;
 
         private int _minX;
@@ -18,27 +19,29 @@ namespace LostAndFound.Core.Games
 
         private IEntity _following;
 
-        public Camera(IWindowConfiguration windowConfiguration)
+        public Camera(IWindowConfiguration windowConfiguration, ZoneManager zoneManager)
         {
             _windowConfiguration = windowConfiguration;
+            _zoneManager = zoneManager;
             _position = Vector2.Zero;
             _maxX = 2000000;
             _maxY = 1000000;
         }
-        
+
         public Vector2 ToGo { get; set; }
+
         public void Goto(Vector2 pos)
         {
             ToGo = pos;
         }
-        
+
         public void Update(int maxX, int maxY)
         {
             maxX -= _windowConfiguration.WindowWidth / 2 / _zoom + 3;
-            maxY -= _windowConfiguration.WindowHeight / 2 / _zoom + 3;
+            maxY = _zoneManager.ActiveZone.Image.Height - (_windowConfiguration.WindowHeight / 2 / _zoom + 3);
             _minX = _windowConfiguration.WindowWidth / 2 / _zoom + 1;
             _minY = _windowConfiguration.WindowHeight / 2 / _zoom;
-            
+
             if (_following != null)
                 Goto(new Vector2(_following.Position.X,
                     _following.Position.Y));
@@ -56,7 +59,7 @@ namespace LostAndFound.Core.Games
             _position.X = MathHelper.Clamp(_position.X, _minX, maxX);
             _position.Y = MathHelper.Clamp(_position.Y, _minY, maxY);
         }
-        
+
         public void SetEntity(IEntity entity, bool immediate)
         {
             _following = entity;
@@ -64,7 +67,7 @@ namespace LostAndFound.Core.Games
             if (immediate)
                 Position = entity.Position;
         }
-        
+
         public Vector2 Position
         {
             get => _position;
