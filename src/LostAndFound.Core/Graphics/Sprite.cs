@@ -13,6 +13,7 @@ namespace LostAndFound.Core.Graphics
 
         public int Width => Source.Width;
         public int Height => Source.Height;
+        public Color Color { get; set; } = Color.White;
 
         public Sprite(Texture2D texture, Rectangle sourceRectangle, Vector2 origin)
         {

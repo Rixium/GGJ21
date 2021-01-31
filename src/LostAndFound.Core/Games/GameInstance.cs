@@ -29,7 +29,7 @@ namespace LostAndFound.Core.Games
 
         public GameInstance(IRenderManager renderManager,
             IWindowConfiguration windowConfiguration,
-            GameInterface gameInterface, 
+            GameInterface gameInterface,
             LightingOverlay lightingOverlay, IContentLoader<AsepriteSpriteMap> spriteMapLoader,
             SystemManager systemManager, ZoneManager zoneManager, SkyboxManager skyboxManager)
         {
@@ -65,7 +65,7 @@ namespace LostAndFound.Core.Games
             var playerSoundComponent = Program.Resolve<SoundComponent>();
             var animatorComponent = Program.Resolve<AnimatorComponent>();
             animatorComponent.SetUp(Program.Resolve<PlayerAnimationSet>());
-            
+
             player.AddComponent(Program.Resolve<PlayerAnimationComponent>());
             player.AddComponent(Program.Resolve<AnimationDrawComponent>());
             player.AddComponent(playerFeetBoxCollider);
@@ -74,18 +74,22 @@ namespace LostAndFound.Core.Games
             player.AddComponent(Program.Resolve<ZoneInteractionComponent>());
             player.AddComponent(playerSoundComponent);
             player.AddComponent(Program.Resolve<PlayerSoundManagerComponent>());
-            player.AddComponent(Program.Resolve<QuestHolderComponent>());
+
+            var questHolderComponent = Program.Resolve<QuestHolderComponent>();
+            player.AddComponent(questHolderComponent);
 
             player.Position = playerStartCollider.Bounds.ToVector2() - playerFeetBoxCollider.Offset;
 
             _camera.SetEntity(player, false);
 
             _player = player;
-            
+
             _gameInterface.RegisterToEntity(player);
             _systemManager.Start();
             _zoneManager.AddToActiveZone(player);
             _zoneManager.Start();
+
+            questHolderComponent.QuestTaken += _systemManager.GetSystem<QuestSystem>().OnQuestTaken;
         }
 
         public void Draw()
@@ -93,14 +97,14 @@ namespace LostAndFound.Core.Games
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             _skyboxManager.Draw();
             _renderManager.SpriteBatch.End();
-            
+
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null,
                 _camera.GetMatrix());
             _zoneManager.Draw(_renderManager.SpriteBatch);
             _renderManager.SpriteBatch.End();
-            
+
             _lightingOverlay.Draw(_camera, _player);
-            
+
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             _gameInterface.Draw();
             _systemManager.Draw(_renderManager.SpriteBatch);
