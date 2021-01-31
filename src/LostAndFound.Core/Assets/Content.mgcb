@@ -37,6 +37,12 @@
 /processorParam:Quality=Best
 /build:Audio/Music/Floating.mp3
 
+#begin Audio/SoundEffects/AnimalSounds/bark_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/AnimalSounds/bark_1.wav
+
 #begin Audio/SoundEffects/buttonClick.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

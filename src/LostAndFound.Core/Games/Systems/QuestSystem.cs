@@ -79,6 +79,9 @@ namespace LostAndFound.Core.Games.Systems
             var questFulfilmentComponent = Program.Resolve<QuestFulfilmentComponent>();
             questFulfilmentComponent.Quest = quest;
             entity.AddComponent(questFulfilmentComponent);
+            
+            entity.AddComponent(Program.Resolve<AnimalSoundComponent>());
+            entity.AddComponent(Program.Resolve<SoundComponent>());
 
             animalZone.AddEntity(entity);
         }

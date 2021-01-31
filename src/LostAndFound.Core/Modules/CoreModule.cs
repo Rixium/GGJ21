@@ -100,6 +100,7 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<QuestFulfilmentComponent>().InstancePerDependency();
             builder.RegisterType<MoneyBagComponent>().InstancePerDependency();
             builder.RegisterType<AnimalHolderComponent>().InstancePerDependency();
+            builder.RegisterType<AnimalSoundComponent>().InstancePerDependency();
         }
     }
 }
