@@ -8,7 +8,7 @@ namespace LostAndFound.Core.Graphics
     {
         public Texture2D Texture { get; }
         public Rectangle Source { get; }
-        public Vector2 Origin { get; }
+        public Vector2 Origin { get; set; }
         public Vector2 Center => new Vector2(Source.Width, Source.Height) / 2.0f;
 
         public int Width => Source.Width;

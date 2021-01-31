@@ -19,15 +19,7 @@
   "frameTags": [
   ],
   "layers": [
-   { "name": "Background", "opacity": 255, "blendMode": "normal" },
-   { "name": "Light", "opacity": 255, "blendMode": "normal" },
-   { "name": "Ground", "opacity": 255, "blendMode": "normal" },
-   { "name": "Trees Back", "opacity": 255, "blendMode": "normal" },
-   { "name": "Trees Middle", "opacity": 255, "blendMode": "normal" },
-   { "name": "Trees Front", "opacity": 255, "blendMode": "normal" },
-   { "name": "Tree Top Front", "opacity": 255, "blendMode": "normal" },
-   { "name": "Ground Foreground", "opacity": 255, "blendMode": "normal" },
-   { "name": "Bin", "opacity": 255, "blendMode": "normal" }
+   { "name": "Background", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
    { "name": "SafeZone", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 39, "y": 240, "w": 461, "h": 35 } }] },
