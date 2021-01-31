@@ -49,6 +49,7 @@ namespace LostAndFound.Core
             var spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _renderManager.SpriteBatch = spriteBatch;
+            _renderManager.GraphicsDeviceManager = _graphics;
 
             _contentChest.ContentManager = Content;
 

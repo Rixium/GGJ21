@@ -73,7 +73,6 @@ namespace LostAndFound.Core.Games
                     _nightColor * (float) (Map(1200, 1440, NightIntensity, 0, _timeManager.DayTotalMinutes));
             }
 
-
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp,
                 null, null, null, camera.GetMatrix());
             
