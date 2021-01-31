@@ -46,6 +46,8 @@ namespace LostAndFound.Core.Screens
         {
             _transitionManager.Load();
 
+            var font = _contentChest.Get<SpriteFont>("Fonts\\DefaultFont");
+
             var spriteMap = _spriteMapLoader.GetContent("Assets/UI/ui.json");
 
             var titleSprite = spriteMap.CreateSpriteFromRegion("tittle");
@@ -93,6 +95,13 @@ namespace LostAndFound.Core.Screens
             //     _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonClick").Play();
             // };
 
+            mainPanel.AddElement(new Text(font, "Global Game Jam 2021", Color.White,
+                new Vector2(_windowConfiguration.WindowWidth / 2f, _windowConfiguration.WindowHeight - 60), 1f,
+                Origin.Center));
+            mainPanel.AddElement(new Text(font, "by Gagunga, Rixium, Tiffany, WoogieVlogs & the b o n e m a n", Color.White,
+                new Vector2(_windowConfiguration.WindowWidth / 2f, _windowConfiguration.WindowHeight - 20), 1f,
+                Origin.Center));
+            
             quitButton.Click = Game1.Quit;
 
             mainPanel.AddElement(titleImage);
@@ -125,7 +134,6 @@ namespace LostAndFound.Core.Screens
 
         public void OnMadeActiveScreen()
         {
-            
         }
     }
 }

@@ -44,6 +44,7 @@ namespace LostAndFound.Core
 
         protected override void LoadContent()
         {
+            Window.Title = "Off the Leash - UNLEASHED";
             _graphics.PreferredBackBufferWidth = 1280;
             _graphics.PreferredBackBufferHeight = 720;
             _graphics.ApplyChanges();
@@ -79,7 +80,7 @@ namespace LostAndFound.Core
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(new Color(49, 66, 44));
             GraphicsDevice.SetRenderTarget(null);
             
             _screenManager.GetActiveScreen().Draw();
