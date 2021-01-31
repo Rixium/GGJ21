@@ -73,5 +73,10 @@ namespace LostAndFound.Core.Screens
             _transitionManager.Draw();
             _renderManager.SpriteBatch.End();
         }
+
+        public void OnMadeActiveScreen()
+        {
+            
+        }
     }
 }

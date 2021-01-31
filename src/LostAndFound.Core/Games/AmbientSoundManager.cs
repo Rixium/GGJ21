@@ -22,7 +22,6 @@ namespace LostAndFound.Core.Games
         {
             _zoneManager = zoneManager;
             _contentChest = contentChest;
-            zoneManager.ZoneChanged += OnZoneChanged;
         }
 
         void OnZoneChanged(ZoneType zoneType)
@@ -58,6 +57,8 @@ namespace LostAndFound.Core.Games
             _ambientInstance = _streetAmbientSound.CreateInstance();
             _ambientInstance.IsLooped = true;
             _ambientInstance.Play();
+            
+            _zoneManager.ZoneChanged += OnZoneChanged;
         }
 
         public void Update(GameTime gameTime)

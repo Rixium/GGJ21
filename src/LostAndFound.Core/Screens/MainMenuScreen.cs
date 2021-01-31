@@ -53,10 +53,10 @@ namespace LostAndFound.Core.Screens
             var downButton = spriteMap.CreateSpriteFromRegion("play down");
             var quitUp = spriteMap.CreateSpriteFromRegion("quit up");
             var quitDown = spriteMap.CreateSpriteFromRegion("quit down");
-            var optionsUp = spriteMap.CreateSpriteFromRegion("options up");
-            var optionsDown = spriteMap.CreateSpriteFromRegion("options down");
-            var petItUp = spriteMap.CreateSpriteFromRegion("pet it up");
-            var petItDown = spriteMap.CreateSpriteFromRegion("pet it down");
+            // var optionsUp = spriteMap.CreateSpriteFromRegion("options up");
+            // var optionsDown = spriteMap.CreateSpriteFromRegion("options down");
+            // var petItUp = spriteMap.CreateSpriteFromRegion("pet it up");
+            // var petItDown = spriteMap.CreateSpriteFromRegion("pet it down");
 
             var mainPanel = new Panel(_renderManager, "Main");
             var optionsPanel = new Panel(_renderManager, "Options");
@@ -65,12 +65,12 @@ namespace LostAndFound.Core.Screens
                 Origin.Center);
             var playButton = new Button(upButton, downButton, titleImage.Bottom + new Vector2(0, 30),
                 _uiScale, Origin.Center);
-            var optionsButton = new Button(optionsUp, optionsDown, playButton.Bottom, _uiScale, Origin.Center);
-            var quitButton = new Button(quitUp, quitDown, optionsButton.Bottom, _uiScale, Origin.Center);
-            var petItButton = new Button(petItUp, petItDown, optionsButton.Bottom, _uiScale, Origin.Center);
+            // var optionsButton = new Button(optionsUp, optionsDown, playButton.Bottom, _uiScale, Origin.Center);
+            var quitButton = new Button(quitUp, quitDown, playButton.Bottom, _uiScale, Origin.Center);
+            // var petItButton = new Button(petItUp, petItDown, optionsButton.Bottom, _uiScale, Origin.Center);
 
             playButton.HoverOn = () => { _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonHover").Play(); };
-            optionsButton.HoverOn = () => { _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonHover").Play(); };
+            // optionsButton.HoverOn = () => { _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonHover").Play(); };
             quitButton.HoverOn = () => { _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonHover").Play(); };
 
             playButton.Click = () =>
@@ -86,18 +86,18 @@ namespace LostAndFound.Core.Screens
                     MediaPlayer.Volume = 0.2f;
                 };
             };
-
-            optionsButton.Click = () =>
-            {
-                _activePanelName = "Options";
-                _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonClick").Play();
-            };
+            //
+            // optionsButton.Click = () =>
+            // {
+            //     _activePanelName = "Options";
+            //     _contentChest.Get<SoundEffect>("Audio/SoundEffects/buttonClick").Play();
+            // };
 
             quitButton.Click = Game1.Quit;
 
             mainPanel.AddElement(titleImage);
             mainPanel.AddElement(playButton);
-            mainPanel.AddElement(optionsButton);
+            // mainPanel.AddElement(optionsButton);
             mainPanel.AddElement(quitButton);
 
             optionsPanel.AddElement(titleImage);
@@ -121,6 +121,11 @@ namespace LostAndFound.Core.Screens
 
             _transitionManager.Draw();
             _renderManager.SpriteBatch.End();
+        }
+
+        public void OnMadeActiveScreen()
+        {
+            
         }
     }
 }

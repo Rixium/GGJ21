@@ -20,5 +20,10 @@ namespace LostAndFound.Core.Screens
         {
             
         }
+
+        public void OnMadeActiveScreen()
+        {
+            
+        }
     }
 }

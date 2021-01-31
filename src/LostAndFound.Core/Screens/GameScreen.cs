@@ -30,6 +30,10 @@ namespace LostAndFound.Core.Screens
             _gameInstance.Load();
             _transitionManager.Load();
             
+        }
+
+        public void OnMadeActiveScreen()
+        {
             _gameInstance.Start();
         }
 
