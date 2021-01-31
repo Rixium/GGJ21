@@ -14,16 +14,16 @@ namespace LostAndFound.Core.Games.Components
         private SoundComponent _soundComponent;
         private PlayerControllerComponent _playerControllerComponent;
         
-        private Vector2 lastFootstepPos;
-        private int footStepLenght = 25;
+        private double _footStepLength = 0.5;
         List<string> soundPaths = new List<string>();
-        
+        private bool _isMoving;
+        private double _lastStepTime;
+
         public void Start()
         {
             _soundComponent = Entity.GetComponent<SoundComponent>();
             _playerControllerComponent = Entity.GetComponent<PlayerControllerComponent>();
-            lastFootstepPos = Entity.Position;
-            
+
             soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_1");
             soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_2");
             soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_3");
@@ -36,11 +36,33 @@ namespace LostAndFound.Core.Games.Components
 
         public void Update(GameTime gameTime)
         {
-            if ((lastFootstepPos - Entity.Position).Length() > footStepLenght)
-            {
-                lastFootstepPos = Entity.Position;
+            var playerVelocity = _playerControllerComponent.XVelocity + _playerControllerComponent.YVelocity;
+            
+            if (playerVelocity != 0 && !_isMoving)
+            { 
+                _isMoving = true;
                 PlayRandomFootstep();
+                _lastStepTime = gameTime.TotalGameTime.TotalSeconds;
             }
+            else if (playerVelocity == 0)
+            {
+                _isMoving = false;
+            }
+
+            if (_isMoving)
+            {
+                if (_lastStepTime + _footStepLength < gameTime.TotalGameTime.TotalSeconds)
+                {
+                    PlayRandomFootstep();
+                    _lastStepTime = gameTime.TotalGameTime.TotalSeconds;
+                }
+            }
+
+            // if ((lastFootstepPos - Entity.Position).Length() > footStepLenght)
+            // {
+            //     lastFootstepPos = Entity.Position;
+            //     PlayRandomFootstep();
+            // }
         }
 
         private void PlayRandomFootstep()
