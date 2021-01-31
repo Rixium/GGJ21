@@ -1,4 +1,5 @@
-﻿using LostAndFound.Core.Games.Entities;
+﻿using LostAndFound.Core.Games.Components;
+using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Models;
 using Microsoft.Xna.Framework;
 
@@ -13,5 +14,6 @@ namespace LostAndFound.Core.Games.Questing
         public Color AnimalColor { get; set; }
         public string AnimalImage { get; set; }
         public int Reward { get; set; }
+        public AnimalType AnimalType { get; set; }
     }
 }
