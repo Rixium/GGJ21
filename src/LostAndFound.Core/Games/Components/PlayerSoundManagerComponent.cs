@@ -12,7 +12,7 @@ namespace LostAndFound.Core.Games.Components
         private SoundComponent _soundComponent;
         private PlayerControllerComponent _playerControllerComponent;
         
-        private double _footStepLength = 0.5;
+        private double _footStepLength = 0.6;
         private List<string> _soundPaths = new List<string>();
         private bool _isMoving;
         private double _lastStepTime;
