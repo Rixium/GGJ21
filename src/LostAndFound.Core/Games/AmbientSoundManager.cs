@@ -16,6 +16,7 @@ namespace LostAndFound.Core.Games
         private SoundEffectInstance _ambientInstance;
         private SoundEffect _streetAmbientSound;
         private SoundEffect _forestAmbientSound;
+        private SoundEffect _parkAmbientSound;
 
         public AmbientSoundManager(ZoneManager zoneManager, IContentChest contentChest)
         {
@@ -42,6 +43,8 @@ namespace LostAndFound.Core.Games
                     _ambientInstance.Volume = 0.3f;
                     break;
                 case ZoneType.Park:
+                    _ambientInstance = _parkAmbientSound.CreateInstance();
+                    _ambientInstance.Volume = 0.6f;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(zoneType), zoneType, null);
@@ -53,6 +56,7 @@ namespace LostAndFound.Core.Games
         {
             _streetAmbientSound = _contentChest.Get<SoundEffect>("Audio/Ambience/StreetAmbience");
             _forestAmbientSound = _contentChest.Get<SoundEffect>("Audio/Ambience/ForestAmbience");
+            _parkAmbientSound = _contentChest.Get<SoundEffect>("Audio/Ambience/ParkAmbience");
             _ambientInstance = _streetAmbientSound.CreateInstance();
             _ambientInstance.IsLooped = true;
             _ambientInstance.Play();
