@@ -8,6 +8,7 @@ using LostAndFound.Core.Games.Animals;
 using LostAndFound.Core.Games.Components;
 using LostAndFound.Core.Games.Interfaces;
 using LostAndFound.Core.Games.Person;
+using LostAndFound.Core.Games.Systems;
 using LostAndFound.Core.Games.Zones;
 using LostAndFound.Core.Graphics;
 using LostAndFound.Core.Input;
@@ -57,10 +58,18 @@ namespace LostAndFound.Core.Modules
 
             builder.RegisterType<PersonFactory>().As<IPersonFactory>().SingleInstance();
             builder.RegisterType<AnimalFactory>().As<IAnimalFactory>().SingleInstance();
+            builder.RegisterType<ZoneManager>().SingleInstance();
 
             RegisterComponents(builder);
+            RegisterSystems(builder);
 
             base.Load(builder);
+        }
+
+        private void RegisterSystems(ContainerBuilder builder)
+        {
+            builder.RegisterType<SystemManager>().SingleInstance();
+            builder.RegisterType<QuestSystem>().As<ISystem>().SingleInstance();
         }
 
         private static void RegisterComponents(ContainerBuilder builder)

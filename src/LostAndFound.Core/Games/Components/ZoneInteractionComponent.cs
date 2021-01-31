@@ -9,14 +9,13 @@ namespace LostAndFound.Core.Games.Components
 {
     public class ZoneInteractionComponent : IComponent
     {
-        private readonly IGameInstance _gameInstance;
-        private bool _transitioning;
+        private readonly ZoneManager _zoneManager;
         private BoxColliderComponent _entityCollider;
         public IEntity Entity { get; set; }
 
-        public ZoneInteractionComponent(IGameInstance gameInstance)
+        public ZoneInteractionComponent(ZoneManager zoneManager)
         {
-            _gameInstance = gameInstance;
+            _zoneManager = zoneManager;
         }
 
         public void Start()
@@ -26,7 +25,7 @@ namespace LostAndFound.Core.Games.Components
 
         public void Update(GameTime gameTime)
         {
-            var entityZone = _gameInstance.ActiveZone;
+            var entityZone = _zoneManager.ActiveZone;
 
             if (_entityCollider.Bounds.X < 0)
             {
@@ -39,7 +38,7 @@ namespace LostAndFound.Core.Games.Components
                 var property = collider.GetProperty("Left");
                 Enum.TryParse<ZoneType>(property, out var zoneType);
 
-                var zoneToGoTo = _gameInstance.GetZone(zoneType);
+                var zoneToGoTo = _zoneManager.GetZone(zoneType);
 
                 if (zoneToGoTo != null)
                 {
@@ -58,7 +57,7 @@ namespace LostAndFound.Core.Games.Components
                 var property = collider.GetProperty("Right");
                 Enum.TryParse<ZoneType>(property, out var zoneType);
 
-                var zoneToGoTo = _gameInstance.GetZone(zoneType);
+                var zoneToGoTo = _zoneManager.GetZone(zoneType);
 
                 if (zoneToGoTo != null)
                 {
@@ -70,8 +69,8 @@ namespace LostAndFound.Core.Games.Components
 
         private void TeleportToZone(IZone oldZone, IZone zoneToGoTo)
         {
-            _gameInstance.MoveEntityToZone(oldZone, zoneToGoTo, Entity);
-            _gameInstance.SetActiveZone(zoneToGoTo.ZoneType);
+            _zoneManager.MoveEntityToZone(oldZone, zoneToGoTo, Entity);
+            _zoneManager.SetActiveZone(zoneToGoTo.ZoneType);
         }
 
         public void Draw(SpriteBatch spriteBatch)

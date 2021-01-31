@@ -16,18 +16,19 @@ namespace LostAndFound.Core.Games.Components
     public class PlayerControllerComponent : IComponent
     {
         private BoxColliderComponent _boxColliderComponent;
-        
+
         public int XVelocity { get; set; }
         public int YVelocity { get; set; }
-        
+
         private readonly IGameInstance _gameInstance;
+        private readonly ZoneManager _zoneManager;
         private readonly IInputManager _inputManager;
         private int _speed = 1;
         private bool _canMove = true;
 
-        public PlayerControllerComponent(IGameInstance gameInstance, IInputManager inputManager)
+        public PlayerControllerComponent(ZoneManager zoneManager, IInputManager inputManager)
         {
-            _gameInstance = gameInstance;
+            _zoneManager = zoneManager;
             _inputManager = inputManager;
         }
 
@@ -46,14 +47,14 @@ namespace LostAndFound.Core.Games.Components
         public void Draw(SpriteBatch spriteBatch)
         {
         }
-        
+
         private void PlayerMovement()
         {
-            if (_gameInstance.ActiveZone == null)
+            if (_zoneManager.ActiveZone == null)
             {
                 return;
             }
-            
+
             var xChange = 0;
             var yChange = 0;
 
@@ -83,14 +84,14 @@ namespace LostAndFound.Core.Games.Components
             XVelocity = xChange;
             YVelocity = yChange;
         }
-        
+
         public void Move(IEntity entity, int xMove, int yMove)
         {
             var newPosition = entity.Position + new Vector2(xMove, yMove);
 
             var bounds = _boxColliderComponent.Bounds.Add(new Rectangle(xMove, 0, 0, 0));
 
-            foreach (var collider in _gameInstance.ActiveZone.Colliders)
+            foreach (var collider in _zoneManager.ActiveZone.Colliders)
             {
                 if (collider.GetProperty("Solid") != null)
                 {
@@ -101,9 +102,9 @@ namespace LostAndFound.Core.Games.Components
                     }
                 }
             }
-            
+
             bounds = _boxColliderComponent.Bounds.Add(new Rectangle(0, yMove, 0, 0));
-            foreach (var collider in _gameInstance.ActiveZone.Colliders)
+            foreach (var collider in _zoneManager.ActiveZone.Colliders)
             {
                 if (collider.GetProperty("Solid") != null)
                 {
@@ -115,13 +116,14 @@ namespace LostAndFound.Core.Games.Components
                 }
             }
 
-            var mapBottom = new Rectangle(0, _gameInstance.ActiveZone.Image.Height - _boxColliderComponent.Height, _gameInstance.ActiveZone.Image.Width, 100);
+            var mapBottom = new Rectangle(0, _zoneManager.ActiveZone.Image.Height - _boxColliderComponent.Height,
+                _zoneManager.ActiveZone.Image.Width, 100);
             if (bounds.Intersects(mapBottom))
             {
                 var depth = bounds.GetIntersectionDepth(mapBottom);
                 newPosition.Y += depth.Y;
             }
-            
+
             entity.Position = newPosition;
         }
     }
