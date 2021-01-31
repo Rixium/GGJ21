@@ -12,6 +12,8 @@ namespace LostAndFound.Core
 {
     internal class Game1 : Game
     {
+        private const ScreenType StartingScreen = ScreenType.GameScreen;
+            
         private static Game1 _instance;
         private readonly IRenderManager _renderManager;
         private readonly IScreenManager _screenManager;
@@ -60,7 +62,7 @@ namespace LostAndFound.Core
             _applicationFolder.Create();
 
             _screenManager.LoadScreens();
-            _screenManager.SetActiveScreen(ScreenType.GameScreen);
+            _screenManager.SetActiveScreen(StartingScreen);
         }
 
         protected override void Update(GameTime gameTime)
