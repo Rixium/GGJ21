@@ -37,7 +37,8 @@ namespace LostAndFound.Core.Games.Systems
                     Image = person
                 });
 
-                questGiver.AddComponent(Program.Resolve<QuestGiverComponent>());
+                var questGiverComponent = Program.Resolve<QuestGiverComponent>();
+                questGiver.AddComponent(questGiverComponent);
 
                 questZone.AddEntity(questGiver);
             }

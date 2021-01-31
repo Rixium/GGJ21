@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using LostAndFound.Core.Content;
 using LostAndFound.Core.Extensions;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Graphics;
@@ -73,5 +74,7 @@ namespace LostAndFound.Core.Games.Components
 
         public void AddAnimation(string animationName, Animation animation) =>
             _animations.Add(animationName, animation);
+
+        public void SetUp(IAnimationSet animationSet) => animationSet.AddTo(this);
     }
 }

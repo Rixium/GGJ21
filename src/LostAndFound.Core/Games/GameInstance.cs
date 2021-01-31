@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using LostAndFound.Core.Config;
+using LostAndFound.Core.Content;
 using LostAndFound.Core.Content.Aseprite;
 using LostAndFound.Core.Content.ContentLoader;
 using LostAndFound.Core.Extensions;
@@ -54,8 +54,6 @@ namespace LostAndFound.Core.Games
 
         public void Start()
         {
-            var playerAnimationMap = _spriteMapLoader.GetContent("Assets/Images/Player/PlayerAnimations.json");
-
             var zoneColliders = _zoneManager.ActiveZone.Colliders.ToList();
             var playerStartCollider = zoneColliders.First(x => x.Name.Equals("PlayerStart"));
 
@@ -65,63 +63,9 @@ namespace LostAndFound.Core.Games
             playerFeetBoxCollider.Height = 5;
             playerFeetBoxCollider.Offset = new Vector2(0, 49);
             var playerSoundComponent = Program.Resolve<SoundComponent>();
-
             var animatorComponent = Program.Resolve<AnimatorComponent>();
-            animatorComponent.AddAnimation("Walk_Right", new Animation(new List<Sprite>
-            {
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Right_1"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Right_2"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Right_3"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Right_4"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Right_5")
-            })
-            {
-                FrameDuration = 0.2f
-            });
-
-            animatorComponent.AddAnimation("Walk_Left", new Animation(new List<Sprite>
-            {
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Left_1"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Left_2"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Left_3"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Left_4"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Left_5")
-            })
-            {
-                FrameDuration = 0.2f
-            });
-
-            animatorComponent.AddAnimation("Walk_Up", new Animation(new List<Sprite>
-            {
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Up_1"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Up_2")
-            })
-            {
-                FrameDuration = 0.2f
-            });
-
-            animatorComponent.AddAnimation("Walk_Down", new Animation(new List<Sprite>
-            {
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Down_1"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Down_2"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Down_3"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Down_4"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Down_5"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Down_6"),
-                playerAnimationMap.CreateSpriteFromRegion("Walk_Down_7")
-            })
-            {
-                FrameDuration = 0.2f
-            });
-
-            animatorComponent.AddAnimation("Idle", new Animation(new List<Sprite>
-            {
-                playerAnimationMap.CreateSpriteFromRegion("Idle_1")
-            })
-            {
-                FrameDuration = 0.2f
-            });
-
+            animatorComponent.SetUp(Program.Resolve<PlayerAnimationSet>());
+            
             player.AddComponent(Program.Resolve<PlayerAnimationComponent>());
             player.AddComponent(Program.Resolve<AnimationDrawComponent>());
             player.AddComponent(playerFeetBoxCollider);
