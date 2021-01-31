@@ -13,6 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Audio/Ambience/ForestAmbience.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Ambience/ForestAmbience.wav
+
 #begin Audio/Ambience/StreetAmbience.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
