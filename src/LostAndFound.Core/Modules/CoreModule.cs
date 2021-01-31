@@ -78,6 +78,7 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<QuestSystem>().As<ISystem>().SingleInstance();
             builder.RegisterType<AmbientSoundManager>().As<ISystem>().SingleInstance();
             builder.RegisterType<TimeManager>().As<ISystem>().SingleInstance();
+            builder.RegisterType<AudioSystem>().As<ISystem>().SingleInstance();
         }
 
         private static void RegisterComponents(ContainerBuilder builder)

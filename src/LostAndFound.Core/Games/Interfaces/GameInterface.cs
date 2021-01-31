@@ -7,6 +7,7 @@ using LostAndFound.Core.Content.ContentLoader;
 using LostAndFound.Core.Games.Components;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Questing;
+using LostAndFound.Core.Games.Systems;
 using LostAndFound.Core.Graphics;
 using LostAndFound.Core.Input;
 using LostAndFound.Core.UI;
@@ -26,6 +27,7 @@ namespace LostAndFound.Core.Games.Interfaces
         private readonly IInputManager _inputManager;
         private readonly IWindowConfiguration _windowConfiguration;
         private readonly IContentLoader<AsepriteSpriteMap> _spriteMapLoader;
+        private readonly SystemManager _systemManager;
 
         private readonly IList<IPanel> _panels = new List<IPanel>();
         private string _activePanelName = "Game";
@@ -33,19 +35,21 @@ namespace LostAndFound.Core.Games.Interfaces
         private AsepriteSpriteMap _uiSpriteMap;
 
         private Sprite _questPopupImage;
+        private AudioSystem _audioSystem;
 
 
         private IPanel ActivePanel => _panels.First(x => x.Name.Equals(_activePanelName));
 
         public GameInterface(IRenderManager renderManager, IContentChest contentChest,
             IInputManager inputManager, IWindowConfiguration windowConfiguration,
-            IContentLoader<AsepriteSpriteMap> spriteMapLoader)
+            IContentLoader<AsepriteSpriteMap> spriteMapLoader, SystemManager systemManager)
         {
             _renderManager = renderManager;
             _contentChest = contentChest;
             _inputManager = inputManager;
             _windowConfiguration = windowConfiguration;
             _spriteMapLoader = spriteMapLoader;
+            _systemManager = systemManager;
         }
 
         public void Load()
@@ -54,6 +58,8 @@ namespace LostAndFound.Core.Games.Interfaces
             _questPopupImage = _uiSpriteMap.CreateSpriteFromRegion("QuestAccepted_Popup");
 
             SetupGameUi();
+
+            _audioSystem = _systemManager.GetSystem<AudioSystem>();
         }
 
         private void SetupGameUi()
@@ -94,6 +100,8 @@ namespace LostAndFound.Core.Games.Interfaces
             var element = new Image(_questPopupImage, _windowConfiguration.Center, 1f, Origin.Center);
             element.AddEffect(new FadeOutEffect());
 
+            _audioSystem.Play("Audio\\SoundEffects\\quest_taken");
+            
             gamePanel.AddElement(element);
         }
     }
