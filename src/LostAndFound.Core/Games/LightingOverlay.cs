@@ -12,7 +12,7 @@ namespace LostAndFound.Core.Games
     public class LightingOverlay
     {
         public Texture2D Texture { get; set; }
-        public double NightIntensity { get; set; } = 1;
+        public double NightIntensity { get; set; } = 0.6;
 
         private readonly TimeManager _timeManager;
         private readonly IRenderManager _renderManager;
