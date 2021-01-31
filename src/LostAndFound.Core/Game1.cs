@@ -78,7 +78,8 @@ namespace LostAndFound.Core
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            GraphicsDevice.SetRenderTarget(null);
+            
             _screenManager.GetActiveScreen().Draw();
 
             base.Draw(gameTime);

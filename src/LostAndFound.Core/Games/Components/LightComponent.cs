@@ -9,7 +9,7 @@ namespace LostAndFound.Core.Games.Components
     {
         public IEntity Entity { get; set; }
         public Texture2D Texture { get; set; }
-        public Color LightColor { get; set; } = Color.Orange;
+        public Color LightColor { get; set; } = Color.White;
         public Vector2 Offset { get; set; }
         public int Size { get; set; } = 220;
 

@@ -21,8 +21,11 @@ namespace LostAndFound.Core.Games
         private Color _nightColor = new Color(0, 2, 20);
         private Color _dayColor = new Color(252, 219, 3);
         private Color _overlayColor = Color.Black * 0;
+        
         private Texture2D _lightTexture;
         private List<LightComponent> _lights = new List<LightComponent>();
+
+        private RenderTarget2D _renderTarget2D;
 
         public LightingOverlay(SystemManager systemManager, IRenderManager renderManager, IContentChest contentChest,
             ZoneManager zoneManager)
@@ -37,6 +40,13 @@ namespace LostAndFound.Core.Games
         {
             GetLightComponents();
             _zoneManager.ZoneChanged += (type => GetLightComponents());
+
+            _renderTarget2D = new RenderTarget2D(_renderManager.GraphicsDeviceManager.GraphicsDevice,
+                _renderManager.GraphicsDeviceManager.GraphicsDevice.PresentationParameters.BackBufferWidth,
+                _renderManager.GraphicsDeviceManager.GraphicsDevice.PresentationParameters.BackBufferHeight,
+                false,
+                _renderManager.GraphicsDeviceManager.GraphicsDevice.PresentationParameters.BackBufferFormat,
+                DepthFormat.Depth24, 0, RenderTargetUsage.PreserveContents);
         }
 
         private void GetLightComponents()
@@ -62,6 +72,9 @@ namespace LostAndFound.Core.Games
 
         public void Draw(Camera camera)
         {
+            _renderManager.SpriteBatch.GraphicsDevice.SetRenderTarget(_renderTarget2D);
+            _renderManager.SpriteBatch.GraphicsDevice.Clear(new Color(0, 0, 0, 255));
+
             if (_timeManager.DayTotalMinutes < 960)
             {
                 _overlayColor = _nightColor * (float) (Map(720, 960, 0, NightIntensity, _timeManager.DayTotalMinutes));
@@ -72,40 +85,19 @@ namespace LostAndFound.Core.Games
                     _nightColor * (float) (Map(1200, 1440, NightIntensity, 0, _timeManager.DayTotalMinutes));
             }
 
-            /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            var m = Matrix.CreateOrthographicOffCenter(0,
-                _renderManager.GraphicsDeviceManager.GraphicsDevice.PresentationParameters.BackBufferWidth,
-                _renderManager.GraphicsDeviceManager.GraphicsDevice.PresentationParameters.BackBufferHeight,
-                0, 0, 1
-            );
-
-            var a = new AlphaTestEffect(_renderManager.GraphicsDeviceManager.GraphicsDevice)
+            var blend = new BlendState
             {
-                Projection = camera.GetMatrix() * m
+                AlphaSourceBlend = Blend.Zero,
+                AlphaDestinationBlend = Blend.InverseSourceColor,
+                ColorSourceBlend = Blend.Zero,
+                ColorDestinationBlend = Blend.InverseSourceColor
             };
 
-            var s1 = new DepthStencilState
-            {
-                StencilEnable = true,
-                StencilFunction = CompareFunction.Always,
-                StencilPass = StencilOperation.Replace,
-                ReferenceStencil = 1,
-                DepthBufferEnable = false,
-            };
+            _renderManager.SpriteBatch.Begin(blendState: blend, transformMatrix: camera.GetMatrix());
 
-            var s2 = new DepthStencilState
-            {
-                StencilEnable = true,
-                StencilFunction = CompareFunction.LessEqual,
-                StencilPass = StencilOperation.Keep,
-                ReferenceStencil = 1,
-                DepthBufferEnable = false,
-            };
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, null, s1, null, a);
+            _renderManager.SpriteBatch.Draw(Texture,
+                new Rectangle(0, 0, _zoneManager.ActiveZone.Image.Width, _zoneManager.ActiveZone.Image.Height),
+                Color.White * 0.5f);
 
             foreach (var light in _lights)
             {
@@ -114,12 +106,14 @@ namespace LostAndFound.Core.Games
 
             _renderManager.SpriteBatch.End();
 
-            _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, null, s2, null, a);
+            _renderManager.SpriteBatch.GraphicsDevice.SetRenderTarget(null);
 
-            _renderManager.SpriteBatch.Draw(Texture,
-                new Rectangle(0, 0, _zoneManager.ActiveZone.Image.Width, _zoneManager.ActiveZone.Image.Height),
-                _overlayColor);
+        }
 
+        public void DrawNow()
+        {
+            _renderManager.SpriteBatch.Begin();
+            _renderManager.SpriteBatch.Draw(_renderTarget2D, Vector2.Zero, _overlayColor);
             _renderManager.SpriteBatch.End();
         }
 

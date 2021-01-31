@@ -97,6 +97,8 @@ namespace LostAndFound.Core.Games
 
         public void Draw()
         {
+            _lightingOverlay.Draw(_camera);
+
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             _skyboxManager.Draw();
             _renderManager.SpriteBatch.End();
@@ -106,12 +108,12 @@ namespace LostAndFound.Core.Games
             _zoneManager.Draw(_renderManager.SpriteBatch);
             _renderManager.SpriteBatch.End();
 
-            _lightingOverlay.Draw(_camera);
-
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             _gameInterface.Draw();
             _systemManager.Draw(_renderManager.SpriteBatch);
             _renderManager.SpriteBatch.End();
+            
+            _lightingOverlay.DrawNow();
         }
 
         public void Update(GameTime gameTime)
