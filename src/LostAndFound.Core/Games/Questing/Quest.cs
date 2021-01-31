@@ -2,6 +2,6 @@
 {
     public class Quest
     {
-        
+        public string AnimalName { get; set; }
     }
 }

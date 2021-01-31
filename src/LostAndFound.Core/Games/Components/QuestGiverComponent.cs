@@ -5,6 +5,7 @@ using LostAndFound.Core.Content;
 using LostAndFound.Core.Content.Aseprite;
 using LostAndFound.Core.Content.ContentLoader;
 using LostAndFound.Core.Games.Entities;
+using LostAndFound.Core.Games.Questing;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,6 +20,7 @@ namespace LostAndFound.Core.Games.Components
         private Random _random = new Random();
         private SpriteFont _font;
         private Sprite _questIcon;
+        private bool _hasQuest = true;
         public IEntity Entity { get; set; }
         public string Name { get; set; }
         public bool Highlighted { get; set; }
@@ -49,7 +51,6 @@ namespace LostAndFound.Core.Games.Components
 
         public void Update(GameTime gameTime)
         {
-            
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -64,6 +65,16 @@ namespace LostAndFound.Core.Games.Components
                 _questIcon.Origin, scale, SpriteEffects.None, 0f);
         }
 
-        public bool HasQuestToGive() => true;
+        public bool HasQuestToGive() => _hasQuest;
+
+        public Quest GetQuest()
+        {
+            _hasQuest = false;
+
+            return new Quest
+            {
+                AnimalName = "Joey"
+            };
+        }
     }
 }

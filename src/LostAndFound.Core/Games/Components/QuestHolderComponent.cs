@@ -4,6 +4,7 @@ using LostAndFound.Core.Games.Questing;
 using LostAndFound.Core.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace LostAndFound.Core.Games.Components
 {
@@ -39,6 +40,12 @@ namespace LostAndFound.Core.Games.Components
                 if (Vector2.Distance(Entity.Position, questGiverComponent.Entity.Position) < 20)
                 {
                     _questGiverNextTo = questGiverComponent;
+                    
+                    if (_inputManager.KeyPressed(Keys.E))
+                    {
+                        _quests.Add(questGiverComponent.GetQuest());
+                    }
+                    
                     return;
                 }
             }
