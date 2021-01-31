@@ -22,5 +22,13 @@ namespace LostAndFound.Core.Games.Systems
         {
             foreach (var system in _systems) system.Draw(spriteBatch);
         }
+
+        public void Start()
+        {
+            foreach (var system in _systems)
+            {
+                system.Start();
+            }
+        }
     }
 }
