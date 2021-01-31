@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using LostAndFound.Core.Content;
@@ -29,6 +30,10 @@ namespace LostAndFound.Core.Games.Components
         private Sprite _questIcon;
         private bool _hasQuest = true;
         private Quest _givenQuest;
+
+        private Dictionary<string, Sprite> _animalSprites = new Dictionary<string, Sprite>();
+        private Sprite _animalScroll;
+
         public IEntity Entity { get; set; }
         public string Name { get; set; }
         public bool Highlighted { get; set; }
@@ -51,8 +56,26 @@ namespace LostAndFound.Core.Games.Components
 
             Name = selected.Split('\\').Last().Split('.').First();
 
-            _questIcon = _spriteMapLoader.GetContent("Assets\\UI\\ui.json").CreateSpriteFromRegion("Quest_Alert");
+            var asepriteSpriteMap = _spriteMapLoader.GetContent("Assets\\UI\\ui.json");
+            _questIcon = asepriteSpriteMap.CreateSpriteFromRegion("Quest_Alert");
             _questIcon.Origin = _questIcon.Center;
+
+            _animalScroll = asepriteSpriteMap.CreateSpriteFromRegion("Animal_Scroll");
+
+            var animalSpriteMap = _spriteMapLoader.GetContent("Assets\\Images\\Animals\\animals.json");
+
+            _animalSprites.Add("Dog_1", animalSpriteMap.CreateSpriteFromRegion("Dog_1"));
+            _animalSprites.Add("Dog_2", animalSpriteMap.CreateSpriteFromRegion("Dog_2"));
+            _animalSprites.Add("Dog_3", animalSpriteMap.CreateSpriteFromRegion("Dog_3"));
+            _animalSprites.Add("Dog_4", animalSpriteMap.CreateSpriteFromRegion("Dog_4"));
+            _animalSprites.Add("Dog_5", animalSpriteMap.CreateSpriteFromRegion("Dog_5"));
+            _animalSprites.Add("Dog_6", animalSpriteMap.CreateSpriteFromRegion("Dog_6"));
+            _animalSprites.Add("Cat_1", animalSpriteMap.CreateSpriteFromRegion("Cat_1"));
+            _animalSprites.Add("Cat_2", animalSpriteMap.CreateSpriteFromRegion("Cat_2"));
+            _animalSprites.Add("Cat_3", animalSpriteMap.CreateSpriteFromRegion("Cat_3"));
+            _animalSprites.Add("Cat_4", animalSpriteMap.CreateSpriteFromRegion("Cat_4"));
+            _animalSprites.Add("Cat_5", animalSpriteMap.CreateSpriteFromRegion("Cat_5"));
+            _animalSprites.Add("Cat_6", animalSpriteMap.CreateSpriteFromRegion("Cat_6"));
         }
 
         public void Update(GameTime gameTime)
@@ -63,17 +86,41 @@ namespace LostAndFound.Core.Games.Components
         {
             if (GivenQuest())
             {
+                DrawAnimalAboveHead(spriteBatch);
                 return;
             }
 
             if (!HasQuestToGive()) return;
 
+            DrawQuestIconAboveHead(spriteBatch);
+        }
+
+        private void DrawQuestIconAboveHead(SpriteBatch spriteBatch)
+        {
             var positionToDraw = Entity.Position + new Vector2(
                 _staticDrawComponent.Image.Width / 2f,
                 -_questIcon.Height);
             var scale = Highlighted ? 1.5f : 1f;
             spriteBatch.Draw(_questIcon.Texture, positionToDraw, _questIcon.Source, Color.White, 0f,
                 _questIcon.Origin, scale, SpriteEffects.None, 0f);
+        }
+
+        private void DrawAnimalAboveHead(SpriteBatch spriteBatch)
+        {
+            var animal = _animalSprites[_givenQuest.AnimalImage];
+
+            var animalScrollPosition = Entity.Position;
+            animalScrollPosition -= new Vector2(0, _animalScroll.Height);
+
+            spriteBatch.Draw(_animalScroll.Texture, animalScrollPosition, _animalScroll.Source, Color.White, 0f,
+                _animalScroll.Origin, 1f, SpriteEffects.None, 0f);
+
+            var position = new Vector2(animalScrollPosition.X,
+                animalScrollPosition.Y) + new Vector2(_animalScroll.Width, _animalScroll.Height) / 4f;
+
+            spriteBatch.Draw(animal.Texture,
+                position, animal.Source, _givenQuest.AnimalColor, 0f,
+                Vector2.One * 0.5f, 1.5f, SpriteEffects.None, 0f);
         }
 
         private bool GivenQuest() => _givenQuest != null;
