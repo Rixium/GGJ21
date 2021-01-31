@@ -66,6 +66,7 @@ namespace LostAndFound.Core.Games
             var animatorComponent = Program.Resolve<AnimatorComponent>();
             animatorComponent.SetUp(Program.Resolve<PlayerAnimationSet>());
             
+            player.AddComponent(Program.Resolve<LightComponent>());
             player.AddComponent(Program.Resolve<PlayerAnimationComponent>());
             player.AddComponent(Program.Resolve<AnimationDrawComponent>());
             player.AddComponent(playerFeetBoxCollider);
@@ -86,6 +87,7 @@ namespace LostAndFound.Core.Games
             _systemManager.Start();
             _zoneManager.AddToActiveZone(player);
             _zoneManager.Start();
+            _lightingOverlay.Start();
         }
 
         public void Draw()
@@ -99,7 +101,7 @@ namespace LostAndFound.Core.Games
             _zoneManager.Draw(_renderManager.SpriteBatch);
             _renderManager.SpriteBatch.End();
             
-            _lightingOverlay.Draw(_camera, _player);
+            _lightingOverlay.Draw(_camera);
             
             _renderManager.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             _gameInterface.Draw();
