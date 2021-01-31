@@ -1,6 +1,6 @@
 { "frames": [
    {
-    "filename": "park.aseprite",
+    "filename": "Park.aseprite",
     "frame": { "x": 0, "y": 0, "w": 500, "h": 281 },
     "rotated": false,
     "trimmed": false,
