@@ -136,7 +136,7 @@ namespace LostAndFound.Core.Games.Components
             _givenQuest = new Quest
             {
                 HandIn = Entity,
-                AnimalZone = ZoneType.Forest,
+                AnimalZone = _random.Next(0, 2) == 1 ? ZoneType.Forest : ZoneType.Park,
                 AnimalImage = randomAnimalType + "_" + _random.Next(1, 6),
                 AnimalColor = ColorRandomizer.GetRandomColor(),
                 AnimalName = "Joey",
