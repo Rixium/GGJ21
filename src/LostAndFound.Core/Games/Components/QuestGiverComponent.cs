@@ -133,6 +133,9 @@ namespace LostAndFound.Core.Games.Components
             _hasQuest = false;
             var randomAnimalType = (AnimalType) _random.Next(0, (int) AnimalType.END);
 
+            var reward = _random.Next(100, 1000);
+            reward = (reward + 50) / 100 * 100;
+            
             _givenQuest = new Quest
             {
                 HandIn = Entity,
@@ -141,9 +144,10 @@ namespace LostAndFound.Core.Games.Components
                 AnimalColor = ColorRandomizer.GetRandomColor(),
                 AnimalName = "Joey",
                 Completed = false,
-                Reward = 1000,
+                Reward = reward,
                 AnimalType = randomAnimalType
             };
+            
             return _givenQuest;
         }
 

@@ -12,7 +12,7 @@ namespace LostAndFound.Core
 {
     internal class Game1 : Game
     {
-        private const ScreenType StartingScreen = ScreenType.Splash;
+        private const ScreenType StartingScreen = ScreenType.GameScreen;
             
         private static Game1 _instance;
         private readonly IRenderManager _renderManager;

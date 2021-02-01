@@ -102,6 +102,7 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<AnimalHolderComponent>().InstancePerDependency();
             builder.RegisterType<AnimalSoundComponent>().InstancePerDependency();
             builder.RegisterType<BounceComponent>().InstancePerDependency();
+            builder.RegisterType<DialogComponent>().InstancePerDependency();
         }
     }
 }

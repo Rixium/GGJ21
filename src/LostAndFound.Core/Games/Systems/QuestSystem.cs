@@ -52,6 +52,8 @@ namespace LostAndFound.Core.Games.Systems
                 var questGiverComponent = Program.Resolve<QuestGiverComponent>();
                 questGiver.AddComponent(questGiverComponent);
 
+                questGiver.AddComponent(Program.Resolve<DialogComponent>());
+                
                 questZone.AddEntity(questGiver);
             }
         }

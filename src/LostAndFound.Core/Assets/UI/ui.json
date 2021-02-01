@@ -50,7 +50,8 @@
    { "name": "volume high 3", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 254, "y": 565, "w": 118, "h": 33 } }] },
    { "name": "Quest_Alert", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 57, "y": 117, "w": 4, "h": 14 } }] },
    { "name": "QuestAccepted_Popup", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 16, "y": 192, "w": 141, "h": 65 } }] },
-   { "name": "animal_scroll", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 9, "y": 270, "w": 18, "h": 26 } }] }
+   { "name": "animal_scroll", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 9, "y": 270, "w": 18, "h": 26 } }] },
+   { "name": "Next_Button", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 160, "y": 272, "w": 14, "h": 13 } }] }
   ]
  }
 }
