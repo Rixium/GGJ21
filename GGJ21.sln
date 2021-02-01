@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LostAndFound.Core", "src\LostAndFound.Core\LostAndFound.Core.csproj", "{A01A5F81-A155-4F91-AF10-656476F8B334}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LostAndFound.Core.IntegrationTests", "LostAndFound.Core.IntegrationTests\LostAndFound.Core.IntegrationTests.csproj", "{08F6B710-FF67-492E-8718-073880DB4A47}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,9 +12,5 @@ Global
 		{A01A5F81-A155-4F91-AF10-656476F8B334}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A01A5F81-A155-4F91-AF10-656476F8B334}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A01A5F81-A155-4F91-AF10-656476F8B334}.Release|Any CPU.Build.0 = Release|Any CPU
-		{08F6B710-FF67-492E-8718-073880DB4A47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{08F6B710-FF67-492E-8718-073880DB4A47}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{08F6B710-FF67-492E-8718-073880DB4A47}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{08F6B710-FF67-492E-8718-073880DB4A47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
