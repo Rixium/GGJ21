@@ -53,7 +53,12 @@ namespace LostAndFound.Core.Games.Systems
                 questGiver.AddComponent(questGiverComponent);
 
                 questGiver.AddComponent(Program.Resolve<DialogComponent>());
+                var wandererComponent = Program.Resolve<WandererComponent>();
+                wandererComponent.Property = "SafeZone";
+                wandererComponent.Speed = 0.001f;
                 
+                questGiver.AddComponent(wandererComponent);
+                questGiver.AddComponent(Program.Resolve<BounceComponent>());
                 questZone.AddEntity(questGiver);
             }
         }
@@ -86,6 +91,7 @@ namespace LostAndFound.Core.Games.Systems
             entity.AddComponent(Program.Resolve<AnimalSoundComponent>());
             entity.AddComponent(Program.Resolve<SoundComponent>());
             entity.AddComponent(Program.Resolve<BounceComponent>());
+            entity.AddComponent(Program.Resolve<WandererComponent>());
 
             animalZone.AddEntity(entity);
         }

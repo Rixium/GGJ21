@@ -103,6 +103,7 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<AnimalSoundComponent>().InstancePerDependency();
             builder.RegisterType<BounceComponent>().InstancePerDependency();
             builder.RegisterType<DialogComponent>().InstancePerDependency();
+            builder.RegisterType<WandererComponent>().InstancePerDependency();
         }
     }
 }
