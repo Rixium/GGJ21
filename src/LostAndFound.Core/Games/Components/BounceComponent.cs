@@ -16,6 +16,8 @@ namespace LostAndFound.Core.Games.Components
         private float bounceTimer;
         private float _moveDelay = 0.01f;
 
+        public float BounceSpeed = 1f;
+
         public IEntity Entity { get; set; }
 
         public void Start()
@@ -31,7 +33,7 @@ namespace LostAndFound.Core.Games.Components
             {
                 if (Entity.Position.Y > _startY - _bounceHeight)
                 {
-                    Entity.Position -= new Vector2(0, 1);
+                    Entity.Position -= new Vector2(0, BounceSpeed);
                 }
                 else
                 {
@@ -43,7 +45,7 @@ namespace LostAndFound.Core.Games.Components
             {
                 if (Entity.Position.Y < _startY)
                 {
-                    Entity.Position += new Vector2(0, 1);
+                    Entity.Position += new Vector2(0, BounceSpeed);
                 }
                 else
                 {

@@ -31,7 +31,7 @@ namespace LostAndFound.Core.Games.Components
 
         public void Update(GameTime gameTime)
         {
-            if (Vector2.Distance(_wanderPosition, Entity.Position) < 40)
+            if (Vector2.Distance(_wanderPosition, Entity.Position) < 100)
             {
                 _randomPositionGetTimer -= gameTime.AsDelta();
                 if (_randomPositionGetTimer < 0)

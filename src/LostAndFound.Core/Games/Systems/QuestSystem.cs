@@ -58,7 +58,9 @@ namespace LostAndFound.Core.Games.Systems
                 wandererComponent.Speed = 0.001f;
                 
                 questGiver.AddComponent(wandererComponent);
-                questGiver.AddComponent(Program.Resolve<BounceComponent>());
+                var bounceComponent = Program.Resolve<BounceComponent>();
+                bounceComponent.BounceSpeed = 0.3f;
+                questGiver.AddComponent(bounceComponent);
                 questZone.AddEntity(questGiver);
             }
         }
@@ -79,10 +81,6 @@ namespace LostAndFound.Core.Games.Systems
 
             entity.AddComponent(staticDrawComponent);
 
-            var lightComponent = Program.Resolve<LightComponent>();
-            lightComponent.Size = 10;
-            
-            entity.AddComponent(lightComponent);
             var questFulfilmentComponent = Program.Resolve<QuestFulfilmentComponent>();
             questFulfilmentComponent.Quest = quest;
             questFulfilmentComponent.QuestFulfiller = taker;
