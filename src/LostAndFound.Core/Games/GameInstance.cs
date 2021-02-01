@@ -119,7 +119,7 @@ namespace LostAndFound.Core.Games
 
         public void Update(GameTime gameTime)
         {
-            _camera.Update(500, 281);
+            _camera.Update();
             _gameInterface.Update(gameTime);
             _zoneManager.Update(gameTime);
             _systemManager.Update(gameTime);

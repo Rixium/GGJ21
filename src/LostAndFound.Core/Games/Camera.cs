@@ -7,16 +7,11 @@ namespace LostAndFound.Core.Games
 {
     public class Camera
     {
+        private const int Zoom = 4;
+
         private readonly IWindowConfiguration _windowConfiguration;
         private readonly ZoneManager _zoneManager;
         private Vector2 _position;
-
-        private int _minX;
-        private readonly int _maxX;
-        private int _minY;
-        private readonly int _maxY;
-
-        private int _zoom = 4;
 
         private IEntity _following;
 
@@ -25,23 +20,21 @@ namespace LostAndFound.Core.Games
             _windowConfiguration = windowConfiguration;
             _zoneManager = zoneManager;
             _position = Vector2.Zero;
-            _maxX = 2000000;
-            _maxY = 1000000;
         }
 
-        public Vector2 ToGo { get; set; }
+        private Vector2 ToGo { get; set; }
 
-        public void Goto(Vector2 pos)
+        private void Goto(Vector2 pos)
         {
             ToGo = pos;
         }
 
-        public void Update(int maxX, int maxY)
+        public void Update()
         {
-            maxX -= _windowConfiguration.WindowWidth / 2 / _zoom + 3;
-            maxY = _zoneManager.ActiveZone.Image.Height - (_windowConfiguration.WindowHeight / 2 / _zoom + 3);
-            _minX = _windowConfiguration.WindowWidth / 2 / _zoom + 1;
-            _minY = _windowConfiguration.WindowHeight / 2 / _zoom;
+            var maxX = _zoneManager.ActiveZone.Image.Width - (_windowConfiguration.WindowWidth / 2 / Zoom + 3);
+            var maxY = _zoneManager.ActiveZone.Image.Height - (_windowConfiguration.WindowHeight / 2 / Zoom + 3);
+            var minX = _windowConfiguration.WindowWidth / 2 / Zoom + 1;
+            var minY = _windowConfiguration.WindowHeight / 2 / Zoom;
 
             if (_following != null)
                 Goto(new Vector2(_following.Position.X,
@@ -57,8 +50,8 @@ namespace LostAndFound.Core.Games
             _position.X = x;
             _position.Y = y;
 
-            _position.X = MathHelper.Clamp(_position.X, _minX, maxX);
-            _position.Y = MathHelper.Clamp(_position.Y, _minY, maxY);
+            _position.X = MathHelper.Clamp(_position.X, minX, maxX);
+            _position.Y = MathHelper.Clamp(_position.Y, minY, maxY);
         }
 
         public void OnZoneChanged(ZoneType zoneType)
@@ -75,7 +68,7 @@ namespace LostAndFound.Core.Games
                 Position = entity.Position;
         }
 
-        public Vector2 Position
+        private Vector2 Position
         {
             get => _position;
             set => _position = value;
@@ -83,13 +76,10 @@ namespace LostAndFound.Core.Games
 
         public Matrix GetMatrix() =>
             Matrix.CreateTranslation(new Vector3(-_position.X, -_position.Y, 0)) *
-            Matrix.CreateScale(_zoom, _zoom, 1) *
+            Matrix.CreateScale(Zoom, Zoom, 1) *
             Matrix.CreateTranslation(new Vector3(_windowConfiguration.Center.X, _windowConfiguration.Center.Y, 0));
 
-        public bool Intersects(Rectangle bounds) =>
-            Bounds.Intersects(bounds);
-
-        public Rectangle Bounds => new Rectangle((int) (_position.X - _windowConfiguration.Center.X),
+        private Rectangle Bounds => new Rectangle((int) (_position.X - _windowConfiguration.Center.X),
             (int) (_position.Y - _windowConfiguration.Center.Y), _windowConfiguration.WindowWidth,
             _windowConfiguration.WindowHeight);
     }

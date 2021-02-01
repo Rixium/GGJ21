@@ -15,16 +15,15 @@ namespace LostAndFound.Core.Games.Components
 
     public class PlayerControllerComponent : IComponent
     {
-        private BoxColliderComponent _boxColliderComponent;
+        private const int Speed = 1;
 
+        private readonly ZoneManager _zoneManager;
+        private readonly IInputManager _inputManager;
+
+        private BoxColliderComponent _boxColliderComponent;
         public int XVelocity { get; set; }
         public int YVelocity { get; set; }
 
-        private readonly IGameInstance _gameInstance;
-        private readonly ZoneManager _zoneManager;
-        private readonly IInputManager _inputManager;
-        private int _speed = 1;
-        private bool _canMove = true;
 
         public PlayerControllerComponent(ZoneManager zoneManager, IInputManager inputManager)
         {
@@ -60,20 +59,20 @@ namespace LostAndFound.Core.Games.Components
 
             if (_inputManager.KeyDown(Keys.A))
             {
-                xChange = -_speed;
+                xChange = -Speed;
             }
             else if (_inputManager.KeyDown(Keys.D))
             {
-                xChange = _speed;
+                xChange = Speed;
             }
 
             if (_inputManager.KeyDown(Keys.W))
             {
-                yChange = -_speed;
+                yChange = -Speed;
             }
             else if (_inputManager.KeyDown(Keys.S))
             {
-                yChange = _speed;
+                yChange = Speed;
             }
 
             if (xChange != 0 || yChange != 0)
