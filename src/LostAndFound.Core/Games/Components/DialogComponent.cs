@@ -7,8 +7,6 @@ using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using NotImplementedException = System.NotImplementedException;
 
 namespace LostAndFound.Core.Games.Components
 {
