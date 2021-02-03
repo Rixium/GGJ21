@@ -57,7 +57,8 @@
    { "name": "Sign", "group": "House_right", "opacity": 255, "blendMode": "normal" },
    { "name": "Door", "group": "House_right", "opacity": 255, "blendMode": "normal" },
    { "name": "Layer 18", "group": "House_right", "opacity": 150, "blendMode": "normal" },
-   { "name": "Creepy", "opacity": 124, "blendMode": "normal" }
+   { "name": "Creepy", "opacity": 124, "blendMode": "normal" },
+   { "name": "Entities", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
    { "name": "Slice 1", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 188, "w": 500, "h": 49 } }] },
@@ -69,7 +70,7 @@
    { "name": "Slice 5", "color": "#0000ffff", "data": "(Entity:StreetLamp)", "keys": [{ "frame": 0, "bounds": {"x": 4, "y": 161, "w": 10, "h": 10 } }] },
    { "name": "Slice 6", "color": "#0000ffff", "data": "(Entity:StreetLamp)(Component:LightComponent)", "keys": [{ "frame": 0, "bounds": {"x": 101, "y": 161, "w": 10, "h": 10 } }] },
    { "name": "Slice 7", "color": "#0000ffff", "data": "(Entity:StreetLamp)(Component:BounceComponent,PlayerControllerComponent,BoxColliderComponent)", "keys": [{ "frame": 0, "bounds": {"x": 195, "y": 161, "w": 10, "h": 10 } }] },
-   { "name": "Slice 8", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 428, "y": 246, "w": 70, "h": 6 } }] }
+   { "name": "Slice 8", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 423, "y": 246, "w": 82, "h": 6 } }] }
   ]
  }
 }
