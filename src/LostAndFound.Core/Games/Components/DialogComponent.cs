@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Asepreadr;
 using Asepreadr.Aseprite;
 using Asepreadr.Graphics;
@@ -17,6 +18,7 @@ namespace LostAndFound.Core.Games.Components
         private readonly IContentLoader<AsepriteSpriteMap> _spriteMapLoader;
         private readonly Queue<string> _dialogQueue = new Queue<string>();
 
+        private Random _random = new Random();
         private string _activeDialog;
         private SpriteFont _dialogFont;
         private Texture2D _pixel;
@@ -51,6 +53,7 @@ namespace LostAndFound.Core.Games.Components
                     var letter = _letterQueue.Dequeue();
                     var sound = _contentChest.Get<SoundEffect>($"Audio\\SoundEffects\\Mouth\\{letter}");
                     _soundEffect = sound.CreateInstance();
+                    _soundEffect.Pitch = (float) (_random.NextDouble() * (1 - -1) - 1);
                     _soundEffect.Play();
                 }
             }
