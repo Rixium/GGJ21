@@ -13,7 +13,7 @@ namespace LostAndFound.Core.Games.Components
         Right
     }
 
-    public class PlayerControllerComponent : IComponent
+    public class PlayerControllerComponent : Component
     {
         private const int Speed = 1;
 
@@ -31,19 +31,19 @@ namespace LostAndFound.Core.Games.Components
             _inputManager = inputManager;
         }
 
-        public IEntity Entity { get; set; }
+        
 
-        public void Start()
+        public override void Start()
         {
             _boxColliderComponent = Entity.GetComponent<BoxColliderComponent>();
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             PlayerMovement();
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
         }
 

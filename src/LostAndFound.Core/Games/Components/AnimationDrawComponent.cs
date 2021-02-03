@@ -1,24 +1,22 @@
-﻿using LostAndFound.Core.Games.Entities;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
 {
-    public class AnimationDrawComponent : IComponent
+    public class AnimationDrawComponent : Component
     {
         private AnimatorComponent _animator;
-        public IEntity Entity { get; set; }
 
-        public void Start()
+        public override void Start()
         {
             _animator = Entity.GetComponent<AnimatorComponent>();
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             var frame = _animator.Current;
             if (frame == null)

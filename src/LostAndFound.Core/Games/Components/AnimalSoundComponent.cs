@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using LostAndFound.Core.Games.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
 {
-    public class AnimalSoundComponent : IComponent
+    public class AnimalSoundComponent : Component
     {
-        public IEntity Entity { get; set; }
         public AnimalType _animalType = AnimalType.Dog;
         public int SoundInterval = 2;
 
@@ -19,7 +17,7 @@ namespace LostAndFound.Core.Games.Components
         
         Random random = new Random();
 
-        public void Start()
+        public override void Start()
         {
             _lastSoundTime = random.Next(0, 5000);
             _soundComponent = Entity.GetComponent<SoundComponent>();
@@ -51,7 +49,7 @@ namespace LostAndFound.Core.Games.Components
             }
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             var distance = Vector2.Distance(Entity.Position, _questFulfilmentComponent.QuestFulfiller.Position);
             var soundVolume = Map(100, 0, 0, 1, distance);
@@ -63,7 +61,7 @@ namespace LostAndFound.Core.Games.Components
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
         }
         

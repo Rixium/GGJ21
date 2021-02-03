@@ -2,20 +2,17 @@
 using Asepreadr.Aseprite;
 using Asepreadr.Graphics;
 using Asepreadr.Loaders;
-using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Questing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
 {
-    public class AnimalHolderComponent : IComponent
+    public class AnimalHolderComponent : Component
     {
         private readonly IContentLoader<AsepriteSpriteMap> _spriteMapLoader;
         private AsepriteSpriteMap _spriteMap;
         private Dictionary<string, Sprite> _animalSprites = new Dictionary<string, Sprite>();
-
-        public IEntity Entity { get; set; }
         public Quest Quest { get; private set; }
 
         public AnimalHolderComponent(IContentLoader<AsepriteSpriteMap> spriteMapLoader)
@@ -23,7 +20,7 @@ namespace LostAndFound.Core.Games.Components
             _spriteMapLoader = spriteMapLoader;
         }
 
-        public void Start()
+        public override void Start()
         {
             _animalSprites = new Dictionary<string, Sprite>();
             _spriteMap = _spriteMapLoader.GetContent("Assets//Images//Animals//animals.json");
@@ -41,11 +38,11 @@ namespace LostAndFound.Core.Games.Components
             _animalSprites.Add("Cat_6", _spriteMap.CreateSpriteFromRegion("Cat_6"));
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             if (Quest == null)
             {

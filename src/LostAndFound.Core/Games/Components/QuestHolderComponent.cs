@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LostAndFound.Core.Games.Components
 {
-    public class QuestHolderComponent : IComponent
+    public class QuestHolderComponent : Component
     {
         private Random _random = new Random();
         public Action<Quest, IEntity> QuestTaken { get; set; }
@@ -22,7 +22,7 @@ namespace LostAndFound.Core.Games.Components
         private readonly ZoneManager _zoneManager;
         private readonly IInputManager _inputManager;
         private readonly IContentChest _contentChest;
-        public IEntity Entity { get; set; }
+        
 
         private List<QuestGiverComponent> _questGiversNextTo = new List<QuestGiverComponent>();
         private MoneyBagComponent _moneyBagComponent;
@@ -39,7 +39,7 @@ namespace LostAndFound.Core.Games.Components
             _contentChest = contentChest;
         }
 
-        public void Start()
+        public override void Start()
         {
             _moneyBagComponent = Entity.GetComponent<MoneyBagComponent>();
             _boxColliderComponent = Entity.GetComponent<BoxColliderComponent>();
@@ -48,7 +48,7 @@ namespace LostAndFound.Core.Games.Components
             _questSuccessSound = _contentChest.Get<SoundEffect>("Audio\\SoundEffects\\quest_complete");
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             foreach (var entity in _zoneManager.ActiveZone.Entities)
             {
@@ -187,7 +187,7 @@ namespace LostAndFound.Core.Games.Components
             _questSuccessSound.Play();
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             
         }

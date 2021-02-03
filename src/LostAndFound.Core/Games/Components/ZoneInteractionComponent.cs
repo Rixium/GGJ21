@@ -1,5 +1,4 @@
 ﻿using System;
-using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Games.Zones;
 using Microsoft.Xna.Framework;
@@ -7,23 +6,23 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
 {
-    public class ZoneInteractionComponent : IComponent
+    public class ZoneInteractionComponent : Component
     {
         private readonly ZoneManager _zoneManager;
         private BoxColliderComponent _entityCollider;
-        public IEntity Entity { get; set; }
+        
 
         public ZoneInteractionComponent(ZoneManager zoneManager)
         {
             _zoneManager = zoneManager;
         }
 
-        public void Start()
+        public override void Start()
         {
             _entityCollider = Entity.GetComponent<BoxColliderComponent>();
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             var entityZone = _zoneManager.ActiveZone;
 
@@ -75,7 +74,7 @@ namespace LostAndFound.Core.Games.Components
             _zoneManager.SetActiveZone(zoneToGoTo.ZoneType);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
         }
     }

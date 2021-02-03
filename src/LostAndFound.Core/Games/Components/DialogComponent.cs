@@ -4,18 +4,15 @@ using Asepreadr.Aseprite;
 using Asepreadr.Graphics;
 using Asepreadr.Loaders;
 using LostAndFound.Core.Extensions;
-using LostAndFound.Core.Games.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
 {
-    internal class DialogComponent : IComponent
+    internal class DialogComponent : Component
     {
         private readonly IContentChest _contentChest;
         private readonly IContentLoader<AsepriteSpriteMap> _spriteMapLoader;
-        public IEntity Entity { get; set; }
-
         private readonly Queue<string> _dialogQueue = new Queue<string>();
 
         private string _activeDialog;
@@ -32,7 +29,7 @@ namespace LostAndFound.Core.Games.Components
             _spriteMapLoader = spriteMapLoader;
         }
 
-        public void Start()
+        public override void Start()
         {
             var spriteMap = _spriteMapLoader.GetContent("Assets\\UI\\UI.json");
             _nextButtonSprite = spriteMap.CreateSpriteFromRegion("Next_Button");
@@ -42,7 +39,7 @@ namespace LostAndFound.Core.Games.Components
             _wandererComponent = Entity.GetComponent<WandererComponent>();
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             if (_activeDialog == null || _curr == _activeDialog.Length)
             {
@@ -60,7 +57,7 @@ namespace LostAndFound.Core.Games.Components
             _curr++;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             if (_activeDialog == null) return;
             var dialogPosition = GetDialogPosition();

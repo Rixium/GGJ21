@@ -1,25 +1,24 @@
 ﻿using Asepreadr.Graphics;
-using LostAndFound.Core.Games.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
 {
-    public class StaticDrawComponent : IComponent
+    public class StaticDrawComponent : Component
     {
         public Sprite Image { get; set; }
 
-        public IEntity Entity { get; set; }
+        
 
-        public void Start()
+        public override void Start()
         {
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             Entity.Bottom = (int) (Entity.Position.Y + Image.Height);
             Entity.Height = Image.Height;

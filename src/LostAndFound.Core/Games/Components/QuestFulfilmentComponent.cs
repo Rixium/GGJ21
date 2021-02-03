@@ -5,23 +5,23 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
 {
-    public class QuestFulfilmentComponent : IComponent
+    public class QuestFulfilmentComponent : Component
     {
-        public IEntity Entity { get; set; }
+        
         public Quest Quest { get; set; }
         public IEntity QuestFulfiller { get; set; }
 
-        public void Start()
+        public override void Start()
         {
             
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             
         }

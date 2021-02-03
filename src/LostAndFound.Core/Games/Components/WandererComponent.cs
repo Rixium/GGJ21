@@ -1,15 +1,14 @@
 ﻿using System;
 using LostAndFound.Core.Extensions;
-using LostAndFound.Core.Games.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
 {
-    internal class WandererComponent : IComponent
+    internal class WandererComponent : Component
     {
         private readonly ZoneManager _zoneManager;
-        public IEntity Entity { get; set; }
+        
         public bool Active { get; set; } = true;
 
         private Vector2 _wanderPosition;
@@ -24,12 +23,12 @@ namespace LostAndFound.Core.Games.Components
             _zoneManager = zoneManager;
         }
         
-        public void Start()
+        public override void Start()
         {
             _wanderPosition = Entity.Position;
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             if (!Active) return;
             
@@ -54,7 +53,7 @@ namespace LostAndFound.Core.Games.Components
             return randomPosition;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
         }
     }

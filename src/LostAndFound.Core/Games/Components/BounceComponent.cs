@@ -1,11 +1,10 @@
 ﻿using LostAndFound.Core.Extensions;
-using LostAndFound.Core.Games.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
 {
-    public class BounceComponent : IComponent
+    public class BounceComponent : Component
     {
         private const float MoveDelay = 0.01f;
         private const int BounceHeight = 3;
@@ -18,13 +17,11 @@ namespace LostAndFound.Core.Games.Components
 
         public float BounceSpeed = 1f;
 
-        public IEntity Entity { get; set; }
-
-        public void Start()
+        public override void Start()
         {
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             _bounceTimer -= gameTime.AsDelta();
 
@@ -60,7 +57,7 @@ namespace LostAndFound.Core.Games.Components
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
         }
     }

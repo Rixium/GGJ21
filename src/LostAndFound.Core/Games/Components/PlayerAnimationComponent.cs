@@ -1,22 +1,21 @@
-﻿using LostAndFound.Core.Games.Entities;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
 {
-    public class PlayerAnimationComponent : IComponent
+    public class PlayerAnimationComponent : Component
     {
         private PlayerControllerComponent _moveComponent;
         private AnimatorComponent _animatorComponent;
-        public IEntity Entity { get; set; }
+        
 
-        public void Start()
+        public override void Start()
         {
             _moveComponent = Entity.GetComponent<PlayerControllerComponent>();
             _animatorComponent = Entity.GetComponent<AnimatorComponent>();
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             if (_moveComponent.XVelocity > 0)
             {
@@ -40,7 +39,7 @@ namespace LostAndFound.Core.Games.Components
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
         }
     }

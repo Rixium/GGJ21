@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using Asepreadr;
 using Asepreadr.Aseprite;
 using Asepreadr.Graphics;
 using Asepreadr.Loaders;
-using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Games.Questing;
 using LostAndFound.Core.Utilities;
@@ -22,7 +19,7 @@ namespace LostAndFound.Core.Games.Components
         END
     }
 
-    public class QuestGiverComponent : IComponent
+    public class QuestGiverComponent : Component
     {
         private readonly IContentChest _contentChest;
         private readonly IContentLoader<AsepriteSpriteMap> _spriteMapLoader;
@@ -35,7 +32,7 @@ namespace LostAndFound.Core.Games.Components
         private Dictionary<string, Sprite> _animalSprites = new Dictionary<string, Sprite>();
         private Sprite _animalScroll;
 
-        public IEntity Entity { get; set; }
+        
         public string Name { get; set; }
         public bool Highlighted { get; set; }
 
@@ -45,7 +42,7 @@ namespace LostAndFound.Core.Games.Components
             _spriteMapLoader = spriteMapLoader;
         }
 
-        public void Start()
+        public override void Start()
         {
             _staticDrawComponent = Entity.GetComponent<StaticDrawComponent>();
             Entity.Position -= new Vector2(0, _staticDrawComponent.Image.Height) - new Vector2(0, 10);
@@ -73,11 +70,11 @@ namespace LostAndFound.Core.Games.Components
             _animalSprites.Add("Cat_6", animalSpriteMap.CreateSpriteFromRegion("Cat_6"));
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             if (GivenQuest())
             {

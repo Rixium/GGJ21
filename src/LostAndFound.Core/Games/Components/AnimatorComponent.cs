@@ -2,14 +2,13 @@
 using Asepreadr.Graphics;
 using LostAndFound.Core.Content;
 using LostAndFound.Core.Extensions;
-using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
 {
-    public class AnimatorComponent : IComponent
+    public class AnimatorComponent : Component
     {
         private readonly Dictionary<string, Animation> _animations = new Dictionary<string, Animation>();
 
@@ -36,13 +35,11 @@ namespace LostAndFound.Core.Games.Components
             _currentFrameTime = 0;
         }
 
-        public IEntity Entity { get; set; }
-
-        public void Start()
+        public override void Start()
         {
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             if (!Animating) return;
 
@@ -53,7 +50,7 @@ namespace LostAndFound.Core.Games.Components
             NextFrame();
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
         }
 

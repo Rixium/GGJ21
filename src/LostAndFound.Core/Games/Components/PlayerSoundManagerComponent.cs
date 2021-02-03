@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using LostAndFound.Core.Games.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
 {
-    public class PlayerSoundManagerComponent : IComponent
+    public class PlayerSoundManagerComponent : Component
     {
-        public IEntity Entity { get; set; }
+        
 
         private SoundComponent _soundComponent;
         private PlayerControllerComponent _playerControllerComponent;
@@ -17,7 +16,7 @@ namespace LostAndFound.Core.Games.Components
         private bool _isMoving;
         private double _lastStepTime;
 
-        public void Start()
+        public override void Start()
         {
             _soundComponent = Entity.GetComponent<SoundComponent>();
             _playerControllerComponent = Entity.GetComponent<PlayerControllerComponent>();
@@ -32,7 +31,7 @@ namespace LostAndFound.Core.Games.Components
             _soundPaths.Add("Audio/SoundEffects/Footsteps/footstep_8");
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             if ((_playerControllerComponent.XVelocity != 0 || _playerControllerComponent.YVelocity != 0) && !_isMoving)
             { 
@@ -55,7 +54,7 @@ namespace LostAndFound.Core.Games.Components
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             
         }

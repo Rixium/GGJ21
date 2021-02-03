@@ -1,32 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using Asepreadr;
-using LostAndFound.Core.Games.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
 {
-    public class SoundComponent : IComponent
+    public class SoundComponent : Component
     {
         private readonly IContentChest _contentChest;
-        public IEntity Entity { get; set; }
+        
 
         public SoundComponent(IContentChest contentChest)
         {
             _contentChest = contentChest;
         }
         
-        public void Start()
+        public override void Start()
         {
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
         }
 

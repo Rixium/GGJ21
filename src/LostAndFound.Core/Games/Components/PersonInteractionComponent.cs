@@ -1,11 +1,10 @@
-﻿using LostAndFound.Core.Games.Entities;
-using LostAndFound.Core.Input;
+﻿using LostAndFound.Core.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
 {
-    public class PersonInteractionComponent : IComponent
+    public class PersonInteractionComponent : Component
     {
         private readonly IInputManager _inputManager;
         private readonly IGameInstance _gameInstance;
@@ -16,17 +15,17 @@ namespace LostAndFound.Core.Games.Components
             _gameInstance = gameInstance;
         }
 
-        public IEntity Entity { get; set; }
+        
 
-        public void Start()
+        public override void Start()
         {
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             
         }
