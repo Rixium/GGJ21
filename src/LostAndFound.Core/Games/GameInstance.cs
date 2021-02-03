@@ -1,8 +1,8 @@
 ﻿using System.Linq;
+using Asepreadr.Aseprite;
+using Asepreadr.Loaders;
 using LostAndFound.Core.Config;
 using LostAndFound.Core.Content;
-using LostAndFound.Core.Content.Aseprite;
-using LostAndFound.Core.Content.ContentLoader;
 using LostAndFound.Core.Extensions;
 using LostAndFound.Core.Games.Components;
 using LostAndFound.Core.Games.Entities;

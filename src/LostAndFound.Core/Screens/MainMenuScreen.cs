@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Asepreadr;
+using Asepreadr.Aseprite;
+using Asepreadr.Loaders;
 using LostAndFound.Core.Config;
-using LostAndFound.Core.Content;
-using LostAndFound.Core.Content.Aseprite;
-using LostAndFound.Core.Content.ContentLoader;
 using LostAndFound.Core.Graphics;
 using LostAndFound.Core.Transitions;
 using LostAndFound.Core.UI;

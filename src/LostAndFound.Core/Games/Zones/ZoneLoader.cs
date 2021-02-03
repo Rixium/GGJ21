@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using LostAndFound.Core.Content.Aseprite;
-using LostAndFound.Core.Content.ContentLoader;
+using Asepreadr.Aseprite;
+using Asepreadr.Loaders;
 using LostAndFound.Core.Games.Models;
 using Microsoft.Xna.Framework;
 

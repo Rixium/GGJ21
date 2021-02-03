@@ -1,8 +1,10 @@
-﻿using Autofac;
+﻿using Asepreadr;
+using Asepreadr.Aseprite;
+using Asepreadr.Loaders;
+using Asepreadr.Serialization;
+using Autofac;
 using LostAndFound.Core.Config;
 using LostAndFound.Core.Content;
-using LostAndFound.Core.Content.Aseprite;
-using LostAndFound.Core.Content.ContentLoader;
 using LostAndFound.Core.Games;
 using LostAndFound.Core.Games.Animals;
 using LostAndFound.Core.Games.Components;
@@ -40,8 +42,6 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<ContentChest>().As<IContentChest>().SingleInstance();
             builder.RegisterType<FileSystem>().As<IFileSystem>().SingleInstance();
             builder.RegisterType<ApplicationFolder>().As<IApplicationFolder>().SingleInstance();
-
-            builder.RegisterType<ContentChest>().As<IContentChest>().SingleInstance();
 
             builder.RegisterType<WindowConfiguration>().As<IWindowConfiguration>().SingleInstance();
 

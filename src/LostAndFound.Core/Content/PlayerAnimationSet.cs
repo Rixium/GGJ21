@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
-using LostAndFound.Core.Content.Aseprite;
-using LostAndFound.Core.Content.ContentLoader;
+using Asepreadr.Aseprite;
+using Asepreadr.Graphics;
+using Asepreadr.Loaders;
 using LostAndFound.Core.Games.Components;
 using LostAndFound.Core.Graphics;
 
@@ -14,7 +15,7 @@ namespace LostAndFound.Core.Content
         {
             _spriteMapLoader = spriteMapLoader;
         }
-        
+
         public void AddTo(AnimatorComponent animatorComponent)
         {
             var playerAnimationMap = _spriteMapLoader.GetContent("Assets/Images/Player/PlayerAnimations.json");

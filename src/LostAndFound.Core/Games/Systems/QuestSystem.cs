@@ -1,12 +1,12 @@
-﻿using LostAndFound.Core.Content;
-using LostAndFound.Core.Content.Aseprite;
-using LostAndFound.Core.Content.ContentLoader;
+﻿using Asepreadr;
+using Asepreadr.Aseprite;
+using Asepreadr.Graphics;
+using Asepreadr.Loaders;
 using LostAndFound.Core.Extensions;
 using LostAndFound.Core.Games.Components;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Games.Questing;
-using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using LostAndFound.Core.Content;
+using Asepreadr;
 using LostAndFound.Core.Games.Models;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -9,9 +9,9 @@ namespace LostAndFound.Core.Games.Person
 {
     public class PersonFactory : IPersonFactory
     {
-        private Random _random = new Random();
+        private readonly Random _random = new Random();
+        private readonly IContentChest _contentChest;
         
-        private IContentChest _contentChest;
         private List<Texture2D> _personTextures;
 
         public PersonFactory(IContentChest contentChest)
