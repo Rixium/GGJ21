@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Asepreadr;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Questing;
@@ -21,7 +22,7 @@ namespace LostAndFound.Core.Games.Components
         private readonly IContentChest _contentChest;
         public IEntity Entity { get; set; }
 
-        private QuestGiverComponent _questGiverNextTo;
+        private List<QuestGiverComponent> _questGiversNextTo = new List<QuestGiverComponent>();
         private MoneyBagComponent _moneyBagComponent;
         private BoxColliderComponent _boxColliderComponent;
         private AnimalHolderComponent _animalHolder;
@@ -45,12 +46,6 @@ namespace LostAndFound.Core.Games.Components
 
         public void Update(GameTime gameTime)
         {
-            if (_questGiverNextTo != null)
-            {
-                _questGiverNextTo.Highlighted = false;
-                _questGiverNextTo = null;
-            }
-            
             foreach (var entity in _zoneManager.ActiveZone.Entities)
             {
                 CheckForQuestPickup(entity);
@@ -76,13 +71,36 @@ namespace LostAndFound.Core.Games.Components
             if (Vector2.Distance(Entity.Position, dialogComponent.Entity.Position) < 20)
             {
                 dialogComponent.SetNear(true);
-                
-                _questGiverNextTo = dialogComponent.Entity.GetComponent<QuestGiverComponent>();
-                _questGiverNextTo.Highlighted = true;
 
+                bool alreadyAdded = false;
+                foreach (var questGiver in _questGiversNextTo)
+                {
+                    if (questGiver == entity.GetComponent<QuestGiverComponent>())
+                    {
+                        alreadyAdded = true;
+                        questGiver.Highlighted = true;
+                        break;
+                    }
+                }
+
+                if (!alreadyAdded)
+                {
+                    _questGiversNextTo.Add(dialogComponent.Entity.GetComponent<QuestGiverComponent>());
+                }
+                
                 return _inputManager.KeyPressed(Keys.E) && dialogComponent.Talk();
             }
-            
+
+            foreach (var questGiver in _questGiversNextTo)
+            {
+                if (questGiver == entity.GetComponent<QuestGiverComponent>())
+                {
+                    questGiver.Highlighted = false;
+                    _questGiversNextTo.Remove(questGiver);
+                    break;
+                }
+            }
+
             dialogComponent.SetNear(false);
 
             return false;
