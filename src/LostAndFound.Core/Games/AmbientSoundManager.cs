@@ -46,6 +46,7 @@ namespace LostAndFound.Core.Games
                 default:
                     throw new ArgumentOutOfRangeException(nameof(zoneType), zoneType, null);
             }
+            _ambientInstance.IsLooped = true;
             _ambientInstance.Play();
         }
 
