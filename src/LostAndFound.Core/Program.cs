@@ -7,6 +7,11 @@ namespace LostAndFound.Core
 {
     public static class Program
     {
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //  You're doing really fucking well Dan, I am glad I met u so u can teach me how to become programming mastr. 1337 sh!t bro. //
+        //  Now let's make some fucking games, fren! (Seriously this time, I won't quit... I really won't.                            //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         public static IContainer Container;
 
         [STAThread]
