@@ -4,7 +4,6 @@ using Asepreadr;
 using Asepreadr.Aseprite;
 using Asepreadr.Graphics;
 using Asepreadr.Loaders;
-using LostAndFound.Core.Extensions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
