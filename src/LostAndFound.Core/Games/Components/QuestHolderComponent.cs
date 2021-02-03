@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Asepreadr;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Questing;
@@ -23,8 +22,7 @@ namespace LostAndFound.Core.Games.Components
         private readonly IInputManager _inputManager;
         private readonly IContentChest _contentChest;
         public IEntity Entity { get; set; }
-
-        private List<QuestGiverComponent> _questGiversNextTo = new List<QuestGiverComponent>();
+        
         private MoneyBagComponent _moneyBagComponent;
         private BoxColliderComponent _boxColliderComponent;
         private AnimalHolderComponent _animalHolder;
