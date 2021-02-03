@@ -30,7 +30,7 @@ namespace LostAndFound.Core.Games.Zones
                 return newList;
             }
         }
-
+        
         public void Update(GameTime gameTime)
         {
             foreach (var entity in _entitiesToRemove)

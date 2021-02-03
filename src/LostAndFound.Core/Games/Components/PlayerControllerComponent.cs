@@ -1,4 +1,5 @@
-﻿using LostAndFound.Core.Extensions;
+﻿using System.Linq;
+using LostAndFound.Core.Extensions;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Input;
 using Microsoft.Xna.Framework;
@@ -31,7 +32,6 @@ namespace LostAndFound.Core.Games.Components
             _inputManager = inputManager;
         }
 
-        
 
         public override void Start()
         {
@@ -90,28 +90,25 @@ namespace LostAndFound.Core.Games.Components
 
             var bounds = _boxColliderComponent.Bounds.Add(new Rectangle(xMove, 0, 0, 0));
 
-            foreach (var collider in _zoneManager.ActiveZone.Colliders)
+            var allColliders = _zoneManager.ActiveZone.Colliders.Where(x => x.GetProperty("Solid") != null)
+                .Select(x => x.Bounds).ToList();
+
+            foreach (var collider in allColliders)
             {
-                if (collider.GetProperty("Solid") != null)
+                if (collider.Intersects(bounds))
                 {
-                    if (collider.Bounds.Intersects(bounds))
-                    {
-                        var depth = bounds.GetIntersectionDepth(collider.Bounds);
-                        newPosition.X += depth.X;
-                    }
+                    var depth = bounds.GetIntersectionDepth(collider);
+                    newPosition.X += depth.X;
                 }
             }
 
             bounds = _boxColliderComponent.Bounds.Add(new Rectangle(0, yMove, 0, 0));
-            foreach (var collider in _zoneManager.ActiveZone.Colliders)
+            foreach (var collider in allColliders)
             {
-                if (collider.GetProperty("Solid") != null)
+                if (collider.Intersects(bounds))
                 {
-                    if (collider.Bounds.Intersects(bounds))
-                    {
-                        var depth = bounds.GetIntersectionDepth(collider.Bounds);
-                        newPosition.Y += depth.Y;
-                    }
+                    var depth = bounds.GetIntersectionDepth(collider);
+                    newPosition.Y += depth.Y;
                 }
             }
 

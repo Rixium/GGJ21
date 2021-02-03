@@ -261,6 +261,18 @@
 /processorParam:TextureFormat=Color
 /build:Images/Animals/animals.png
 
+#begin Images/entities.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/entities.png
+
 #begin Images/People/Doctor.png
 /importer:TextureImporter
 /processor:TextureProcessor

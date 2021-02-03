@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Asepreadr.Aseprite;
+using Asepreadr.Loaders;
+using LostAndFound.Core.Extensions;
 using LostAndFound.Core.Games.Components;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Models;
@@ -15,19 +18,22 @@ namespace LostAndFound.Core.Games
         public Action<ZoneType> ZoneChanged { get; set; }
 
         private readonly IZoneLoader _zoneLoader;
+        private readonly IContentLoader<AsepriteSpriteMap> _spriteMapLoader;
 
         private readonly IList<IZone> _zones = new List<IZone>();
         private const ZoneType StartingZone = ZoneType.Street;
         public IZone ActiveZone => _zones.First(x => x.ZoneType == _currentZone);
         private ZoneType _currentZone = StartingZone;
 
-        public ZoneManager(IZoneLoader zoneLoader)
+        public ZoneManager(IZoneLoader zoneLoader, IContentLoader<AsepriteSpriteMap> spriteMapLoader)
         {
             _zoneLoader = zoneLoader;
+            _spriteMapLoader = spriteMapLoader;
         }
 
         public void Load()
         {
+            var entitySpriteMap = _spriteMapLoader.GetContent("Assets\\Images\\entities.json");
             var zoneData = _zoneLoader.LoadZones();
 
             foreach (var zone in zoneData)
@@ -51,6 +57,19 @@ namespace LostAndFound.Core.Games
 
                     lightEntity.AddComponent(lightComponent);
                     newZone.Entities.Add(lightEntity);
+                }
+
+                var zoneEntities = zone.Colliders.Where(x => x.GetProperty("Entity") != null);
+
+                foreach (var collider in zoneEntities)
+                {
+                    var entity = new Entity(collider.Bounds.ToVector2());
+                    var staticDrawComponent = Program.Resolve<StaticDrawComponent>();
+                    var entityName = collider.Properties["Entity"];
+                    staticDrawComponent.Image = entitySpriteMap.CreateSpriteFromRegion(entityName);
+                    
+                    entity.AddComponent(staticDrawComponent);
+                    newZone.Entities.Add(entity);
                 }
 
                 _zones.Add(newZone);
