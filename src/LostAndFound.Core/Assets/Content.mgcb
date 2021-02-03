@@ -429,6 +429,18 @@
 /processorParam:TextureFormat=Color
 /build:Images/entities.png
 
+#begin Images/people.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/people.png
+
 #begin Images/People/Doctor.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -476,18 +488,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/People/Marge.png
-
-#begin Images/People/people.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/People/people.png
 
 #begin Images/Player/Idle_1.png
 /importer:TextureImporter

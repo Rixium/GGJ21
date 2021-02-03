@@ -35,7 +35,7 @@ namespace LostAndFound.Core.Games
         public void Load()
         {
             var entitySpriteMap = _spriteMapLoader.GetContent("Assets\\Images\\entities.json");
-            var peopleSpriteMap = _spriteMapLoader.GetContent("Assets\\Images\\People\\People.json");
+            var peopleSpriteMap = _spriteMapLoader.GetContent("Assets\\Images\\People.json");
             var zoneData = _zoneLoader.LoadZones();
 
             foreach (var zone in zoneData)

@@ -51,27 +51,18 @@ namespace LostAndFound.Core.Games.Components
                 if (_soundEffect == null || _soundEffect.State == SoundState.Stopped)
                 {
                     var letter = _letterQueue.Dequeue();
-                    var sound = _contentChest.Get<SoundEffect>($"Audio\\SoundEffects\\Mouth\\{letter}");
-                    _soundEffect = sound.CreateInstance();
-                    _soundEffect.Pitch = (float) (_random.NextDouble() * (1 - -1) - 1);
-                    _soundEffect.Play();
+                    
+                    if (char.IsLetter(letter))
+                    {
+                        var sound = _contentChest.Get<SoundEffect>($"Audio\\SoundEffects\\Mouth\\{letter}");
+                        _soundEffect = sound.CreateInstance();
+                        _soundEffect.Pitch = (float) (_random.NextDouble() * (0 - -1) - 1);
+                        _soundEffect.Play();
+                       
+                    }
+                    _curr++;
                 }
             }
-
-            if (_activeDialog == null || _curr == _activeDialog.Length)
-            {
-                return;
-            }
-
-            _timer -= gameTime.AsDelta();
-
-            if (_timer > 0)
-            {
-                return;
-            }
-
-            _timer = 0.05f;
-            _curr++;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -126,6 +117,13 @@ namespace LostAndFound.Core.Games.Components
 
         public bool Talk()
         {
+            if (_curr < _activeDialog?.Length)
+            {
+                _curr = _activeDialog.Length;
+                _letterQueue.Clear();
+                return true;
+            }
+            
             if (!HasDialog())
             {
                 _activeDialog = null;
@@ -137,10 +135,7 @@ namespace LostAndFound.Core.Games.Components
             _letterQueue = new Queue<char>();
             foreach (var letter in _activeDialog.ToLower())
             {
-                if (char.IsLetter(letter))
-                {
-                    _letterQueue.Enqueue(letter);
-                }
+                _letterQueue.Enqueue(letter);
             }
 
             _curr = 0;
