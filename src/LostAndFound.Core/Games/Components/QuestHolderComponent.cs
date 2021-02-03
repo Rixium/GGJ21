@@ -17,6 +17,8 @@ namespace LostAndFound.Core.Games.Components
         public Action<Quest, IEntity> QuestTaken { get; set; }
         public Action<Quest> QuestComplete { get; set; }
 
+        public int InteractionRange = 20;
+
         private readonly ZoneManager _zoneManager;
         private readonly IInputManager _inputManager;
         private readonly IContentChest _contentChest;
@@ -27,6 +29,8 @@ namespace LostAndFound.Core.Games.Components
         private BoxColliderComponent _boxColliderComponent;
         private AnimalHolderComponent _animalHolder;
         private SoundEffect _questSuccessSound;
+        private QuestGiverComponent _firstActiveQuestGiver;
+        private bool _isInsideInteractionRange;
 
         public QuestHolderComponent(ZoneManager zoneManager, IInputManager inputManager, IContentChest contentChest)
         {
@@ -48,13 +52,21 @@ namespace LostAndFound.Core.Games.Components
         {
             foreach (var entity in _zoneManager.ActiveZone.Entities)
             {
+                _isInsideInteractionRange = (Vector2.Distance(Entity.Position, entity.Position) < InteractionRange);
+
+                _firstActiveQuestGiver ??= entity.GetComponent<QuestGiverComponent>();
+
+                if (_firstActiveQuestGiver == null) continue;
+
+                if (entity != _firstActiveQuestGiver.Entity) continue;
+                
                 CheckForQuestPickup(entity);
 
                 if (CheckForDialog(entity))
                 {
                     break;
                 }
-
+                        
                 CheckForQuests(entity);
             }
         }
@@ -68,37 +80,22 @@ namespace LostAndFound.Core.Games.Components
                 return false;
             }
 
-            if (Vector2.Distance(Entity.Position, dialogComponent.Entity.Position) < 20)
+            if (_isInsideInteractionRange)
             {
                 dialogComponent.SetNear(true);
 
-                bool alreadyAdded = false;
-                foreach (var questGiver in _questGiversNextTo)
+                if (_firstActiveQuestGiver != null)
                 {
-                    if (questGiver == entity.GetComponent<QuestGiverComponent>())
-                    {
-                        alreadyAdded = true;
-                        questGiver.Highlighted = true;
-                        break;
-                    }
+                    _firstActiveQuestGiver.Highlighted = true;
                 }
 
-                if (!alreadyAdded)
-                {
-                    _questGiversNextTo.Add(dialogComponent.Entity.GetComponent<QuestGiverComponent>());
-                }
-                
                 return _inputManager.KeyPressed(Keys.E) && dialogComponent.Talk();
             }
 
-            foreach (var questGiver in _questGiversNextTo)
+            if (_firstActiveQuestGiver != null)
             {
-                if (questGiver == entity.GetComponent<QuestGiverComponent>())
-                {
-                    questGiver.Highlighted = false;
-                    _questGiversNextTo.Remove(questGiver);
-                    break;
-                }
+                _firstActiveQuestGiver.Highlighted = false;
+                _firstActiveQuestGiver = null;
             }
 
             dialogComponent.SetNear(false);
@@ -142,7 +139,7 @@ namespace LostAndFound.Core.Games.Components
             {
                 return;
             }
-
+            
             var questGiverComponent = entity.GetComponent<QuestGiverComponent>();
 
             if (questGiverComponent == null)
@@ -150,7 +147,7 @@ namespace LostAndFound.Core.Games.Components
                 return;
             }
 
-            if (Vector2.Distance(Entity.Position, questGiverComponent.Entity.Position) < 20)
+            if (_isInsideInteractionRange)
             {
                 if (questGiverComponent.HasQuestToGive())
                 {
