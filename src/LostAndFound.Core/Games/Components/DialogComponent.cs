@@ -24,6 +24,7 @@ namespace LostAndFound.Core.Games.Components
         private Sprite _nextButtonSprite;
         private int _curr;
         private float _timer;
+        private WandererComponent _wandererComponent;
 
         public DialogComponent(IContentChest contentChest, IContentLoader<AsepriteSpriteMap> spriteMapLoader)
         {
@@ -38,6 +39,7 @@ namespace LostAndFound.Core.Games.Components
 
             _dialogFont = _contentChest.Get<SpriteFont>("Fonts\\dialogFont");
             _pixel = _contentChest.Get<Texture2D>("Utils\\pixel");
+            _wandererComponent = Entity.GetComponent<WandererComponent>();
         }
 
         public void Update(GameTime gameTime)
@@ -75,16 +77,25 @@ namespace LostAndFound.Core.Games.Components
                 dialogSize * 0.5f,
                 0.5f, SpriteEffects.None, 0f);
 
-                spriteBatch.Draw(_nextButtonSprite.Texture, new Vector2(backSize.X + backSize.Width / 2f + 5, backSize.Y - _nextButtonSprite.Height / 2f),
-                    _nextButtonSprite.Source, Color.White, 0f, _nextButtonSprite.Origin, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(_nextButtonSprite.Texture,
+                new Vector2(backSize.X + backSize.Width / 2f + 5, backSize.Y - _nextButtonSprite.Height / 2f),
+                _nextButtonSprite.Source, Color.White, 0f, _nextButtonSprite.Origin, 1f, SpriteEffects.None, 0f);
         }
 
         private void DrawOutline(SpriteBatch spriteBatch, Rectangle backSize, Color color)
         {
-            spriteBatch.Draw(_pixel, new Rectangle((int) (backSize.X - backSize.Width / 2f), (int) (backSize.Y - (backSize.Height / 2f)), backSize.Width, 1), color);
-            spriteBatch.Draw(_pixel, new Rectangle((int) (backSize.X - backSize.Width / 2f), (int) (backSize.Y + (backSize.Height / 2f) - 1), backSize.Width, 1), color);
-            spriteBatch.Draw(_pixel, new Rectangle((int) (backSize.X - backSize.Width / 2f), (int) (backSize.Y - (backSize.Height / 2f)), 1, backSize.Height), color);
-            spriteBatch.Draw(_pixel, new Rectangle((int) (backSize.X + backSize.Width / 2f - 1), (int) (backSize.Y - (backSize.Height / 2f)), 1, backSize.Height), color);
+            spriteBatch.Draw(_pixel,
+                new Rectangle((int) (backSize.X - backSize.Width / 2f), (int) (backSize.Y - (backSize.Height / 2f)),
+                    backSize.Width, 1), color);
+            spriteBatch.Draw(_pixel,
+                new Rectangle((int) (backSize.X - backSize.Width / 2f), (int) (backSize.Y + (backSize.Height / 2f) - 1),
+                    backSize.Width, 1), color);
+            spriteBatch.Draw(_pixel,
+                new Rectangle((int) (backSize.X - backSize.Width / 2f), (int) (backSize.Y - (backSize.Height / 2f)), 1,
+                    backSize.Height), color);
+            spriteBatch.Draw(_pixel,
+                new Rectangle((int) (backSize.X + backSize.Width / 2f - 1), (int) (backSize.Y - (backSize.Height / 2f)),
+                    1, backSize.Height), color);
         }
 
         private Vector2 GetDialogPosition()
@@ -116,5 +127,7 @@ namespace LostAndFound.Core.Games.Components
         public bool HasDialog() => _dialogQueue.Count > 0;
 
         public string GetNextDialog() => _dialogQueue.Dequeue();
+
+        public void SetNear(bool near) => _wandererComponent.Active = !near;
     }
 }

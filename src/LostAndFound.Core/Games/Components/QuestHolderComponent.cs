@@ -12,7 +12,6 @@ namespace LostAndFound.Core.Games.Components
 {
     public class QuestHolderComponent : IComponent
     {
-
         private Random _random = new Random();
         public Action<Quest, IEntity> QuestTaken { get; set; }
         public Action<Quest> QuestComplete { get; set; }
@@ -46,19 +45,16 @@ namespace LostAndFound.Core.Games.Components
 
         public void Update(GameTime gameTime)
         {
-            if (_inputManager.KeyPressed(Keys.E))
+            foreach (var entity in _zoneManager.ActiveZone.Entities)
             {
-                foreach (var entity in _zoneManager.ActiveZone.Entities)
-                {
-                    CheckForQuestPickup(entity);
-                    
-                    if (CheckForDialog(entity))
-                    {
-                        break;
-                    }
+                CheckForQuestPickup(entity);
 
-                    CheckForQuests(entity);
+                if (CheckForDialog(entity))
+                {
+                    break;
                 }
+
+                CheckForQuests(entity);
             }
 
             if (_questGiverNextTo != null)
@@ -78,11 +74,25 @@ namespace LostAndFound.Core.Games.Components
                 return false;
             }
 
-            return Vector2.Distance(Entity.Position, dialogComponent.Entity.Position) < 20 && dialogComponent.Talk();
+            if (Vector2.Distance(Entity.Position, dialogComponent.Entity.Position) < 20)
+            {
+                dialogComponent.SetNear(true);
+
+                return _inputManager.KeyPressed(Keys.E) && dialogComponent.Talk();
+            }
+
+            dialogComponent.SetNear(false);
+
+            return false;
         }
 
         private void CheckForQuestPickup(IEntity entity)
         {
+            if (!_inputManager.KeyPressed(Keys.E))
+            {
+                return;
+            }
+
             if (_animalHolder.Quest != null)
             {
                 return;
@@ -108,8 +118,13 @@ namespace LostAndFound.Core.Games.Components
 
         private void CheckForQuests(IEntity entity)
         {
+            if (!_inputManager.KeyPressed(Keys.E))
+            {
+                return;
+            }
+
             var questGiverComponent = entity.GetComponent<QuestGiverComponent>();
-            
+
             if (questGiverComponent == null)
             {
                 return;
@@ -122,18 +137,19 @@ namespace LostAndFound.Core.Games.Components
                 if (questGiverComponent.HasQuestToGive())
                 {
                     var dialogComponent = entity.GetComponent<DialogComponent>();
-                    
+
                     var newQuest = questGiverComponent.TakeQuest();
-                    
-                    var text = dialogComponent.AddText($"My {newQuest.AnimalType} loves to hang around at the {newQuest.AnimalZone}.");
+
+                    var text = dialogComponent.AddText(
+                        $"My {newQuest.AnimalType} loves to hang around at the {newQuest.AnimalZone}.");
                     newQuest.AddDialogHistory(text);
-                    
+
                     text = dialogComponent.AddText($"Please find {(_random.Next(0, 2) == 1 ? "her" : "him")}.");
                     newQuest.AddDialogHistory(text);
-                    
+
                     text = dialogComponent.AddText($"I'll give you ${newQuest.Reward}");
                     newQuest.AddDialogHistory(text);
-                    
+
 
                     QuestTaken?.Invoke(newQuest, Entity);
                 }

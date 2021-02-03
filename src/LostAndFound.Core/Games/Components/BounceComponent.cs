@@ -7,14 +7,14 @@ namespace LostAndFound.Core.Games.Components
 {
     public class BounceComponent : IComponent
     {
-        private int _startY;
-        private int _bounceHeight = 3;
+        private const float MoveDelay = 0.01f;
+        private const int BounceHeight = 3;
 
         private bool _bouncing = true;
-        private bool _fall = false;
+        private bool _fall;
 
-        private float bounceTimer;
-        private float _moveDelay = 0.01f;
+        private float _bounceTimer;
+        private float _bounceDistance;
 
         public float BounceSpeed = 1f;
 
@@ -22,37 +22,41 @@ namespace LostAndFound.Core.Games.Components
 
         public void Start()
         {
-            _startY = (int) Entity.Position.Y;
         }
 
         public void Update(GameTime gameTime)
         {
-            bounceTimer -= gameTime.AsDelta();
-            
-            if (_bouncing && bounceTimer <= 0)
+            _bounceTimer -= gameTime.AsDelta();
+
+            if (_bouncing && _bounceTimer <= 0)
             {
-                if (Entity.Position.Y > _startY - _bounceHeight)
+                if (_bounceDistance > 0)
                 {
                     Entity.Position -= new Vector2(0, BounceSpeed);
+                    _bounceDistance -= BounceSpeed;
                 }
                 else
                 {
                     _bouncing = false;
                     _fall = true;
                 }
-                bounceTimer = _moveDelay;
-            } else if (_fall && bounceTimer <= 0)
+
+                _bounceTimer = MoveDelay;
+            }
+            else if (_fall && _bounceTimer <= 0)
             {
-                if (Entity.Position.Y < _startY)
+                if (_bounceDistance < BounceHeight)
                 {
                     Entity.Position += new Vector2(0, BounceSpeed);
+                    _bounceDistance += BounceSpeed;
                 }
                 else
                 {
                     _bouncing = true;
                     _fall = false;
                 }
-                bounceTimer = _moveDelay;
+
+                _bounceTimer = MoveDelay;
             }
         }
 

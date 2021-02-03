@@ -47,15 +47,8 @@ namespace LostAndFound.Core.Games.Components
 
         public void Start()
         {
-            var possibleImages = Directory.GetFiles("Assets\\Images\\People");
-            var randomPerson = _random.Next(0, possibleImages.Length);
-            var selected = possibleImages[randomPerson].Replace($"Assets{Path.DirectorySeparatorChar}", "");
             _staticDrawComponent = Entity.GetComponent<StaticDrawComponent>();
-            _staticDrawComponent.Image = new Sprite(_contentChest.Get<Texture2D>(selected));
-
             Entity.Position -= new Vector2(0, _staticDrawComponent.Image.Height) - new Vector2(0, 10);
-
-            Name = selected.Split('\\').Last().Split('.').First();
 
             var asepriteSpriteMap = _spriteMapLoader.GetContent("Assets\\UI\\ui.json");
             _questIcon = asepriteSpriteMap.CreateSpriteFromRegion("Quest_Alert");

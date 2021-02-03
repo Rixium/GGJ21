@@ -10,6 +10,7 @@ namespace LostAndFound.Core.Games.Components
     {
         private readonly ZoneManager _zoneManager;
         public IEntity Entity { get; set; }
+        public bool Active { get; set; } = true;
 
         private Vector2 _wanderPosition;
         private float _randomPositionGetTimer;
@@ -30,6 +31,8 @@ namespace LostAndFound.Core.Games.Components
 
         public void Update(GameTime gameTime)
         {
+            if (!Active) return;
+            
             if (Vector2.Distance(_wanderPosition, Entity.Position) < 100)
             {
                 _randomPositionGetTimer -= gameTime.AsDelta();

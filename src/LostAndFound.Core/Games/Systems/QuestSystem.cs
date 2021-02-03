@@ -1,4 +1,7 @@
-﻿using Asepreadr;
+﻿using System;
+using System.IO;
+using System.Linq;
+using Asepreadr;
 using Asepreadr.Aseprite;
 using Asepreadr.Graphics;
 using Asepreadr.Loaders;
@@ -14,6 +17,7 @@ namespace LostAndFound.Core.Games.Systems
 {
     public class QuestSystem : ISystem
     {
+        private readonly Random _random = new Random();
         private readonly ZoneManager _zoneManager;
         private readonly IContentChest _contentChest;
         private readonly IContentLoader<AsepriteSpriteMap> _spriteMapLoader;
@@ -32,6 +36,7 @@ namespace LostAndFound.Core.Games.Systems
             _spriteMap = _spriteMapLoader.GetContent("Assets\\Images\\Animals\\animals.json");
 
             var questZone = _zoneManager.GetZone(ZoneType.Street);
+            var possibleImages = Directory.GetFiles("Assets\\Images\\People").ToList();
 
             foreach (var collider in questZone.Colliders)
             {
@@ -40,7 +45,11 @@ namespace LostAndFound.Core.Games.Systems
                     continue;
                 }
 
-                var person = _contentChest.Get<Texture2D>("Images/People/Marge");
+                var randomPerson = _random.Next(0, possibleImages.Count);
+                var selected = possibleImages[randomPerson].Replace($"Assets{Path.DirectorySeparatorChar}", "");
+                possibleImages.RemoveAt(randomPerson);
+
+                var person = _contentChest.Get<Texture2D>(selected);
                 var personSprite = new Sprite(person);
 
                 var questGiver = new Entity(collider.Bounds.ToVector2());
@@ -50,13 +59,16 @@ namespace LostAndFound.Core.Games.Systems
                 });
 
                 var questGiverComponent = Program.Resolve<QuestGiverComponent>();
+                questGiverComponent.Name = selected.Split('\\').Last().Split('.').First();
+
+
                 questGiver.AddComponent(questGiverComponent);
 
                 questGiver.AddComponent(Program.Resolve<DialogComponent>());
                 var wandererComponent = Program.Resolve<WandererComponent>();
                 wandererComponent.Property = "SafeZone";
                 wandererComponent.Speed = 0.001f;
-                
+
                 questGiver.AddComponent(wandererComponent);
                 var bounceComponent = Program.Resolve<BounceComponent>();
                 bounceComponent.BounceSpeed = 0.3f;
@@ -85,7 +97,7 @@ namespace LostAndFound.Core.Games.Systems
             questFulfilmentComponent.Quest = quest;
             questFulfilmentComponent.QuestFulfiller = taker;
             entity.AddComponent(questFulfilmentComponent);
-            
+
             entity.AddComponent(Program.Resolve<AnimalSoundComponent>());
             entity.AddComponent(Program.Resolve<SoundComponent>());
             entity.AddComponent(Program.Resolve<BounceComponent>());

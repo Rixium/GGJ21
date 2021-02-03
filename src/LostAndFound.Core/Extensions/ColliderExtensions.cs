@@ -10,8 +10,8 @@ namespace LostAndFound.Core.Extensions
 
         public static Vector2 GetRandomPositionInBounds(this Collider collider)
         {
-            var randomX = Random.Next(collider.Bounds.X, collider.Bounds.Right);
-            var randomY = Random.Next(collider.Bounds.Y, collider.Bounds.Bottom);
+            var randomX = Random.Next(collider.Bounds.Left, collider.Bounds.Right);
+            var randomY = Random.Next(collider.Bounds.Top, collider.Bounds.Bottom);
 
             return new Vector2(randomX, randomY);
         }
