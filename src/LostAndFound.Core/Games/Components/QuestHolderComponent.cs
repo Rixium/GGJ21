@@ -45,6 +45,12 @@ namespace LostAndFound.Core.Games.Components
 
         public void Update(GameTime gameTime)
         {
+            if (_questGiverNextTo != null)
+            {
+                _questGiverNextTo.Highlighted = false;
+                _questGiverNextTo = null;
+            }
+            
             foreach (var entity in _zoneManager.ActiveZone.Entities)
             {
                 CheckForQuestPickup(entity);
@@ -56,13 +62,6 @@ namespace LostAndFound.Core.Games.Components
 
                 CheckForQuests(entity);
             }
-
-            if (_questGiverNextTo != null)
-            {
-                _questGiverNextTo.Highlighted = false;
-            }
-
-            _questGiverNextTo = null;
         }
 
         private bool CheckForDialog(IEntity entity)
@@ -77,10 +76,13 @@ namespace LostAndFound.Core.Games.Components
             if (Vector2.Distance(Entity.Position, dialogComponent.Entity.Position) < 20)
             {
                 dialogComponent.SetNear(true);
+                
+                _questGiverNextTo = dialogComponent.Entity.GetComponent<QuestGiverComponent>();
+                _questGiverNextTo.Highlighted = true;
 
                 return _inputManager.KeyPressed(Keys.E) && dialogComponent.Talk();
             }
-
+            
             dialogComponent.SetNear(false);
 
             return false;
@@ -132,8 +134,6 @@ namespace LostAndFound.Core.Games.Components
 
             if (Vector2.Distance(Entity.Position, questGiverComponent.Entity.Position) < 20)
             {
-                _questGiverNextTo = questGiverComponent;
-
                 if (questGiverComponent.HasQuestToGive())
                 {
                     var dialogComponent = entity.GetComponent<DialogComponent>();
@@ -174,10 +174,7 @@ namespace LostAndFound.Core.Games.Components
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (_questGiverNextTo != null)
-            {
-                _questGiverNextTo.Highlighted = true;
-            }
+            
         }
     }
 }
