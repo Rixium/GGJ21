@@ -54,6 +54,8 @@
    { "name": "Water", "group": "House_right", "opacity": 255, "blendMode": "normal" },
    { "name": "Window_left", "group": "House_right", "opacity": 255, "blendMode": "normal" },
    { "name": "Window_right", "group": "House_right", "opacity": 255, "blendMode": "normal" },
+   { "name": "WindowSign", "group": "House_right", "opacity": 255, "blendMode": "normal" },
+   { "name": "WindowGlass", "group": "House_right", "opacity": 255, "blendMode": "normal" },
    { "name": "Sign", "group": "House_right", "opacity": 255, "blendMode": "normal" },
    { "name": "Door", "group": "House_right", "opacity": 255, "blendMode": "normal" },
    { "name": "Layer 18", "group": "House_right", "opacity": 150, "blendMode": "normal" },
@@ -71,7 +73,8 @@
    { "name": "Slice 6", "color": "#0000ffff", "data": "(Entity:StreetLamp)(Component:LightComponent)", "keys": [{ "frame": 0, "bounds": {"x": 101, "y": 161, "w": 10, "h": 10 } }] },
    { "name": "Slice 7", "color": "#0000ffff", "data": "(Entity:StreetLamp)(Component:BounceComponent,PlayerControllerComponent,BoxColliderComponent)", "keys": [{ "frame": 0, "bounds": {"x": 195, "y": 161, "w": 10, "h": 10 } }] },
    { "name": "Slice 8", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 423, "y": 246, "w": 82, "h": 6 } }] },
-   { "name": "QuestGiver", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 263, "y": 279, "w": 10, "h": 8 } }] }
+   { "name": "QuestGiver", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 263, "y": 279, "w": 10, "h": 8 } }] },
+   { "name": "ShopKeeper", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 458, "y": 194, "w": 7, "h": 6 } }] }
   ]
  }
 }

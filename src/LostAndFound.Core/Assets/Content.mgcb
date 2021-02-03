@@ -181,6 +181,162 @@
 /processorParam:Quality=Best
 /build:Audio/SoundEffects/Footsteps/footstep_8.wav
 
+#begin Audio/SoundEffects/Mouth/a.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/a.wav
+
+#begin Audio/SoundEffects/Mouth/b.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/b.wav
+
+#begin Audio/SoundEffects/Mouth/c.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/c.wav
+
+#begin Audio/SoundEffects/Mouth/d.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/d.wav
+
+#begin Audio/SoundEffects/Mouth/e.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/e.wav
+
+#begin Audio/SoundEffects/Mouth/f.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/f.wav
+
+#begin Audio/SoundEffects/Mouth/g.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/g.wav
+
+#begin Audio/SoundEffects/Mouth/h.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/h.wav
+
+#begin Audio/SoundEffects/Mouth/i.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/i.wav
+
+#begin Audio/SoundEffects/Mouth/j.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/j.wav
+
+#begin Audio/SoundEffects/Mouth/k.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/k.wav
+
+#begin Audio/SoundEffects/Mouth/l.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/l.wav
+
+#begin Audio/SoundEffects/Mouth/m.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/m.wav
+
+#begin Audio/SoundEffects/Mouth/n.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/n.wav
+
+#begin Audio/SoundEffects/Mouth/o.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/o.wav
+
+#begin Audio/SoundEffects/Mouth/p.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/p.wav
+
+#begin Audio/SoundEffects/Mouth/q.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/q.wav
+
+#begin Audio/SoundEffects/Mouth/r.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/r.wav
+
+#begin Audio/SoundEffects/Mouth/s.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/s.wav
+
+#begin Audio/SoundEffects/Mouth/t.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/t.wav
+
+#begin Audio/SoundEffects/Mouth/u.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/u.wav
+
+#begin Audio/SoundEffects/Mouth/v.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/v.wav
+
+#begin Audio/SoundEffects/Mouth/w.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/w.wav
+
+#begin Audio/SoundEffects/Mouth/x.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/x.wav
+
+#begin Audio/SoundEffects/Mouth/y.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/y.wav
+
+#begin Audio/SoundEffects/Mouth/z.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SoundEffects/Mouth/z.wav
+
 #begin Audio/SoundEffects/quest_complete.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -320,6 +476,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/People/Marge.png
+
+#begin Images/People/people.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/People/people.png
 
 #begin Images/Player/Idle_1.png
 /importer:TextureImporter

@@ -5,12 +5,14 @@ using Asepreadr.Graphics;
 using Asepreadr.Loaders;
 using LostAndFound.Core.Extensions;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
 {
     internal class DialogComponent : Component
     {
+        private SoundEffectInstance _soundEffect;
         private readonly IContentChest _contentChest;
         private readonly IContentLoader<AsepriteSpriteMap> _spriteMapLoader;
         private readonly Queue<string> _dialogQueue = new Queue<string>();
@@ -22,6 +24,7 @@ namespace LostAndFound.Core.Games.Components
         private int _curr;
         private float _timer;
         private WandererComponent _wandererComponent;
+        private Queue<char> _letterQueue = new Queue<char>();
 
         public DialogComponent(IContentChest contentChest, IContentLoader<AsepriteSpriteMap> spriteMapLoader)
         {
@@ -41,6 +44,17 @@ namespace LostAndFound.Core.Games.Components
 
         public override void Update(GameTime gameTime)
         {
+            if (_letterQueue.Count > 0)
+            {
+                if (_soundEffect == null || _soundEffect.State == SoundState.Stopped)
+                {
+                    var letter = _letterQueue.Dequeue();
+                    var sound = _contentChest.Get<SoundEffect>($"Audio\\SoundEffects\\Mouth\\{letter}");
+                    _soundEffect = sound.CreateInstance();
+                    _soundEffect.Play();
+                }
+            }
+
             if (_activeDialog == null || _curr == _activeDialog.Length)
             {
                 return;
@@ -116,6 +130,16 @@ namespace LostAndFound.Core.Games.Components
             }
 
             _activeDialog = GetNextDialog();
+
+            _letterQueue = new Queue<char>();
+            foreach (var letter in _activeDialog.ToLower())
+            {
+                if (char.IsLetter(letter))
+                {
+                    _letterQueue.Enqueue(letter);
+                }
+            }
+
             _curr = 0;
 
             return true;

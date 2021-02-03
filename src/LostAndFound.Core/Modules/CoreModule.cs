@@ -86,6 +86,7 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<PlayerAnimationComponent>().InstancePerDependency();
             builder.RegisterType<AnimatorComponent>().InstancePerDependency();
             builder.RegisterType<AnimationDrawComponent>().InstancePerDependency();
+            builder.RegisterType<AnimationComponent>().InstancePerDependency();
 
             builder.RegisterType<PersonInteractionComponent>().InstancePerDependency();
             builder.RegisterType<StaticDrawComponent>().InstancePerDependency();

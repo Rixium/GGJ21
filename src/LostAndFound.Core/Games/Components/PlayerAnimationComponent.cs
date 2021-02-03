@@ -3,6 +3,26 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
 {
+
+    public class AnimationComponent : Component
+    {
+        private AnimatorComponent _animatorComponent;
+        
+        public override void Start()
+        {
+            _animatorComponent = Entity.GetComponent<AnimatorComponent>();
+        }
+        
+        public override void Update(GameTime gameTime)
+        {
+            _animatorComponent.SetAnimation("Idle");
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+        }
+    }
+    
     public class PlayerAnimationComponent : Component
     {
         private PlayerControllerComponent _moveComponent;

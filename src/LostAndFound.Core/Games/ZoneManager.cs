@@ -8,6 +8,7 @@ using LostAndFound.Core.Games.Components;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Games.Zones;
+using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -34,6 +35,7 @@ namespace LostAndFound.Core.Games
         public void Load()
         {
             var entitySpriteMap = _spriteMapLoader.GetContent("Assets\\Images\\entities.json");
+            var peopleSpriteMap = _spriteMapLoader.GetContent("Assets\\Images\\People\\People.json");
             var zoneData = _zoneLoader.LoadZones();
 
             foreach (var zone in zoneData)
@@ -67,8 +69,33 @@ namespace LostAndFound.Core.Games
                     var staticDrawComponent = Program.Resolve<StaticDrawComponent>();
                     var entityName = collider.Properties["Entity"];
                     staticDrawComponent.Image = entitySpriteMap.CreateSpriteFromRegion(entityName);
-                    
+
                     entity.AddComponent(staticDrawComponent);
+                    newZone.Entities.Add(entity);
+                }
+
+                var keeper = zone.Colliders.Where(x => x.Name.Equals("ShopKeeper"));
+
+                foreach (var collider in keeper)
+                {
+                    var entity = new Entity(collider.Bounds.ToVector2());
+                    
+                    var animator = Program.Resolve<AnimatorComponent>();
+                    animator.AddAnimation("Idle",
+                        new Animation(new[]
+                            {
+                                peopleSpriteMap.CreateSpriteFromRegion("ShopKeeper"),
+                                peopleSpriteMap.CreateSpriteFromRegion("ShopKeeper2")
+                            }
+                        )
+                        {
+                            FrameDuration = 0.8f
+                        });
+
+                    entity.AddComponent(animator);
+                    entity.AddComponent(Program.Resolve<AnimationComponent>());
+                    entity.AddComponent(Program.Resolve<AnimationDrawComponent>());
+                    
                     newZone.Entities.Add(entity);
                 }
 
