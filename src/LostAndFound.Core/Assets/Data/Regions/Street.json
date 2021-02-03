@@ -62,7 +62,7 @@
   ],
   "slices": [
    { "name": "Slice 1", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 188, "w": 500, "h": 49 } }] },
-   { "name": "Slice 2", "color": "#0000ffff", "data": "(SafeZone:true)", "keys": [{ "frame": 0, "bounds": {"x": 116, "y": 273, "w": 288, "h": 54 } }] },
+   { "name": "Slice 2", "color": "#0000ffff", "data": "(SafeZone:true)", "keys": [{ "frame": 0, "bounds": {"x": 167, "y": 271, "w": 288, "h": 54 } }] },
    { "name": "Slice 3", "color": "#0000ffff", "data": "(StartY:true)", "keys": [{ "frame": 0, "bounds": {"x": 8, "y": 267, "w": 19, "h": 20 } }] },
    { "name": "Slice 4", "color": "#0000ffff", "data": "(Left:Forest)(Right:Park)", "keys": [{ "frame": 0, "bounds": {"x": 8, "y": 14, "w": 45, "h": 44 } }] },
    { "name": "PlayerStart", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 307, "y": 242, "w": 19, "h": 13 } }] },
@@ -70,7 +70,8 @@
    { "name": "Slice 5", "color": "#0000ffff", "data": "(Entity:StreetLamp)", "keys": [{ "frame": 0, "bounds": {"x": 4, "y": 161, "w": 10, "h": 10 } }] },
    { "name": "Slice 6", "color": "#0000ffff", "data": "(Entity:StreetLamp)(Component:LightComponent)", "keys": [{ "frame": 0, "bounds": {"x": 101, "y": 161, "w": 10, "h": 10 } }] },
    { "name": "Slice 7", "color": "#0000ffff", "data": "(Entity:StreetLamp)(Component:BounceComponent,PlayerControllerComponent,BoxColliderComponent)", "keys": [{ "frame": 0, "bounds": {"x": 195, "y": 161, "w": 10, "h": 10 } }] },
-   { "name": "Slice 8", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 423, "y": 246, "w": 82, "h": 6 } }] }
+   { "name": "Slice 8", "color": "#0000ffff", "data": "(Solid:true)", "keys": [{ "frame": 0, "bounds": {"x": 423, "y": 246, "w": 82, "h": 6 } }] },
+   { "name": "QuestGiver", "color": "#0000ffff", "data": "(QuestGiver:true)", "keys": [{ "frame": 0, "bounds": {"x": 263, "y": 279, "w": 10, "h": 8 } }] }
   ]
  }
 }
