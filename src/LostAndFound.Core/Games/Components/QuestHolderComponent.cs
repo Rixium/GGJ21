@@ -22,8 +22,6 @@ namespace LostAndFound.Core.Games.Components
         private readonly IInputManager _inputManager;
         private readonly IContentChest _contentChest;
         
-
-        private List<QuestGiverComponent> _questGiversNextTo = new List<QuestGiverComponent>();
         private MoneyBagComponent _moneyBagComponent;
         private BoxColliderComponent _boxColliderComponent;
         private AnimalHolderComponent _animalHolder;
