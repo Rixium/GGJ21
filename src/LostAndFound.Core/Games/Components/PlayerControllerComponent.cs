@@ -17,6 +17,7 @@ namespace LostAndFound.Core.Games.Components
     public class PlayerControllerComponent : Component
     {
         private const int Speed = 1;
+        private const int SprintMultiplier = 2;
 
         private readonly ZoneManager _zoneManager;
         private readonly IInputManager _inputManager;
@@ -73,6 +74,12 @@ namespace LostAndFound.Core.Games.Components
             else if (_inputManager.KeyDown(Keys.S))
             {
                 yChange = Speed;
+            }
+
+            if (_inputManager.KeyDown(Keys.LeftShift))
+            {
+                xChange *= SprintMultiplier;
+                yChange *= SprintMultiplier;
             }
 
             if (xChange != 0 || yChange != 0)
