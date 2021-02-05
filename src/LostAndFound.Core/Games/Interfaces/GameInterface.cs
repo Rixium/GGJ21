@@ -21,7 +21,7 @@ namespace LostAndFound.Core.Games.Interfaces
 {
     public class GameInterface
     {
-        private QuestHolderComponent _questHolderComponent;
+        private QuestBagComponent _questBagComponent;
 
         private readonly IRenderManager _renderManager;
         private readonly IContentChest _contentChest;
@@ -93,10 +93,10 @@ namespace LostAndFound.Core.Games.Interfaces
         public void RegisterToEntity(Entity entity)
         {
             // Register to the quest holder component action, so we can show some UI when taking quest
-            _questHolderComponent = entity.GetComponent<QuestHolderComponent>();
+            _questBagComponent = entity.GetComponent<QuestBagComponent>();
             _moneyBagComponent = entity.GetComponent<MoneyBagComponent>();
 
-            _questHolderComponent.QuestTaken += ShowQuestTaken;
+            _questBagComponent.QuestTaken += ShowQuestTaken;
         }
 
         private void ShowQuestTaken(Quest quest, IEntity taker)

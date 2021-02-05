@@ -80,7 +80,7 @@ namespace LostAndFound.Core.Games
             player.AddComponent(Program.Resolve<MoneyBagComponent>());
             player.AddComponent(Program.Resolve<AnimalHolderComponent>());
 
-            var questHolderComponent = Program.Resolve<QuestHolderComponent>();
+            var questHolderComponent = Program.Resolve<QuestBagComponent>();
             player.AddComponent(questHolderComponent);
 
             player.Position = playerStartCollider.Bounds.ToVector2() - playerFeetBoxCollider.Offset;

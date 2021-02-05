@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LostAndFound.Core.Games.Components
 {
-    public class QuestHolderComponent : Component
+    public class QuestBagComponent : Component
     {
         public Action<Quest, IEntity> QuestTaken { get; set; }
         public Action<Quest> QuestComplete { get; set; }
@@ -25,7 +25,7 @@ namespace LostAndFound.Core.Games.Components
 
         private bool _isInsideInteractionRange;
 
-        public QuestHolderComponent(ZoneManager zoneManager, IInputManager inputManager)
+        public QuestBagComponent(ZoneManager zoneManager, IInputManager inputManager)
         {
             _zoneManager = zoneManager;
             _inputManager = inputManager;
