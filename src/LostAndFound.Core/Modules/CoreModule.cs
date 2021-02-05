@@ -105,6 +105,7 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<BounceComponent>().InstancePerDependency();
             builder.RegisterType<DialogComponent>().InstancePerDependency();
             builder.RegisterType<WandererComponent>().InstancePerDependency();
+            builder.RegisterType<TalkerComponent>().InstancePerDependency();
         }
     }
 }

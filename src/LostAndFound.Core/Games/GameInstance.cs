@@ -74,6 +74,7 @@ namespace LostAndFound.Core.Games
             player.AddComponent(animatorComponent);
             player.AddComponent(Program.Resolve<PlayerControllerComponent>());
             player.AddComponent(Program.Resolve<ZoneInteractionComponent>());
+            player.AddComponent(Program.Resolve<TalkerComponent>());
             player.AddComponent(playerSoundComponent);
             player.AddComponent(Program.Resolve<PlayerSoundManagerComponent>());
             player.AddComponent(Program.Resolve<MoneyBagComponent>());
