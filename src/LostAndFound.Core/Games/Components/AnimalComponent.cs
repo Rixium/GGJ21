@@ -1,4 +1,6 @@
-﻿using LostAndFound.Core.Games.Entities;
+﻿using System;
+using LostAndFound.Core.Extensions;
+using LostAndFound.Core.Games.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -6,10 +8,14 @@ namespace LostAndFound.Core.Games.Components
 {
     internal class AnimalComponent : Component
     {
+        private const int FollowRadius = 10;
         private readonly ZoneManager _zoneManager;
         private WandererComponent _wandererComponent;
         private BoxColliderComponent _boxCollider;
         private IEntity _following;
+        private Vector2 _randomPosition;
+        private float _timer;
+        private Random _random = new Random();
 
         public AnimalComponent(ZoneManager zoneManager)
         {
@@ -28,9 +34,17 @@ namespace LostAndFound.Core.Games.Components
                 return;
             }
 
-            var (x, y) = Vector2.Lerp(Entity.Position, _boxCollider.Bounds.Center.ToVector2(), 0.03f);
+            _timer -= gameTime.AsDelta();
+            
+            if (_timer <= 0)
+            {
+                _randomPosition = _boxCollider.Bounds.Expand(FollowRadius).GetRandomPositionInBounds();
+                _timer = _random.Next(1, 10) / 4f;
+            }
 
-            if (Vector2.Distance(Entity.Position, _boxCollider.Bounds.Center.ToVector2()) < 10)
+            var (x, y) = Vector2.Lerp(Entity.Position, _randomPosition, 0.03f);
+
+            if (Vector2.Distance(Entity.Position, _randomPosition) < 10)
             {
                 return;
             }
@@ -51,10 +65,13 @@ namespace LostAndFound.Core.Games.Components
 
             _following = entity;
             _wandererComponent.Active = false;
-            
+
+            Entity.GetComponent<BounceComponent>().BounceSpeed = 0.3f;
             _following.GetComponent<ZoneInteractionComponent>().ZoneSwitch += zone =>
             {
                 Entity.Position = new Vector2(_following.Position.X, _following.Position.Y);
+                _timer = 0;
+                _randomPosition = Entity.Position;
                 _zoneManager.MoveEntityToZone(Entity.Zone, _following.Zone, Entity);
             };
 

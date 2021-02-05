@@ -16,6 +16,7 @@ namespace LostAndFound.Core.Games.Components
         private float _bounceDistance;
 
         public float BounceSpeed = 1f;
+        public bool Active { get; set; } = true;
 
         public override void Start()
         {
@@ -23,6 +24,8 @@ namespace LostAndFound.Core.Games.Components
 
         public override void Update(GameTime gameTime)
         {
+            if (!Active) return;
+            
             _bounceTimer -= gameTime.AsDelta();
 
             if (_bouncing && _bounceTimer <= 0)
