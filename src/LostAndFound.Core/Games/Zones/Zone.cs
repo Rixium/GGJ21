@@ -31,7 +31,7 @@ namespace LostAndFound.Core.Games.Zones
                 return newList;
             }
         }
-        
+
         public void Update(GameTime gameTime)
         {
             foreach (var entity in _entitiesToRemove)
@@ -73,19 +73,8 @@ namespace LostAndFound.Core.Games.Zones
             entity.Start();
         }
 
-        public Collider GetColliderWithProperty(string propertyName)
-        {
-            foreach (var collider in Colliders)
-            {
-                var property = collider.GetProperty(propertyName);
-                if (property != null)
-                {
-                    return collider;
-                }
-            }
-
-            return null;
-        }
+        public Collider GetColliderWithProperty(string propertyName) =>
+            Colliders.FirstOrDefault(x => x.GetProperty(propertyName) != null);
 
         public void Start()
         {
