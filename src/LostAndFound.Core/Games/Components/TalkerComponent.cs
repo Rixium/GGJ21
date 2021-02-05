@@ -33,12 +33,14 @@ namespace LostAndFound.Core.Games.Components
             
             foreach (var entity in _zoneManager.ActiveZone.Entities)
             {
-                _isInsideInteractionRange = (Vector2.Distance(Entity.Position, entity.Position) < InteractionRange);
+                _isInsideInteractionRange = Vector2.Distance(Entity.Position, entity.Position) < InteractionRange;
 
+                if (!_isInsideInteractionRange) continue;
+                
                 var dialogComponent = entity.GetComponent<DialogComponent>();
 
                 if (dialogComponent == null) continue;
-                
+
                 dialogComponent.Talk();
                 break;
             }
