@@ -94,7 +94,6 @@ namespace LostAndFound.Core.Games.Systems
 
             entity.AddComponent(staticDrawComponent);
 
-            entity.AddComponent(Program.Resolve<ZoneInteractionComponent>());
             entity.AddComponent(Program.Resolve<BoxColliderComponent>());
             var animalSoundComponent = Program.Resolve<AnimalSoundComponent>();
             

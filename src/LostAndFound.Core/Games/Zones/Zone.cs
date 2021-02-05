@@ -69,6 +69,7 @@ namespace LostAndFound.Core.Games.Zones
 
         public void AddEntity(IEntity entity)
         {
+            entity.Zone = this;
             _entitiesToAdd.Add(entity);
             entity.Start();
         }

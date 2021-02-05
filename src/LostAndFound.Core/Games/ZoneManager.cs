@@ -114,6 +114,7 @@ namespace LostAndFound.Core.Games
 
         public void MoveEntityToZone(IZone oldZone, IZone zoneToGoTo, IEntity entity)
         {
+            entity.Zone = zoneToGoTo;
             oldZone.RemoveEntity(entity);
             zoneToGoTo.AddEntity(entity);
         }

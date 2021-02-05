@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using LostAndFound.Core.Games.Components;
+using LostAndFound.Core.Games.Zones;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -60,5 +61,7 @@ namespace LostAndFound.Core.Games.Entities
                 component.Start();
             }
         }
+
+        public IZone Zone { get; set; }
     }
 }

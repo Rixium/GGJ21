@@ -17,6 +17,8 @@ namespace LostAndFound.Core.Games.Components
             _zoneManager = zoneManager;
         }
 
+        public Action<ZoneType> ZoneSwitch { get; set; }
+
         public override void Start()
         {
             _entityCollider = Entity.GetComponent<BoxColliderComponent>();
@@ -24,6 +26,11 @@ namespace LostAndFound.Core.Games.Components
 
         public override void Update(GameTime gameTime)
         {
+            if (_entityCollider == null)
+            {
+                return;
+            }
+            
             var entityZone = _zoneManager.ActiveZone;
 
             if (_entityCollider.Bounds.X < 0)
@@ -44,6 +51,7 @@ namespace LostAndFound.Core.Games.Components
                     TeleportToZone(entityZone, zoneToGoTo);
                     var startYCollider = zoneToGoTo.GetColliderWithProperty("StartY");
                     Entity.Position = new Vector2(zoneToGoTo.Image.Width, startYCollider.Bounds.Y);
+                    ZoneSwitch?.Invoke(zoneToGoTo.ZoneType);
                 }
             }
             else if (_entityCollider.Bounds.X > entityZone.Image.Width)
@@ -64,6 +72,7 @@ namespace LostAndFound.Core.Games.Components
                     TeleportToZone(entityZone, zoneToGoTo);
                     var startYCollider = zoneToGoTo.GetColliderWithProperty("StartY");
                     Entity.Position = new Vector2(0, startYCollider.Bounds.Y);
+                    ZoneSwitch?.Invoke(zoneToGoTo.ZoneType);
                 }
             }
         }
