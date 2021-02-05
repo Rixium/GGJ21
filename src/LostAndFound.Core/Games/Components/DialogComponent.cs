@@ -12,6 +12,8 @@ namespace LostAndFound.Core.Games.Components
 {
     internal class DialogComponent : Component
     {
+        public float SpeechVolume = 0.2f;
+        
         private SoundEffectInstance _soundEffect;
         private readonly IContentChest _contentChest;
         private readonly IContentLoader<AsepriteSpriteMap> _spriteMapLoader;
@@ -56,6 +58,7 @@ namespace LostAndFound.Core.Games.Components
                         var sound = _contentChest.Get<SoundEffect>($"Audio\\SoundEffects\\Mouth\\{letter}");
                         _soundEffect = sound.CreateInstance();
                         _soundEffect.Pitch = (float) (_random.NextDouble() * (0 - -1) - 1);
+                        _soundEffect.Volume = SpeechVolume;
                         _soundEffect.Play();
                        
                     }
