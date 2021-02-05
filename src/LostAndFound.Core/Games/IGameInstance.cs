@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LostAndFound.Core.Games.Entities;
+using Microsoft.Xna.Framework;
 
 namespace LostAndFound.Core.Games
 {
@@ -8,5 +9,6 @@ namespace LostAndFound.Core.Games
         void Start();
         void Draw();
         void Update(GameTime gameTime);
+        IEntity GetPlayer();
     }
 }

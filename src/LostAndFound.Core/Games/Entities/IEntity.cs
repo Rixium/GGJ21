@@ -7,7 +7,6 @@ namespace LostAndFound.Core.Games.Entities
     public interface IEntity
     {
         public Vector2 Position { get; set; }
-        GameInstance GameInstance { get; set; }
         int Bottom { get; set; }
         int Width { get; set; }
         int Height { get; set; }

@@ -12,6 +12,7 @@ using LostAndFound.Core.Games.Systems;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using NotImplementedException = System.NotImplementedException;
 
 namespace LostAndFound.Core.Games
 {
@@ -25,6 +26,7 @@ namespace LostAndFound.Core.Games
         private readonly IRenderManager _renderManager;
 
         private readonly Camera _camera;
+        private IEntity _player;
 
         public GameInstance(IRenderManager renderManager,
             IWindowConfiguration windowConfiguration,
@@ -67,7 +69,7 @@ namespace LostAndFound.Core.Games
             var lightComponent = Program.Resolve<LightComponent>();
             lightComponent.LightColor *= 0.2f;
             lightComponent.Size = 200;
-            
+
             player.AddComponent(lightComponent);
             player.AddComponent(Program.Resolve<PlayerAnimationComponent>());
             player.AddComponent(Program.Resolve<AnimationDrawComponent>());
@@ -96,6 +98,8 @@ namespace LostAndFound.Core.Games
 
             questHolderComponent.QuestTaken += _systemManager.GetSystem<QuestSystem>().OnQuestTaken;
             _zoneManager.ZoneChanged += _camera.OnZoneChanged;
+
+            _player = player;
         }
 
         public void Draw()
@@ -126,5 +130,7 @@ namespace LostAndFound.Core.Games
             _zoneManager.Update(gameTime);
             _systemManager.Update(gameTime);
         }
+
+        public IEntity GetPlayer() => _player;
     }
 }

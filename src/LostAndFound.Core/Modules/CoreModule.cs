@@ -6,11 +6,9 @@ using Autofac;
 using LostAndFound.Core.Config;
 using LostAndFound.Core.Content;
 using LostAndFound.Core.Games;
-using LostAndFound.Core.Games.Animals;
 using LostAndFound.Core.Games.Components;
 using LostAndFound.Core.Games.Components.PlayerComponents;
 using LostAndFound.Core.Games.Interfaces;
-using LostAndFound.Core.Games.Person;
 using LostAndFound.Core.Games.Systems;
 using LostAndFound.Core.Games.Zones;
 using LostAndFound.Core.Graphics;
@@ -56,8 +54,6 @@ namespace LostAndFound.Core.Modules
 
             builder.RegisterType<LightingOverlay>();
 
-            builder.RegisterType<PersonFactory>().As<IPersonFactory>().SingleInstance();
-            builder.RegisterType<AnimalFactory>().As<IAnimalFactory>().SingleInstance();
             builder.RegisterType<ZoneManager>().SingleInstance();
             builder.RegisterType<SkyboxManager>().SingleInstance();
 
@@ -98,7 +94,6 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<QuestGiverComponent>().InstancePerDependency();
             builder.RegisterType<QuestBagComponent>().InstancePerDependency();
             builder.RegisterType<LightComponent>().InstancePerDependency();
-            builder.RegisterType<QuestFulfilmentComponent>().InstancePerDependency();
             builder.RegisterType<MoneyBagComponent>().InstancePerDependency();
             builder.RegisterType<AnimalHolderComponent>().InstancePerDependency();
             builder.RegisterType<AnimalSoundComponent>().InstancePerDependency();

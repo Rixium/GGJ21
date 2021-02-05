@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Asepreadr;
@@ -93,12 +94,28 @@ namespace LostAndFound.Core.Games.Systems
 
             entity.AddComponent(staticDrawComponent);
 
-            var questFulfilmentComponent = Program.Resolve<QuestFulfilmentComponent>();
-            questFulfilmentComponent.Quest = quest;
-            questFulfilmentComponent.QuestFulfiller = taker;
-            entity.AddComponent(questFulfilmentComponent);
-
-            entity.AddComponent(Program.Resolve<AnimalSoundComponent>());
+            var animalSoundComponent = Program.Resolve<AnimalSoundComponent>();
+            animalSoundComponent.SetSounds(
+                (quest.AnimalType == AnimalType.Dog
+                    ? new List<string>()
+                    {
+                        "Audio/SoundEffects/AnimalSounds/bark_1",
+                        "Audio/SoundEffects/AnimalSounds/bark_2",
+                        "Audio/SoundEffects/AnimalSounds/bark_3"
+                    }
+                    : new List<string>()
+                    {
+                        "Audio/SoundEffects/AnimalSounds/meow_1",
+                        "Audio/SoundEffects/AnimalSounds/meow_2",
+                        "Audio/SoundEffects/AnimalSounds/meow_3",
+                        "Audio/SoundEffects/AnimalSounds/meow_4",
+                        "Audio/SoundEffects/AnimalSounds/meow_5",
+                        "Audio/SoundEffects/AnimalSounds/meow_6",
+                        "Audio/SoundEffects/AnimalSounds/meow_7",
+                        "Audio/SoundEffects/AnimalSounds/meow_8"
+                    })
+            );
+            entity.AddComponent(animalSoundComponent);
             entity.AddComponent(Program.Resolve<SoundComponent>());
             entity.AddComponent(Program.Resolve<BounceComponent>());
             entity.AddComponent(Program.Resolve<WandererComponent>());
