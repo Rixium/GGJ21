@@ -81,7 +81,7 @@ namespace LostAndFound.Core.Games
             player.AddComponent(playerSoundComponent);
             player.AddComponent(Program.Resolve<PlayerSoundManagerComponent>());
             player.AddComponent(Program.Resolve<MoneyBagComponent>());
-            player.AddComponent(Program.Resolve<AnimalHolderComponent>());
+            player.AddComponent(Program.Resolve<AnimalInteractorComponent>());
 
             var questHolderComponent = Program.Resolve<QuestBagComponent>();
             player.AddComponent(questHolderComponent);
