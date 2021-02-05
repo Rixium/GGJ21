@@ -1,10 +1,9 @@
 ﻿using System;
-using Asepreadr;
+using System.Collections.Generic;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Questing;
 using LostAndFound.Core.Input;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -12,37 +11,28 @@ namespace LostAndFound.Core.Games.Components
 {
     public class QuestHolderComponent : Component
     {
-        private Random _random = new Random();
         public Action<Quest, IEntity> QuestTaken { get; set; }
         public Action<Quest> QuestComplete { get; set; }
 
-        public int InteractionRange = 20;
+        private const int InteractionRange = 20;
 
         private readonly ZoneManager _zoneManager;
         private readonly IInputManager _inputManager;
-        private readonly IContentChest _contentChest;
-        
-        private MoneyBagComponent _moneyBagComponent;
-        private BoxColliderComponent _boxColliderComponent;
-        private AnimalHolderComponent _animalHolder;
-        private SoundEffect _questSuccessSound;
+
         private QuestGiverComponent _firstActiveQuestGiver;
+
+        private readonly IList<Quest> _quests = new List<Quest>();
+
         private bool _isInsideInteractionRange;
 
-        public QuestHolderComponent(ZoneManager zoneManager, IInputManager inputManager, IContentChest contentChest)
+        public QuestHolderComponent(ZoneManager zoneManager, IInputManager inputManager)
         {
             _zoneManager = zoneManager;
             _inputManager = inputManager;
-            _contentChest = contentChest;
         }
 
         public override void Start()
         {
-            _moneyBagComponent = Entity.GetComponent<MoneyBagComponent>();
-            _boxColliderComponent = Entity.GetComponent<BoxColliderComponent>();
-            _animalHolder = Entity.GetComponent<AnimalHolderComponent>();
-
-            _questSuccessSound = _contentChest.Get<SoundEffect>("Audio\\SoundEffects\\quest_complete");
         }
 
         public override void Update(GameTime gameTime)
@@ -55,79 +45,8 @@ namespace LostAndFound.Core.Games.Components
 
                 if (_firstActiveQuestGiver == null) continue;
 
-                if (entity != _firstActiveQuestGiver.Entity) continue;
-                
-                CheckForQuestPickup(entity);
-
-                if (CheckForDialog(entity))
-                {
-                    break;
-                }
-                        
                 CheckForQuests(entity);
             }
-        }
-
-        private bool CheckForDialog(IEntity entity)
-        {
-            var dialogComponent = entity.GetComponent<DialogComponent>();
-
-            if (dialogComponent == null)
-            {
-                return false;
-            }
-
-            if (_isInsideInteractionRange)
-            {
-                dialogComponent.SetNear(true);
-
-                if (_firstActiveQuestGiver != null)
-                {
-                    _firstActiveQuestGiver.Highlighted = true;
-                }
-
-                return _inputManager.KeyPressed(Keys.E) && dialogComponent.Talk();
-            }
-
-            if (_firstActiveQuestGiver != null)
-            {
-                _firstActiveQuestGiver.Highlighted = false;
-                _firstActiveQuestGiver = null;
-            }
-
-            dialogComponent.SetNear(false);
-
-            return false;
-        }
-
-        private void CheckForQuestPickup(IEntity entity)
-        {
-            if (!_inputManager.KeyPressed(Keys.E))
-            {
-                return;
-            }
-
-            if (_animalHolder.Quest != null)
-            {
-                return;
-            }
-
-            var questFulfilmentComponent = entity.GetComponent<QuestFulfilmentComponent>();
-
-            var bounds = new Rectangle((int) entity.Position.X, (int) entity.Position.Y, entity.Width, entity.Height);
-
-            if (questFulfilmentComponent == null)
-            {
-                return;
-            }
-
-            if (!_boxColliderComponent.Bounds.Intersects(bounds))
-            {
-                return;
-            }
-
-            _animalHolder.SetQuest(questFulfilmentComponent.Quest);
-            _zoneManager.ActiveZone.RemoveEntity(questFulfilmentComponent.Entity);
         }
 
         private void CheckForQuests(IEntity entity)
@@ -136,7 +55,7 @@ namespace LostAndFound.Core.Games.Components
             {
                 return;
             }
-            
+
             var questGiverComponent = entity.GetComponent<QuestGiverComponent>();
 
             if (questGiverComponent == null)
@@ -144,49 +63,17 @@ namespace LostAndFound.Core.Games.Components
                 return;
             }
 
-            if (_isInsideInteractionRange)
-            {
-                if (questGiverComponent.HasQuestToGive())
-                {
-                    var dialogComponent = entity.GetComponent<DialogComponent>();
+            if (!_isInsideInteractionRange) return;
+            if (!questGiverComponent.HasQuestToGive()) return;
 
-                    var newQuest = questGiverComponent.TakeQuest();
+            var newQuest = questGiverComponent.TakeQuest();
 
-                    var text = dialogComponent.AddText(
-                        $"My {newQuest.AnimalType} loves to hang around at the {newQuest.AnimalZone}.");
-                    newQuest.AddDialogHistory(text);
-
-                    text = dialogComponent.AddText($"Please find {(_random.Next(0, 2) == 1 ? "her" : "him")}.");
-                    newQuest.AddDialogHistory(text);
-
-                    text = dialogComponent.AddText($"I'll give you ${newQuest.Reward}");
-                    newQuest.AddDialogHistory(text);
-
-
-                    QuestTaken?.Invoke(newQuest, Entity);
-                }
-                else if (_animalHolder.Quest != null)
-                {
-                    if (questGiverComponent.QuestIs(_animalHolder.Quest))
-                    {
-                        FulfilQuest(_animalHolder.Quest);
-                        questGiverComponent.RefreshQuest();
-                    }
-                }
-            }
-        }
-
-        private void FulfilQuest(Quest quest)
-        {
-            _moneyBagComponent.AddMoney(quest.Reward);
-            QuestComplete?.Invoke(quest);
-            _animalHolder.RemoveQuest();
-            _questSuccessSound.Play();
+            _quests.Add(newQuest);
+            QuestTaken?.Invoke(newQuest, Entity);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            
         }
     }
 }

@@ -31,8 +31,8 @@ namespace LostAndFound.Core.Games.Components
 
         private Dictionary<string, Sprite> _animalSprites = new Dictionary<string, Sprite>();
         private Sprite _animalScroll;
+        private DialogComponent _dialogComponent;
 
-        
         public string Name { get; set; }
         public bool Highlighted { get; set; }
 
@@ -68,6 +68,8 @@ namespace LostAndFound.Core.Games.Components
             _animalSprites.Add("Cat_4", animalSpriteMap.CreateSpriteFromRegion("Cat_4"));
             _animalSprites.Add("Cat_5", animalSpriteMap.CreateSpriteFromRegion("Cat_5"));
             _animalSprites.Add("Cat_6", animalSpriteMap.CreateSpriteFromRegion("Cat_6"));
+
+            _dialogComponent = Entity.GetComponent<DialogComponent>();
         }
 
         public override void Update(GameTime gameTime)
@@ -125,7 +127,7 @@ namespace LostAndFound.Core.Games.Components
 
             var reward = _random.Next(100, 1000);
             reward = (reward + 50) / 100 * 100;
-            
+
             _givenQuest = new Quest
             {
                 HandIn = Entity,
@@ -137,8 +139,18 @@ namespace LostAndFound.Core.Games.Components
                 Reward = reward,
                 AnimalType = randomAnimalType
             };
-            
+
+            AddQuestDialog(_givenQuest);
+
             return _givenQuest;
+        }
+
+        private void AddQuestDialog(Quest quest)
+        {
+            _dialogComponent.AddText(
+                $"My {quest.AnimalType} loves to hang around at the {quest.AnimalZone}.");
+            _dialogComponent.AddText($"Please find {(_random.Next(0, 2) == 1 ? "her" : "him")}.");
+            _dialogComponent.AddText($"I'll give you ${quest.Reward}");
         }
 
         public bool QuestIs(Quest compareQuest) => compareQuest == _givenQuest;
