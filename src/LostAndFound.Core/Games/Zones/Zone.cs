@@ -65,27 +65,6 @@ namespace LostAndFound.Core.Games.Zones
             }
         }
 
-        public Vector2 GetTeleportPoint(Direction direction)
-        {
-            foreach (var collider in Colliders)
-            {
-                var directionProperty = collider.GetProperty("Direction");
-                if (directionProperty == null)
-                {
-                    continue;
-                }
-
-                Enum.TryParse<Direction>(directionProperty, out var entranceDirection);
-
-                if (entranceDirection == direction)
-                {
-                    return collider.Bounds.ToVector2();
-                }
-            }
-
-            return Vector2.Zero;
-        }
-
         public void RemoveEntity(IEntity entity) => _entitiesToRemove.Add(entity);
 
         public void AddEntity(IEntity entity)

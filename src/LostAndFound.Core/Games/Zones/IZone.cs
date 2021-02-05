@@ -17,7 +17,6 @@ namespace LostAndFound.Core.Games.Zones
         IEnumerable<IEntity> NextEntities { get; }
         void Update(GameTime gameTime);
         void Draw(SpriteBatch spriteBatch);
-        Vector2 GetTeleportPoint(Direction direction);
         void RemoveEntity(IEntity entity);
         void AddEntity(IEntity entity);
         Collider GetColliderWithProperty(string propertyName);
