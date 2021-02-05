@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace LostAndFound.Core.Games.Components
+namespace LostAndFound.Core.Games.Components.PlayerComponents
 {
 
     public class AnimationComponent : Component

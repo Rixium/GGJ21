@@ -5,6 +5,7 @@ using Asepreadr.Aseprite;
 using Asepreadr.Loaders;
 using LostAndFound.Core.Extensions;
 using LostAndFound.Core.Games.Components;
+using LostAndFound.Core.Games.Components.PlayerComponents;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Games.Zones;

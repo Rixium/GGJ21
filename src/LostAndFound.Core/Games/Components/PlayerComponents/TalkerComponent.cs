@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace LostAndFound.Core.Games.Components
+namespace LostAndFound.Core.Games.Components.PlayerComponents
 {
     internal class TalkerComponent : Component
     {

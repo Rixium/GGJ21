@@ -5,6 +5,7 @@ using LostAndFound.Core.Config;
 using LostAndFound.Core.Content;
 using LostAndFound.Core.Extensions;
 using LostAndFound.Core.Games.Components;
+using LostAndFound.Core.Games.Components.PlayerComponents;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Interfaces;
 using LostAndFound.Core.Games.Systems;

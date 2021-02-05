@@ -8,6 +8,7 @@ using LostAndFound.Core.Content;
 using LostAndFound.Core.Games;
 using LostAndFound.Core.Games.Animals;
 using LostAndFound.Core.Games.Components;
+using LostAndFound.Core.Games.Components.PlayerComponents;
 using LostAndFound.Core.Games.Interfaces;
 using LostAndFound.Core.Games.Person;
 using LostAndFound.Core.Games.Systems;
@@ -88,7 +89,6 @@ namespace LostAndFound.Core.Modules
             builder.RegisterType<AnimationDrawComponent>().InstancePerDependency();
             builder.RegisterType<AnimationComponent>().InstancePerDependency();
 
-            builder.RegisterType<PersonInteractionComponent>().InstancePerDependency();
             builder.RegisterType<StaticDrawComponent>().InstancePerDependency();
             builder.RegisterType<PlayerControllerComponent>().InstancePerDependency();
             builder.RegisterType<ZoneInteractionComponent>().InstancePerDependency();
