@@ -37,6 +37,7 @@ namespace LostAndFound.Core.Games.Components
         private DialogComponent _dialogComponent;
         private IEntity _questTaker;
         private int _rewardMoney;
+        private Sprite _smiley;
 
         public string Name { get; set; }
         public bool Highlighted { get; set; }
@@ -53,6 +54,9 @@ namespace LostAndFound.Core.Games.Components
             Entity.Position -= new Vector2(0, _staticDrawComponent.Image.Height) - new Vector2(0, 10);
 
             var asepriteSpriteMap = _spriteMapLoader.GetContent("Assets\\UI\\ui.json");
+            _smiley = asepriteSpriteMap.CreateSpriteFromRegion("Smiley");
+            _smiley.Origin = _smiley.Center;
+
             _questIcon = asepriteSpriteMap.CreateSpriteFromRegion("Quest_Alert");
             _questIcon.Origin = _questIcon.Center;
 
@@ -89,9 +93,25 @@ namespace LostAndFound.Core.Games.Components
                 return;
             }
 
+            if (_rewardMoney > 0)
+            {
+                DrawSmileyFace(spriteBatch);
+                return;
+            }
+
             if (!HasQuestToGive()) return;
 
             DrawQuestIconAboveHead(spriteBatch);
+        }
+
+        private void DrawSmileyFace(SpriteBatch spriteBatch)
+        {
+            var positionToDraw = Entity.Position + new Vector2(
+                _staticDrawComponent.Image.Width / 2f,
+                -_smiley.Height);
+            var scale = Highlighted ? 1.5f : 1f;
+            spriteBatch.Draw(_smiley.Texture, positionToDraw, _smiley.Source, Color.White, 0f,
+                _smiley.Origin, scale, SpriteEffects.None, 0f);
         }
 
         private void DrawQuestIconAboveHead(SpriteBatch spriteBatch)
@@ -148,7 +168,7 @@ namespace LostAndFound.Core.Games.Components
             AddQuestDialog(_givenQuest);
 
             _questTaker = questTaker;
-            
+
             return _givenQuest;
         }
 
@@ -166,7 +186,7 @@ namespace LostAndFound.Core.Games.Components
             {
                 return;
             }
-            
+
             _rewardMoney = _givenQuest.Reward;
             _givenQuest = null;
 
@@ -177,7 +197,7 @@ namespace LostAndFound.Core.Games.Components
             _dialogComponent.Clear();
             _dialogComponent.AddText(
                 "Thank you so much!");
-            
+
             _dialogComponent.TalkEvent += OnEndTalk;
         }
 
@@ -185,6 +205,7 @@ namespace LostAndFound.Core.Games.Components
         {
             _dialogComponent.TalkEvent -= OnEndTalk;
             _questTaker.GetComponent<MoneyBagComponent>().AddMoney(_rewardMoney);
+            _rewardMoney = 0;
         }
     }
 }
