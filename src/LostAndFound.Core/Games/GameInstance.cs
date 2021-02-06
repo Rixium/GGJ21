@@ -12,7 +12,6 @@ using LostAndFound.Core.Games.Systems;
 using LostAndFound.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using NotImplementedException = System.NotImplementedException;
 
 namespace LostAndFound.Core.Games
 {
