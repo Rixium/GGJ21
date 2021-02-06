@@ -63,5 +63,12 @@ namespace LostAndFound.Core.Games.Entities
         }
 
         public IZone Zone { get; set; }
+        public void Destroy()
+        {
+            Destroyed = true;
+            Zone.RemoveEntity(this);
+        }
+
+        public bool Destroyed { get; set; }
     }
 }

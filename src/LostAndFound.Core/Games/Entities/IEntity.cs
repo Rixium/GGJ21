@@ -17,5 +17,8 @@ namespace LostAndFound.Core.Games.Entities
         public void Draw(SpriteBatch spriteBatch);
         void Start();
         IZone Zone { get; set; }
+        void Destroy();
+        
+        bool Destroyed { get; set; }
     }
 }

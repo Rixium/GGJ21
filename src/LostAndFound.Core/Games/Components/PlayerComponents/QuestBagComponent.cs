@@ -66,7 +66,7 @@ namespace LostAndFound.Core.Games.Components.PlayerComponents
             if (!_isInsideInteractionRange) return;
             if (!questGiverComponent.HasQuestToGive()) return;
 
-            var newQuest = questGiverComponent.TakeQuest();
+            var newQuest = questGiverComponent.TakeQuest(Entity);
 
             _quests.Add(newQuest);
             QuestTaken?.Invoke(newQuest, Entity);

@@ -1,6 +1,7 @@
 ﻿using System;
 using LostAndFound.Core.Extensions;
 using LostAndFound.Core.Games.Entities;
+using LostAndFound.Core.Games.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -15,7 +16,7 @@ namespace LostAndFound.Core.Games.Components
         private IEntity _following;
         private Vector2 _randomPosition;
         private float _timer;
-        private Random _random = new Random();
+        private readonly Random _random = new Random();
         public IEntity Owner;
 
         public AnimalComponent(ZoneManager zoneManager)
@@ -31,17 +32,25 @@ namespace LostAndFound.Core.Games.Components
         public override void Update(GameTime gameTime)
         {
             CheckForOwner();
-            
-            if (_boxCollider == null)
+
+            if (_following == null)
             {
                 return;
             }
 
             _timer -= gameTime.AsDelta();
-            
+
             if (_timer <= 0)
             {
-                _randomPosition = _boxCollider.Bounds.Expand(FollowRadius).GetRandomPositionInBounds();
+                if (_boxCollider != null)
+                {
+                    _randomPosition = _boxCollider.Bounds.Expand(FollowRadius).GetRandomPositionInBounds();
+                }
+                else
+                {
+                    _randomPosition = Owner.Position;
+                }
+
                 _timer = _random.Next(1, 10) / 4f;
             }
 
@@ -59,24 +68,31 @@ namespace LostAndFound.Core.Games.Components
         {
             foreach (var entity in _zoneManager.ActiveZone.Entities)
             {
+                if (entity == Entity)
+                {
+                    continue;
+                }
+
+                if (entity != Owner)
+                {
+                    continue;
+                }
+
+                Follow(Owner);
+
                 var isInsideInteractionRange = (Vector2.Distance(Entity.Position, entity.Position) < InteractionRange);
 
                 if (!isInsideInteractionRange)
                 {
                     continue;
                 }
-                
-                if (entity == Entity) continue;
 
-                if (entity == Owner)
-                {
-                    var questGiverComponent = Owner.GetComponent<QuestGiverComponent>();
-                    questGiverComponent.CompleteQuest(Entity);
-                }
+                var questGiverComponent = Owner.GetComponent<QuestGiverComponent>();
+                questGiverComponent.CompleteQuest(Entity);
             }
         }
 
-        public double InteractionRange { get; set; } = 10;
+        public double InteractionRange { get; set; } = 30;
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -84,25 +100,48 @@ namespace LostAndFound.Core.Games.Components
 
         public void Follow(IEntity entity)
         {
-            
+            if (_following == Owner)
+            {
+                return;
+            }
+
             if (_following == entity)
             {
                 return;
             }
 
+            _boxCollider = null;
             _following = entity;
             _wandererComponent.Active = false;
 
             Entity.GetComponent<BounceComponent>().BounceSpeed = 0.3f;
-            _following.GetComponent<ZoneInteractionComponent>().ZoneSwitch += zone =>
-            {
-                Entity.Position = new Vector2(_following.Position.X, _following.Position.Y);
-                _timer = 0;
-                _randomPosition = Entity.Position;
-                _zoneManager.MoveEntityToZone(Entity.Zone, _following.Zone, Entity);
-            };
+            var zoneInteractionComponent = _following.GetComponent<ZoneInteractionComponent>();
 
-            _boxCollider = entity.GetComponent<BoxColliderComponent>();
+            if (zoneInteractionComponent != null)
+            {
+                zoneInteractionComponent.ZoneSwitch += OnZoneSwitch;
+                _boxCollider = entity.GetComponent<BoxColliderComponent>();
+            }
+        }
+
+        private void OnZoneSwitch(ZoneType obj)
+        {
+            if (Entity.Destroyed)
+            {
+                var zoneInteractionComponent = _following.GetComponent<ZoneInteractionComponent>();
+
+                if (zoneInteractionComponent != null)
+                {
+                    zoneInteractionComponent.ZoneSwitch -= OnZoneSwitch;
+                }
+
+                return;
+            }
+
+            Entity.Position = new Vector2(_following.Position.X, _following.Position.Y);
+            _timer = 0;
+            _randomPosition = Entity.Position;
+            _zoneManager.MoveEntityToZone(Entity.Zone, _following.Zone, Entity);
         }
     }
 }

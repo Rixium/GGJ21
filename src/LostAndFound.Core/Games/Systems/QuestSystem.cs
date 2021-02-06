@@ -62,7 +62,6 @@ namespace LostAndFound.Core.Games.Systems
                 var questGiverComponent = Program.Resolve<QuestGiverComponent>();
                 questGiverComponent.Name = selected.Split('\\').Last().Split('.').First();
 
-
                 questGiver.AddComponent(questGiverComponent);
 
                 questGiver.AddComponent(Program.Resolve<DialogComponent>());

@@ -14,6 +14,7 @@ namespace LostAndFound.Core.Games.Components
     {
         public float SpeechVolume = 0.2f;
         
+        public Action TalkEvent { get; set; }
         private SoundEffectInstance _soundEffect;
         private readonly IContentChest _contentChest;
         private readonly IContentLoader<AsepriteSpriteMap> _spriteMapLoader;
@@ -140,8 +141,8 @@ namespace LostAndFound.Core.Games.Components
                 _letterQueue.Enqueue(letter);
             }
 
-            _curr = 0;
-
+            _curr = 0; 
+            TalkEvent?.Invoke();
             return true;
         }
 
@@ -150,5 +151,13 @@ namespace LostAndFound.Core.Games.Components
         public string GetNextDialog() => _dialogQueue.Dequeue();
 
         public void SetNear(bool near) => _wandererComponent.Active = !near;
+
+        public void Clear()
+        {
+            _dialogQueue.Clear();
+            _letterQueue.Clear();
+            _activeDialog = null;
+            _curr = 0;
+        }
     }
 }

@@ -4,6 +4,7 @@ using Asepreadr;
 using Asepreadr.Aseprite;
 using Asepreadr.Graphics;
 using Asepreadr.Loaders;
+using LostAndFound.Core.Games.Components.PlayerComponents;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Games.Questing;
@@ -34,6 +35,8 @@ namespace LostAndFound.Core.Games.Components
         private Dictionary<string, Sprite> _animalSprites = new Dictionary<string, Sprite>();
         private Sprite _animalScroll;
         private DialogComponent _dialogComponent;
+        private IEntity _questTaker;
+        private int _rewardMoney;
 
         public string Name { get; set; }
         public bool Highlighted { get; set; }
@@ -122,7 +125,7 @@ namespace LostAndFound.Core.Games.Components
 
         public bool HasQuestToGive() => _hasQuest;
 
-        public Quest TakeQuest()
+        public Quest TakeQuest(IEntity questTaker)
         {
             _hasQuest = false;
             var randomAnimalType = (AnimalType) _random.Next(0, (int) AnimalType.END);
@@ -144,6 +147,8 @@ namespace LostAndFound.Core.Games.Components
 
             AddQuestDialog(_givenQuest);
 
+            _questTaker = questTaker;
+            
             return _givenQuest;
         }
 
@@ -155,18 +160,31 @@ namespace LostAndFound.Core.Games.Components
             _dialogComponent.AddText($"I'll give you ${quest.Reward}");
         }
 
-        public bool QuestIs(Quest compareQuest) => compareQuest == _givenQuest;
-
-        public void RefreshQuest()
-        {
-            _hasQuest = true;
-            _givenQuest = null;
-        }
-
         public void CompleteQuest(IEntity animal)
         {
-            Entity.Zone.RemoveEntity(animal);
+            if (_givenQuest == null)
+            {
+                return;
+            }
+            
+            _rewardMoney = _givenQuest.Reward;
+            _givenQuest = null;
+
+            animal.Destroy();
+
             _contentChest.Get<SoundEffect>("Audio\\SoundEffects\\quest_complete").Play();
+
+            _dialogComponent.Clear();
+            _dialogComponent.AddText(
+                "Thank you so much!");
+            
+            _dialogComponent.TalkEvent += OnEndTalk;
+        }
+
+        private void OnEndTalk()
+        {
+            _dialogComponent.TalkEvent -= OnEndTalk;
+            _questTaker.GetComponent<MoneyBagComponent>().AddMoney(_rewardMoney);
         }
     }
 }

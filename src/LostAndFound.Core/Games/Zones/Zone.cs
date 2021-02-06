@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using LostAndFound.Core.Extensions;
-using LostAndFound.Core.Games.Components;
-using LostAndFound.Core.Games.Components.PlayerComponents;
 using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Models;
 using Microsoft.Xna.Framework;
@@ -34,6 +30,18 @@ namespace LostAndFound.Core.Games.Zones
 
         public void Update(GameTime gameTime)
         {
+            foreach (var entity in Entities)
+            {
+                entity.Update(gameTime);
+            }
+
+            CleanUp();
+
+            Entities = Entities.OrderBy(x => x.Bottom).ToList();
+        }
+
+        private void CleanUp()
+        {
             foreach (var entity in _entitiesToRemove)
             {
                 Entities.Remove(entity);
@@ -46,13 +54,6 @@ namespace LostAndFound.Core.Games.Zones
 
             _entitiesToRemove.Clear();
             _entitiesToAdd.Clear();
-
-            foreach (var entity in Entities)
-            {
-                entity.Update(gameTime);
-            }
-
-            Entities = Entities.OrderBy(x => x.Bottom).ToList();
         }
 
         public void Draw(SpriteBatch spriteBatch)
