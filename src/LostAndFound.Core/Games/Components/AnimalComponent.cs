@@ -16,6 +16,7 @@ namespace LostAndFound.Core.Games.Components
         private Vector2 _randomPosition;
         private float _timer;
         private Random _random = new Random();
+        public IEntity Owner;
 
         public AnimalComponent(ZoneManager zoneManager)
         {
@@ -29,6 +30,8 @@ namespace LostAndFound.Core.Games.Components
 
         public override void Update(GameTime gameTime)
         {
+            CheckForOwner();
+            
             if (_boxCollider == null)
             {
                 return;
@@ -52,12 +55,36 @@ namespace LostAndFound.Core.Games.Components
             Entity.Position = new Vector2(x, y);
         }
 
+        private void CheckForOwner()
+        {
+            foreach (var entity in _zoneManager.ActiveZone.Entities)
+            {
+                var isInsideInteractionRange = (Vector2.Distance(Entity.Position, entity.Position) < InteractionRange);
+
+                if (!isInsideInteractionRange)
+                {
+                    continue;
+                }
+                
+                if (entity == Entity) continue;
+
+                if (entity == Owner)
+                {
+                    var questGiverComponent = Owner.GetComponent<QuestGiverComponent>();
+                    questGiverComponent.CompleteQuest(Entity);
+                }
+            }
+        }
+
+        public double InteractionRange { get; set; } = 10;
+
         public override void Draw(SpriteBatch spriteBatch)
         {
         }
 
         public void Follow(IEntity entity)
         {
+            
             if (_following == entity)
             {
                 return;

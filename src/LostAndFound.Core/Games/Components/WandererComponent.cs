@@ -8,7 +8,7 @@ namespace LostAndFound.Core.Games.Components
     internal class WandererComponent : Component
     {
         private readonly ZoneManager _zoneManager;
-        
+
         public bool Active { get; set; } = true;
 
         private Vector2 _wanderPosition;
@@ -17,12 +17,12 @@ namespace LostAndFound.Core.Games.Components
 
         public float Speed = 0.02f;
         public string Property = "SpawnZone";
-        
+
         public WandererComponent(ZoneManager zoneManager)
         {
             _zoneManager = zoneManager;
         }
-        
+
         public override void Start()
         {
             _wanderPosition = Entity.Position;
@@ -31,7 +31,7 @@ namespace LostAndFound.Core.Games.Components
         public override void Update(GameTime gameTime)
         {
             if (!Active) return;
-            
+
             if (Vector2.Distance(_wanderPosition, Entity.Position) < 100)
             {
                 _randomPositionGetTimer -= gameTime.AsDelta();
@@ -41,7 +41,7 @@ namespace LostAndFound.Core.Games.Components
                     _randomPositionGetTimer = _random.Next(1, 10) / 4f;
                 }
             }
-            
+
             var (x, y) = Vector2.Lerp(Entity.Position, _wanderPosition, Speed);
             Entity.Position = new Vector2(x, y);
         }
@@ -49,8 +49,8 @@ namespace LostAndFound.Core.Games.Components
         private Vector2 GetNewWanderPosition()
         {
             var spawnZone = _zoneManager.ActiveZone.GetColliderWithProperty(Property);
-            var randomPosition = spawnZone.GetRandomPositionInBounds();
-            return randomPosition;
+            var randomPosition = spawnZone?.GetRandomPositionInBounds();
+            return randomPosition ?? Vector2.Zero;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

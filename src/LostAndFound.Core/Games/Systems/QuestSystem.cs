@@ -96,9 +96,12 @@ namespace LostAndFound.Core.Games.Systems
 
             entity.AddComponent(Program.Resolve<BoxColliderComponent>());
             var animalSoundComponent = Program.Resolve<AnimalSoundComponent>();
-            
-            entity.AddComponent(Program.Resolve<AnimalComponent>());
-            
+
+            var animalComponent = Program.Resolve<AnimalComponent>();
+            animalComponent.Owner = quest.HandIn;
+
+            entity.AddComponent(animalComponent);
+
             animalSoundComponent.SetSounds(
                 (quest.AnimalType == AnimalType.Dog
                     ? new List<string>()

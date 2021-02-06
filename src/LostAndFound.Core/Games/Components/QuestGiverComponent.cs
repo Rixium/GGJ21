@@ -4,10 +4,12 @@ using Asepreadr;
 using Asepreadr.Aseprite;
 using Asepreadr.Graphics;
 using Asepreadr.Loaders;
+using LostAndFound.Core.Games.Entities;
 using LostAndFound.Core.Games.Models;
 using LostAndFound.Core.Games.Questing;
 using LostAndFound.Core.Utilities;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LostAndFound.Core.Games.Components
@@ -159,6 +161,12 @@ namespace LostAndFound.Core.Games.Components
         {
             _hasQuest = true;
             _givenQuest = null;
+        }
+
+        public void CompleteQuest(IEntity animal)
+        {
+            Entity.Zone.RemoveEntity(animal);
+            _contentChest.Get<SoundEffect>("Audio\\SoundEffects\\quest_complete").Play();
         }
     }
 }
